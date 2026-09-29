@@ -1,0 +1,11 @@
+framework:
+  repository: "oshizo/novel-maker"
+  revision: "9a9416c35eb14b8e77c85ccca5b95ad4adc05fb8"
+  resolved_commit: "9a9416c35eb14b8e77c85ccca5b95ad4adc05fb8"
+  contract_version: 1
+
+planning:
+  human_review:
+    checkpoints:
+      - overall
+      - arc
