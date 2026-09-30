@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
-  "run_id": "20260930T022802Z-arc-arc-01",
+  "run_id": "20260930T032231Z-arc-arc-01",
   "target": {
     "kind": "arc",
     "id": "arc-01",
     "path": "planning/arcs/arc-01.md"
   },
   "framework_revision": "8090fbfee3da7dc7c5ae6daaf0b08196172debe4",
-  "status": "completed",
-  "started_at": "2026-09-30T02:28:02Z",
-  "completed_at": "2026-09-30T02:51:12Z",
+  "status": "awaiting-human",
+  "started_at": "2026-09-30T03:22:31Z",
+  "completed_at": null,
   "summary": {
     "initial_story_craft_verdict": "PASS",
     "planner_revision_count": 1,
-    "planner_adopted_count": 1,
+    "planner_adopted_count": 0,
     "planner_partially_adopted_count": 0,
     "planner_rejected_count": 0,
-    "technical_required_fix_count": 1,
+    "technical_required_fix_count": 3,
     "regression_verdict": "PASS",
     "regression_attempt_count": 1,
     "recovery_count": 0,
-    "human_review_status": "changes-requested",
-    "human_required_change_count": 3
+    "human_review_status": "pending",
+    "human_required_change_count": null
   },
   "stages": [
     {
@@ -95,17 +95,6 @@
       "verdict": "PASS",
       "snapshots": [],
       "review": "reviews/06-story-craft-regression.md"
-    },
-    {
-      "sequence": 7,
-      "stage": "human-review",
-      "attempt": 1,
-      "agent": "human",
-      "model": null,
-      "result": "completed",
-      "verdict": "CHANGES_REQUESTED",
-      "snapshots": [],
-      "review": "reviews/07-human-review.md"
     }
   ]
 }
