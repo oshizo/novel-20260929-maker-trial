@@ -26,3 +26,12 @@
   applied_migration: "none"
   manual_decision: "issue #7でPlanning kickoff templateをrun trace契約へ更新"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "8090fbfee3da7dc7c5ae6daaf0b08196172debe4"
+  to_revision: "d057210d9f64a930260c51edd3efea7bc8d18d53"
+  resolved_commit: "d057210d9f64a930260c51edd3efea7bc8d18d53"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "issue #9で冒頭導入セットの採否判定契約を反映"
+  unresolved_issue: "none"
