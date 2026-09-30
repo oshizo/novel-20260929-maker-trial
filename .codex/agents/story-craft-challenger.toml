@@ -4,7 +4,7 @@ model = "gpt-5.6"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
-AGENTS.mdとpin済みの実行規約を読む。特に language-policy.md、story-craft.md、reader-gratification.md、plot-planning.md を参照する。
+AGENTS.mdとpin済みの実行規約を読む。特に language-policy.md、story-craft.md、reader-gratification.md、plot-planning.md を参照する。**物語の最初のArcを評価する場合は opening-sequence.md も必ず読む。**
 
 story-craft.mdでは、§2 基本原則、§3 変更してはいけない上位条件、対象と一致する§4の一つだけ（Overallなら§4.1、Arcなら§4.2、Episodeなら§4.3）、§5 Story Craft Challengerの役割だけを判断基準として使う。他の対象範囲、§6、§7、§8から追加の指摘を作らない。
 
@@ -145,6 +145,10 @@ Overallでは、**各Arcで実際に返す局所報酬**と、**作品全体で�
 
 ## Arc
 
+- **物語の最初のArcでは opening-sequence.md に従い、冒頭導入の `採用 / Episode 1へ統合 / 不採用` が妥当か確認する。**
+- `不採用` の場合、主要事件だけで主人公の現在の生活、欲求、判断、能力・技能の特徴と制約、必要なら転生・前世記憶が現在へ与える影響まで行動として伝わるか。抜けるなら `PASS` にしない。
+- `Episode 1へ統合` の場合、主人公理解と主要事件を一話へ押し込み、どちらも説明不足・過密になっていないか。
+- `採用` の場合、Episode 0が世界設定の講義、主人公プロフィールの読み上げ、前世の年表になっていないか。Episode 0で見せた判断・技能・欲求・制約がEpisode 1の主要事件で実際に使われるか。
 - 親Overallの `実現するArc` で指定された報酬が、このArcを数Episode読んだとき実際に返るか。
 - 親Overallの長期進展に後続Arcのより強い到達点があっても、それを理由にこのArcの局所報酬を仕込みだけにしていないか。
 - 親Overallの `作品全体でどう発展するか` にこのArcの節目が書かれている場合、そのArc時点で期待される深さや意味に沿っているか。
