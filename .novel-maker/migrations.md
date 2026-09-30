@@ -15,5 +15,5 @@
   resolved_commit: "d4b6760ea97ea123fd3b71386011281d3b194a2e"
   contract_version: 1
   applied_migration: "none"
-  manual_decision: "issue #5でOverall PlannerとStory Craft ChallengerのCodex用設定だけを新契約へ更新"
+  manual_decision: "issue #5でOverall Planner、Arc Planner、Story Craft ChallengerのCodex用設定を新契約へ更新"
   unresolved_issue: "none"
