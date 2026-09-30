@@ -8,3 +8,12 @@
   applied_migration: "none"
   manual_decision: "none"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "9a9416c35eb14b8e77c85ccca5b95ad4adc05fb8"
+  to_revision: "d4b6760ea97ea123fd3b71386011281d3b194a2e"
+  resolved_commit: "d4b6760ea97ea123fd3b71386011281d3b194a2e"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "issue #5でOverall Planner、Arc Planner、Story Craft ChallengerのCodex用設定を新契約へ更新"
+  unresolved_issue: "none"
