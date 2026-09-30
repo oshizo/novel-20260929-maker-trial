@@ -20,6 +20,8 @@
     "regression_verdict": null,
     "regression_attempt_count": 0,
     "recovery_count": 0,
+    "opening_sequence_decision": null,
+    "opening_sequence_reason": null,
     "human_review_status": "not-recorded",
     "human_required_change_count": null
   },
