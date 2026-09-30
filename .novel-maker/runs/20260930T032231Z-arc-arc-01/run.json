@@ -7,9 +7,9 @@
     "path": "planning/arcs/arc-01.md"
   },
   "framework_revision": "8090fbfee3da7dc7c5ae6daaf0b08196172debe4",
-  "status": "awaiting-human",
+  "status": "completed",
   "started_at": "2026-09-30T03:22:31Z",
-  "completed_at": null,
+  "completed_at": "2026-09-30T06:51:05Z",
   "summary": {
     "initial_story_craft_verdict": "PASS",
     "planner_revision_count": 1,
@@ -20,8 +20,8 @@
     "regression_verdict": "PASS",
     "regression_attempt_count": 1,
     "recovery_count": 0,
-    "human_review_status": "pending",
-    "human_required_change_count": null
+    "human_review_status": "approved",
+    "human_required_change_count": 1
   },
   "stages": [
     {
@@ -95,6 +95,17 @@
       "verdict": "PASS",
       "snapshots": [],
       "review": "reviews/06-story-craft-regression.md"
+    },
+    {
+      "sequence": 7,
+      "stage": "human-review",
+      "attempt": 1,
+      "agent": "human",
+      "model": null,
+      "result": "completed",
+      "verdict": "APPROVED",
+      "snapshots": [],
+      "review": "reviews/07-human-review.md"
     }
   ]
 }
