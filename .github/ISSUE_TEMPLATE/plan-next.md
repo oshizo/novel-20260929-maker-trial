@@ -18,7 +18,7 @@ assignees: ""
 
 1. repo rootの `AGENTS.md` を読む。
 2. `story.yaml`、`story-direction.md`、`canon/`、`planning/`、`state/`、`manuscript/` の現在状態を確認する。
-3. `.novel-maker/runtime/docs/planning-input.md`、`.novel-maker/runtime/docs/plot-planning.md`、`.novel-maker/runtime/docs/story-artifacts.md`、`.novel-maker/runtime/docs/story-craft.md` に従う。
+3. `.novel-maker/runtime/docs/planning-input.md`、`.novel-maker/runtime/docs/plot-planning.md`、`.novel-maker/runtime/docs/story-artifacts.md`、`.novel-maker/runtime/docs/story-craft.md`、`.novel-maker/runtime/docs/pipeline-run-trace.md` に従う。
 4. 物語冒頭のArc / Episodeを扱う場合は `.novel-maker/runtime/docs/opening-sequence.md` も確認する。
 5. `.codex/agents/` がある場合は、`AGENTS.md` の役割分担どおりsubagentを使う。親agentがPlanner / Reviewer等を兼任しない。
 
@@ -98,6 +98,8 @@ Episode一覧の先頭が `episode-000` と `episode-001` で、両者が主人�
 
 対象範囲が決まったら、`AGENTS.md` とruntime契約に定義された標準pipelineを省略せず実行する。
 
+実際に対象Plannerを起動する直前に `.novel-maker/runtime/docs/pipeline-run-trace.md` に従って `.novel-maker/runs/<run-id>/` を開始し、各stageの正式出力とPlanning snapshotを記録する。run traceは診断用であり、過去runをPlanner / Writerの通常contextへ入れない。
+
 Overall / Arc / 通常のEpisode Designでは概ね次を行う。
 
 ```text
@@ -131,10 +133,10 @@ Challengerには `opening-sequence.md` と2つのEpisode Designを渡し、0だ�
 
 Episode DesignはStory Craft Regression通過後、runtime契約どおり執筆指示の生成・確認へ進める。冒頭導入セットでも執筆指示はEpisodeごとに生成・確認する。
 
-- Challenger / Reviewer / Regressionの一時出力をstory成果物へ恒久保存しない。
+- Challenger / Reviewer / Regressionの一時出力を作品成果物へ恒久保存しない。親agentは正式出力をrun traceへ隔離保存する。
 - 設定提案 / 設定提案への依存はruntime契約どおり扱う。
 - 上位Planningの意味を勝手に変更しない。上位変更が必要なら対象範囲の生成で隠さず、停止理由を報告する。
-- Story Craft RegressionがFAILした場合はruntime契約の一度だけの回復手順に従う。
+- Story Craft RegressionがFAILした場合はruntime契約の一度だけの回復手順に従い、そのattemptも同じrun traceへ記録する。
 
 ## 作者確認checkpoint
 
@@ -144,16 +146,17 @@ Episode DesignはStory Craft Regression通過後、runtime契約どおり執筆�
 
 - AI内部pipeline完了後も `draft / pending` で残す。
 - PRを作成して作者確認待ちで停止する。
+- run traceを `awaiting-human` とし、作者確認結果を後から同じrunへ関連付けられる状態にする。
 - 作者承認を捏造しない。
 
-checkpointでなければruntime契約に従って `ready / not-required` へ進める。
+checkpointでなければruntime契約に従って `ready / not-required` へ進め、run traceを `completed` にする。
 
 ## Git / PR
 
 実際にPlanning成果物を変更する場合:
 
 1. このIssue専用branchを作る。
-2. 対象範囲と必要最小限の確定設定更新だけをcommitする。
+2. 対象範囲、必要最小限の確定設定更新、当該実行の `.novel-maker/runs/<run-id>/` だけをcommitする。
 3. PRを作る。
 4. PR本文に次を短く書く。
    - 自動判定した対象範囲
@@ -161,11 +164,12 @@ checkpointでなければruntime契約に従って `ready / not-required` へ進
    - 参照した親Planning version（ある場合）
    - 標準pipeline完了状況
    - Story Craft Regression結果
+   - run-id
    - 設定提案 / 確定設定更新の有無
    - 作者確認待ちかどうか
    - 変更file一覧
 
-Planning成果物を変更せず停止した場合は、不要なbranch / PRを作らない。
+Planning成果物を変更せず停止した場合でも、Planning Readiness等の診断runを保存したなら、そのrun traceだけを残してよい。不要なPRを作る必要はない。
 
 ## 完了条件
 
@@ -173,6 +177,7 @@ Planning成果物を変更せず停止した場合は、不要なbranch / PRを�
 - [ ] Overall開始ならPlanning Readinessを通した
 - [ ] readyな現在Arcがある場合、未作成の次Arcより先にそのArcのEpisodeを確認した
 - [ ] 対象範囲の標準pipelineを省略していない
+- [ ] 当該pipelineのrun traceを `.novel-maker/runs/<run-id>/` に残した
 - [ ] 作者確認待ちの既存成果物を勝手に上書きしていない
 - [ ] 通常は一度に複数Arc / 複数Episodeへ進んでいない
 - [ ] 冒頭導入セットを使った場合、Episode 0と1だけをセット扱いし、2以降へ広げていない
