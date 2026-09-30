@@ -49,7 +49,13 @@ assignees: ""
 
 一度に複数Arcを生成しない。
 
-物語の最初のArcをplanするとき、作品方針または現在の作者指示が主人公導入を主要事件の前に独立して置くことを求めている場合は `opening-sequence.md` をArc Plannerへの入力に含める。導入セットを採用するなら、Episode一覧の先頭を `episode-000`（主人公導入）→ `episode-001`（最初の主要事件・出会い・作品起動）として、2話の接続が分かるようにする。Episode 0を全作品へ機械的に追加しない。
+**物語の最初のArcをplanするときは、作品方針や作者指示にEpisode 0の明示指定がなくても `.novel-maker/runtime/docs/opening-sequence.md` をArc PlannerとStory Craft Challengerへの入力に含める。** Arc PlannerはEpisode一覧を確定する前に、冒頭導入を `採用 / Episode 1へ統合 / 不採用` のどれにするか判定する。
+
+- `採用`: Episode一覧の先頭を `episode-000`（主人公導入）→ `episode-001`（最初の主要事件・出会い・作品起動）とする。
+- `Episode 1へ統合`: 独立Episode 0を置かず、episode-001前半に主人公理解を行動として組み込む。
+- `不採用`: 最初の主要事件だけで主人公の現在・欲求・判断・能力と制約、必要なら転生・前世記憶が現在へ与える影響まで十分に伝わる場合に限る。
+
+Episode 0を全作品へ機械的に追加しない。採否と短い理由はrun traceへ記録し、PR本文にも残す。
 
 ### 4. 現在Arcがreadyの場合
 
@@ -99,6 +105,8 @@ Episode一覧の先頭が `episode-000` と `episode-001` で、両者が主人�
 対象範囲が決まったら、`AGENTS.md` とruntime契約に定義された標準pipelineを省略せず実行する。
 
 実際に対象Plannerを起動する直前に `.novel-maker/runtime/docs/pipeline-run-trace.md` に従って `.novel-maker/runs/<run-id>/` を開始し、各stageの正式出力とPlanning snapshotを記録する。run traceは診断用であり、過去runをPlanner / Writerの通常contextへ入れない。
+
+物語の最初のArcでは、Arc Plannerが返した冒頭導入の `採用 / Episode 1へ統合 / 不採用` と短い理由を `run.json` に記録する。Story Craft Challengerがその判断を不足として覆した場合は、Planner Revision後の最終判断が追えるようにstage出力も残す。
 
 Overall / Arc / 通常のEpisode Designでは概ね次を行う。
 
@@ -160,7 +168,7 @@ checkpointでなければruntime契約に従って `ready / not-required` へ進
 3. PRを作る。
 4. PR本文に次を短く書く。
    - 自動判定した対象範囲
-   - 冒頭導入セットを使ったかどうか
+   - 物語の最初のArcなら、冒頭導入の `採用 / Episode 1へ統合 / 不採用` と短い理由
    - 参照した親Planning version（ある場合）
    - 標準pipeline完了状況
    - Story Craft Regression結果
@@ -178,6 +186,7 @@ Planning成果物を変更せず停止した場合でも、Planning Readiness等
 - [ ] readyな現在Arcがある場合、未作成の次Arcより先にそのArcのEpisodeを確認した
 - [ ] 対象範囲の標準pipelineを省略していない
 - [ ] 当該pipelineのrun traceを `.novel-maker/runs/<run-id>/` に残した
+- [ ] 物語の最初のArcなら、冒頭導入の採否と理由をArc Planner / Challengerで確認しrun traceへ残した
 - [ ] 作者確認待ちの既存成果物を勝手に上書きしていない
 - [ ] 通常は一度に複数Arc / 複数Episodeへ進んでいない
 - [ ] 冒頭導入セットを使った場合、Episode 0と1だけをセット扱いし、2以降へ広げていない
