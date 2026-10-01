@@ -44,3 +44,12 @@
   applied_migration: "none"
   manual_decision: "issue #10でCodexのStory Craft Regression設定とPlanning Issue templateをmaker #129相当へ更新"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "461c2178a5119e73db2455cddc417591da2efbfb"
+  to_revision: "2c84fa517e29c707e59ca018834ab461e49e684a"
+  resolved_commit: "2c84fa517e29c707e59ca018834ab461e49e684a"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "issue #10でCodex custom agentの10役割をmaker #131のGPT-6 Sol / Luna割当に更新"
+  unresolved_issue: "none"

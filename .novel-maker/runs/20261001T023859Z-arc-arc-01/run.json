@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "run_id": "20261001T023859Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md"
+  },
+  "framework_revision": "2c84fa517e29c707e59ca018834ab461e49e684a",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "awaiting-human",
+  "started_at": "2026-10-01T02:38:59Z",
+  "completed_at": null,
+  "summary": {
+    "initial_story_craft_verdict": "WEAK",
+    "planner_revision_count": 1,
+    "planner_adopted_count": 5,
+    "planner_partially_adopted_count": 1,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 6,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "一人旅の仕事と判断、前世記憶由来の思考、魔力の強みと制約を独立回の行動で示し、姉妹救助へつなぐため。",
+    "human_review_status": "pending",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial.md"
+      ],
+      "review": null
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision.md"
+      ],
+      "review": "reviews/03-planner-revision.md"
+    },
+    {
+      "sequence": 4,
+      "stage": "technical-review",
+      "attempt": 1,
+      "configured_agent": "plot_reviewer",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "plot_reviewer",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/04-technical-review.md"
+    },
+    {
+      "sequence": 5,
+      "stage": "finalizer",
+      "attempt": 1,
+      "configured_agent": "plot_finalizer",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "plot_finalizer",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-finalizer.md"
+      ],
+      "review": "reviews/05-finalizer.md"
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "configured_agent": "story_craft_regression",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_regression",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-regression.md"
+    }
+  ]
+}

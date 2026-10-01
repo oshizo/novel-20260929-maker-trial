@@ -1,6 +1,6 @@
 name = "story_craft_challenger"
 description = "Overall、Arc、Episode Designを対象読者として時系列に読み、実際の満足が十分か独立に評価する。"
-model = "gpt-5.6"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """

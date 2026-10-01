@@ -1,6 +1,6 @@
 name = "story_craft_regression"
 description = "Technical Reviewer / Finalizer後の修正で、採用したStory Craft上の改善意図と読者報酬が弱くなっていないか確認する。"
-model = "gpt-5.6"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
