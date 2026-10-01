@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "run_id": "20261001T142250Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md"
+  },
+  "framework_revision": "dc7d0786437ce8280fcd9a7381dd65d1ea356726",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "blocked",
+  "started_at": "2026-10-01T14:22:50Z",
+  "completed_at": "2026-10-01T14:52:42Z",
+  "summary": {
+    "initial_story_craft_verdict": "WEAK",
+    "revised_story_craft_verdict": "WEAK",
+    "story_craft_recheck_attempt_count": 2,
+    "planner_revision_count": 2,
+    "planner_adopted_count": 11,
+    "planner_partially_adopted_count": 1,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": null,
+    "regression_verdict": null,
+    "regression_attempt_count": 0,
+    "recovery_count": 0,
+    "opening_sequence_pattern": "memory-awakening",
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "Canonでカイは十代半ばまで今世の人格として暮らし、その後に日本での前世記憶が鮮明になるため、記憶覚醒前の人格、前世との接続、世界と魔法の再認識、現在の旅へのつながりを独立した複数Episodeで扱う",
+    "human_review_status": "not-recorded",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial.md"
+      ],
+      "review": null
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision.md"
+      ],
+      "review": "reviews/03-planner-revision.md"
+    },
+    {
+      "sequence": 4,
+      "stage": "story-craft-recheck",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/04-story-craft-recheck-attempt-1.md"
+    },
+    {
+      "sequence": 5,
+      "stage": "planner-revision",
+      "attempt": 2,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-planner-revision-attempt-2.md"
+      ],
+      "review": "reviews/05-planner-revision-attempt-2.md"
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-recheck",
+      "attempt": 2,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-recheck-attempt-2.md"
+    }
+  ]
+}
