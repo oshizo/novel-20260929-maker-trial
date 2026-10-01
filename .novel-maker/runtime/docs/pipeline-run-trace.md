@@ -10,23 +10,29 @@ Plot Planningでは、初稿から最終成果物までに複数のagentが確�
 
 ```text
 Planner 初稿
-→ Story Craft Challenger
+→ Story Craft Challenger（初回確認）
 → Planner Revision
+→ Story Craft Challenger（改訂後再判定）
 → Technical Reviewer
 → Finalizer
 → Story Craft Regression
 → 必要な作者確認
 ```
 
+改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner Revisionとfresh Story Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。
+
 最終成果物だけを残すと、後から次を確認できない。
 
-- Challengerが何を問題視したか。
+- 初回Challengerが何を問題視し、`PASS / WEAK / FAIL` のどれを返したか。
 - Planner Revisionが何を採用、一部採用、不採用にしたか。
-- 初稿、Revision後、Finalizer後で何が変わったか。
+- 改訂後の成果物をfresh Challengerが独立にどう再判定したか。
+- 初稿、各Revision後、Finalizer後で何が変わったか。
 - Technical Reviewerが何件の必須修正を出したか。
 - Story Craft Regressionが何を確認してPASS / FAILしたか。
 - machine側がPASSした後に作者がどんな修正を求めたか。
 - framework revision、executor version、configured agent / model、実際に動いたagent / modelの違いで結果がどう変わったか。
+
+特に、**Story Craft Regressionの `PASS` と、改訂後Story Craft再判定の `PASS` は別の意味を持つ。** RegressionはTechnical Review / Finalizerによる回帰がないことを確認するstageであり、改訂済みPlotそのものを対象読者として新規評価するstageではない。
 
 これらは `novel-maker` 自体を改善するための重要な観測情報である。一方、通常のPlannerやWriterへ渡すとcontextを汚染する。
 
@@ -42,28 +48,33 @@ Planner 初稿
   snapshots/
     01-planner-initial.md
     03-planner-revision.md
-    05-finalizer.md
+    05-planner-revision-attempt-2.md     # 追加Revisionを行った場合
+    08-finalizer.md
   reviews/
-    00-planning-readiness.md        # Overallで実行した場合
+    00-planning-readiness.md             # Overallで実行した場合
     02-story-craft-challenger.md
-    03-planner-revision.md
-    04-technical-review.md
-    06-story-craft-regression.md
-    07-human-review.md              # 後から追加してよい
+    04-story-craft-recheck.md
+    05-planner-revision-attempt-2.md     # 追加Revisionを行った場合
+    06-story-craft-recheck-attempt-2.md  # 追加再判定を行った場合
+    07-technical-review.md
+    09-story-craft-regression.md
+    10-human-review.md                   # 後から追加してよい
 ```
 
-Story Craft Regression失敗時の回復やPlanning Readinessの再実行など、同じstageを複数回実行した場合は `-attempt-2` などを付けて別fileにする。
+番号は例であり、実際の処理順に合わせてよい。意味の正本は `run.json > stages` とする。
+
+Story Craft再判定の追加attempt、Story Craft Regression失敗時の回復、Planning Readinessの再実行など、同じstageを複数回実行した場合は `-attempt-2` などを付けて別fileにする。
 
 例:
 
 ```text
-reviews/06-story-craft-regression-attempt-1.md
-snapshots/07-finalizer-recovery.md
-reviews/08-technical-review-recovery.md
-reviews/09-story-craft-regression-attempt-2.md
+reviews/04-story-craft-recheck-attempt-1.md
+reviews/06-story-craft-recheck-attempt-2.md
+reviews/09-story-craft-regression-attempt-1.md
+snapshots/10-finalizer-recovery.md
+reviews/11-technical-review-recovery.md
+reviews/12-story-craft-regression-attempt-2.md
 ```
-
-番号は処理順を読むための補助であり、意味の正本は `run.json > stages` とする。
 
 ## 3. run-id
 
@@ -92,7 +103,7 @@ run-idは一意であればよい。作品の意味を持たせない。
 次の時点の対象Planning fileを、その時点の内容のまま保存する。
 
 - Planner初稿後。
-- Planner Revision後。
+- 各Planner Revision後。追加Revisionを行った場合も別snapshotを残す。
 - Finalizer後。
 - Regression失敗時の回復でFinalizerが再修正した場合は、その回復後。
 
@@ -105,8 +116,9 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 次のagentが親agentへ返した**正式な出力**を保存する。
 
 - Planning Readiness。
-- Story Craft Challenger。
+- Story Craft Challengerの初回確認。
 - Planner Revisionの採否結果と採用した改善意図。
+- Story Craft Challengerの改訂後再判定。追加再判定もattemptごとに保存する。
 - Technical Reviewer。
 - Story Craft Regression。
 - Writer Brief Reviewerを同じ操作内で実行した場合はその確認結果。
@@ -115,6 +127,8 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 要約だけに置き換えず、agentが親へ返した正式出力を残す。
 
 ただし、モデルの内部思考、chain-of-thought、system prompt、認証情報、実行環境の秘密情報は保存しない。Planner Revisionで保存する理由も、親へ正式に返した短い採否理由だけでよく、内部推論を要求しない。
+
+**改訂後再判定のreview fileを保存することと、それを次のfresh Challengerへ入力することは別である。** 再判定agentへは旧review、旧snapshot、過去runを通常contextとして渡さない。
 
 ### 4.3 executor / agent / model情報
 
@@ -164,6 +178,8 @@ actual modelをexecutorから確実に取得できない場合、推測してcon
   "completed_at": null,
   "summary": {
     "initial_story_craft_verdict": "WEAK",
+    "revised_story_craft_verdict": "PASS",
+    "story_craft_recheck_attempt_count": 1,
     "planner_revision_count": 1,
     "planner_adopted_count": 2,
     "planner_partially_adopted_count": 1,
@@ -190,7 +206,7 @@ run全体の状態には次を使う。
 - `running`: AI内部pipelineの途中。
 - `awaiting-human`: machine pipelineは完了し、作者確認待ち。
 - `completed`: 必要な作者確認も含めて完了。
-- `blocked`: 契約上これ以上進めない状態で停止。configured agent起動失敗や正式出力契約の欠落を含む。
+- `blocked`: 契約上これ以上進めない状態で停止。configured agent起動失敗、正式出力契約の欠落、Story Craft再判定の未解決を含む。
 - `failed`: 実行自体が異常終了し、正規の停止記録まで作れなかった。
 
 ### 5.3 summary
@@ -198,8 +214,10 @@ run全体の状態には次を使う。
 集計用の値を置く。
 
 - `initial_story_craft_verdict`: 最初のChallenger判定。`PASS / WEAK / FAIL / null`。
-- `planner_revision_count`: Planner Revisionを実行した回数。
-- `planner_adopted_count`: Planner Revisionが `採用` としたChallenger指摘件数。
+- `revised_story_craft_verdict`: Planner Revision後のfresh Story Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。
+- `story_craft_recheck_attempt_count`: 改訂後再判定を実行した回数。標準pipelineでは1、追加Revisionを使った場合は最大2。
+- `planner_revision_count`: Planner Revisionを実行した回数。標準pipelineでは最低1、追加Revisionを使った場合は最大2。
+- `planner_adopted_count`: Planner Revisionが `採用` としたChallenger指摘件数。複数Revisionがある場合は正式出力から一意に集計できるときだけ合計する。
 - `planner_partially_adopted_count`: `一部採用` とした件数。
 - `planner_rejected_count`: `不採用` とした件数。
 - `technical_required_fix_count`: 最初のTechnical Reviewで明確に数えられる必須修正件数。数えられない形式なら `null`。
@@ -211,11 +229,13 @@ run全体の状態には次を使う。
 
 数字を推測して埋めない。正式出力から一意に数えられない場合は `null` とする。
 
+`initial_story_craft_verdict: WEAK` かつ `regression_verdict: PASS` でも、`revised_story_craft_verdict` が `PASS` でなければ「最終的にStory CraftがPASSした」と扱わない。
+
 ### 5.4 stages
 
 各stageを実行順に並べる。
 
-例:
+初回Challengerの例:
 
 ```json
 {
@@ -223,15 +243,35 @@ run全体の状態には次を使う。
   "stage": "story-craft-challenger",
   "attempt": 1,
   "configured_agent": "story_craft_challenger",
-  "configured_model": "gpt-5.6",
+  "configured_model": "gpt-6-sol",
   "actual_agent": "story_craft_challenger",
-  "actual_model": "gpt-5.6",
+  "actual_model": "gpt-6-sol",
   "reasoning": "high",
   "result": "completed",
   "failure_reason": null,
   "verdict": "WEAK",
   "snapshots": [],
   "review": "reviews/02-story-craft-challenger.md"
+}
+```
+
+改訂後再判定の例:
+
+```json
+{
+  "sequence": 4,
+  "stage": "story-craft-recheck",
+  "attempt": 1,
+  "configured_agent": "story_craft_challenger",
+  "configured_model": "gpt-6-sol",
+  "actual_agent": "story_craft_challenger",
+  "actual_model": "gpt-6-sol",
+  "reasoning": "high",
+  "result": "completed",
+  "failure_reason": null,
+  "verdict": "PASS",
+  "snapshots": [],
+  "review": "reviews/04-story-craft-recheck.md"
 }
 ```
 
@@ -243,7 +283,7 @@ configured agentが起動前に失敗した例:
   "stage": "story-craft-challenger",
   "attempt": 1,
   "configured_agent": "story_craft_challenger",
-  "configured_model": "gpt-5.6",
+  "configured_model": "gpt-6-sol",
   "actual_agent": null,
   "actual_model": null,
   "reasoning": "high",
@@ -261,6 +301,7 @@ configured agentが起動前に失敗した例:
 - `planner-initial`
 - `story-craft-challenger`
 - `planner-revision`
+- `story-craft-recheck`
 - `technical-review`
 - `finalizer`
 - `story-craft-regression`
@@ -268,7 +309,7 @@ configured agentが起動前に失敗した例:
 - `writer-brief-reviewer`
 - `human-review`
 
-回復処理でも同じstage名を使い、`attempt` と処理順で区別してよい。
+追加Revisionや再判定、回復処理でも同じstage名を使い、`attempt` と処理順で区別する。
 
 ### 5.5 standard pipelineのfail-closed
 
@@ -282,12 +323,13 @@ standard pipelineではconfigured role contractを満たした実行だけを正
 - `*-fallback` 等の別roleへ自動切替した。
 - configured modelから別modelへ自動fallbackしたことが分かった。
 - role固有の正式出力契約を満たさない。
+- 改訂後Story Craft再判定が、許可された追加Revision後も `WEAK / FAIL` のまま解消しない。
 
 fallbackを使って診断を続けたい場合は、standard pipelineとは別の実験として明示する。その結果をconfigured roleの `PASS / WEAK / FAIL`、Technical Review完了、Regression PASSとして記録しない。
 
 role固有の出力契約について、少なくとも次を確認する。
 
-- Story Craft Challenger: `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` がある。
+- Story Craft Challengerの初回確認 / 改訂後再判定: `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` がある。再判定も同じ正式出力契約を満たす。
 - Story Craft Regression: `比較結果` と `判定` があり、判定は `PASS / FAIL` のどちらかである。`PASS` 一語だけは正式出力としない。
 
 ## 6. 親agentの記録手順
@@ -299,11 +341,13 @@ role固有の出力契約について、少なくとも次を確認する。
 3. configured agentを起動する。起動できなければstageを `blocked`、runを `blocked` として停止する。別roleや別modelで穴埋めしない。
 4. agentから正式出力を受け取ったらrole固有の出力契約を確認する。不足していればstage / runを `blocked` として停止する。
 5. 正式出力を受け取った直後にreview fileへ保存する。
-6. Planner初稿、Planner Revision、Finalizerが対象成果物を書き換えた直後にsnapshotを取る。
-7. `run.json > stages` と集計可能な `summary` を、そのstage終了時点で更新する。
-8. Regressionが正式な `PASS` を返し、作者確認が必要なら `awaiting-human` とする。不要なら `completed` とする。
-9. Regression未解決、Readinessの停止条件などで進めない場合は `blocked` とし、停止理由をstageへ残す。
-10. 後日作者確認が行われた場合、同じrunへHuman Reviewを追加し、`human_review_status` とrun `status` を更新する。
+6. Planner初稿、各Planner Revision、Finalizerが対象成果物を書き換えた直後にsnapshotを取る。
+7. 初回Challenger終了時に `initial_story_craft_verdict` を更新する。改訂後再判定の各attempt終了時に `story_craft_recheck_attempt_count` と `revised_story_craft_verdict` を更新する。Regression結果で `revised_story_craft_verdict` を上書きしない。
+8. 最初の改訂後再判定が `WEAK / FAIL` なら、追加Planner Revisionと再判定を最大1回だけ行う。2回目も `PASS` でなければrunを `blocked` にする。
+9. `revised_story_craft_verdict: PASS` 後にTechnical Reviewer / Finalizer / Regressionへ進む。
+10. Regressionが正式な `PASS` を返し、作者確認が必要なら `awaiting-human` とする。不要なら `completed` とする。
+11. Regression未解決、Readinessの停止条件などで進めない場合は `blocked` とし、停止理由をstageへ残す。
+12. 後日作者確認が行われた場合、同じrunへHuman Reviewを追加し、`human_review_status` とrun `status` を更新する。
 
 親agentが途中で異常終了しても、そこまでのfileは残す。次回実行で未完runを見つけても、通常Planningの入力として再利用しない。診断または明示的な再開指示がある場合だけ参照する。
 
@@ -317,6 +361,8 @@ role固有の出力契約について、少なくとも次を確認する。
 - Planner、Challenger、Reviewer、Finalizer、Writerへ過去runを入力しない。
 - Canon / Planning / State / Style / Manuscriptの代わりにrun traceを参照しない。
 - `check-story` やframework-syncは、`.novel-maker/runs/` をruntime snapshotやPlanning成果物として解釈しない。
+
+Story Craft改訂後再判定でもこの隔離は維持する。fresh Challengerへは、**現在の改訂済みPlotと現在の正本入力だけ**を渡し、初回Challenger全文、Planner Revisionの採否一覧、旧snapshot、過去runを渡さない。
 
 過去runを読むのは次の場合だけとする。
 
@@ -333,7 +379,7 @@ role固有の出力契約について、少なくとも次を確認する。
 
 作者が承認した場合:
 
-- `reviews/07-human-review.md` 等に承認した事実を短く残してよい。
+- `reviews/10-human-review.md` 等に承認した事実を短く残してよい。
 - `human_review_status: approved` にする。
 - runを `completed` にする。
 

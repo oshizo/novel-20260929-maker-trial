@@ -225,7 +225,11 @@ Episode Designの作者向け説明は、そのまま執筆指示へ移さず、
 
 ## 5. Story Craft Challengerの役割
 
-Story Craft Challengerは、技術上の整合性を確認するReviewerではない。
+Story Craft Challengerは、技術上の整合性を確認するReviewerではない。標準pipelineでは、**Planner初稿への初回確認**と、**Planner Revision後の改訂版への独立再判定**の二つの用途で使う。
+
+どちらも同じ対象読者・同じ判定基準で読み、`PASS / WEAK / FAIL` を返す。改訂後再判定は、初回指摘の消し込みではなく、fresh Challengerが改訂版そのものを最初から読み直す工程とする。
+
+改訂後再判定へは、初回Challengerの指摘全文、Planner Revisionの採用・不採用一覧、旧snapshot、過去runを通常contextとして渡さない。現在の改訂済みPlotと、作品方針・確定設定・作者制約・承認済み上位Plot等の正本入力から独立に判断する。
 
 主に次を確認する。
 
@@ -262,9 +266,13 @@ Story Craftの確認用に考えた前振り、出来事、結果の残り方を
 
 下位で追加した内容を上位へ自動的に書き戻さない。
 
+Planner Revision後は、Technical Reviewerへ直接進まず、fresh Story Craft Challengerで改訂版を再判定する。再判定が `PASS` の場合だけTechnical Reviewerへ進む。
+
+最初の再判定が `WEAK / FAIL` の場合は、[`plot-planning.md`](plot-planning.md) のbounded ruleに従い、追加Planner Revisionとfresh再判定を最大1回だけ行う。無制限ループにはしない。
+
 ## 7. Technical Reviewer / Finalizerとの境界
 
-Planner Revision後にTechnical Reviewerが確認する。
+**改訂後Story Craft再判定が `PASS` した後に**Technical Reviewerが確認する。
 
 Technical Reviewerの主な責務:
 
@@ -312,11 +320,13 @@ Overallで重複を統合する修正、Overallで細部をArcへ戻す修正、
 
 ここでは新しい改善案を追加しない。
 
+**Regression PASSは、改訂後PlotそのものがStory Craft上 `PASS` だったことを新規に保証しない。** 改訂後の独立再判定とRegressionは別stageであり、前者が `PASS` したうえで後者がその改善意図の維持を確認する。
+
 ## 9. 情報境界
 
 標準的な受け渡しは次とする。
 
-| 情報 | Planner | Craft Challenger | Planner Revision | Technical Reviewer | Finalizer | Craft Regression |
+| 情報 | Planner | Craft Challenger（初回 / 再判定） | Planner Revision | Technical Reviewer | Finalizer | Craft Regression |
 |---|---|---|---|---|---|---|
 | 作品方針 | 読む | 読む | 読む | 読む | 読む | 読む |
 | 確定設定 | 読む | 読む | 読む | 読む | 読む | 読む |
@@ -324,14 +334,17 @@ Overallで重複を統合する修正、Overallで細部をArcへ戻す修正、
 | 適用されるStyle上の視点指定 | Episodeで読む | Episodeで読む | Episodeで読む | Episodeで読む | Episodeで読む | 原則不要 |
 | 関連State | 必要時に読む | 原則不要 | 必要時に読む | 読む | 読む | 原則不要 |
 | Story Craft | 許可された節だけ読む | 許可された節だけ読む | 許可された節だけ読む | 全文は読まない | 全文は読まない | §3と§8だけ読む |
-| 初稿 | 作る | 読む | 読む | - | - | - |
-| Challengerの指摘 | - | 作る | 読む | - | - | - |
-| 採用した改善意図 | - | - | 作る | 読む | 読む | 読む |
-| 改訂済みPlot | - | - | 作る | 読む | 読む | 比較元として読む |
+| 初稿 | 作る | 初回確認で読む | 読む | - | - | - |
+| 初回Challengerの指摘 | - | 作る / 再判定では読まない | 読む | - | - | - |
+| 改訂済みPlot | - | 再判定で読む | 作る | PASS後に読む | 読む | 比較元として読む |
+| 改訂後再判定の指摘 | - | 作る | 追加Revision時だけ読む | - | - | - |
+| 採用した改善意図 | - | 再判定では読まない | 作る | 読む | 読む | 読む |
 | Technical Reviewerの指摘 | - | - | - | 作る | 読む | - |
 | 最終Plot | - | - | - | - | 作成・更新 | 読む |
 
 Stateをagentが自由探索するという意味ではない。親agentが対象範囲と執筆状況に応じて必要なStateを入力へ含める。
+
+fresh Story Craft再判定の独立性を守るため、診断用のrun traceや初回reviewを「参考資料」として再判定へ追加しない。
 
 ## 10. 非ルール
 

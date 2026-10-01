@@ -1,5 +1,5 @@
 name = "story_craft_regression"
-description = "Technical Reviewer / Finalizer後の修正で、採用したStory Craft上の改善意図と読者報酬が弱くなっていないか確認する。"
+description = "Technical Reviewer / Finalizer後の修正で、Story Craft再判定PASS時の改善意図と読者報酬が弱くなっていないか確認する。"
 model = "gpt-6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
@@ -8,15 +8,17 @@ AGENTS.mdとpin済みの実行規約を読む。特に language-policy.md、stor
 
 story-craft.mdでは、§3 変更してはいけない上位条件と§8 Story Craft Regressionだけを判断基準として使う。§9は入力境界の確認だけに使う。§2、§4、§5、§6から新しい改善案を探したり追加したりしない。
 
-Story Craft Regressionの確認だけを担当する。Technical Reviewerへ渡す前の改訂済みPlotとFinalizer後のPlotを、採用した改善意図、Story Craft Challengerの読者シミュレーション結果、作品方針、確定設定に照らして比較する。
+Story Craft Regressionの確認だけを担当する。**Technical Reviewerへ渡す直前にfresh Story Craft再判定で `PASS` した改訂済みPlot**とFinalizer後のPlotを、採用した改善意図、**改訂後Story Craft再判定の正式出力**、作品方針、確定設定に照らして比較する。
 
-Challengerが出した `PASS / WEAK / FAIL`、読者としての感想、主要な報酬トレースは、その実行で採用された改善意図の一部として扱う。ただしRegression自身が新しく対象読者をシミュレートし直したり、好みで点数を付け直したりはしない。
+初回Story Craft Challengerの `PASS / WEAK / FAIL`、初回の読者としての感想、初回報酬トレースはRegressionの比較基準として受け取らない。Regressionの基準になるのは、Technical Reviewerへ進む条件を満たした**最後の改訂後再判定 `PASS`** と、その時点の読者としての感想・報酬トレースである。
+
+改訂後再判定が出した `PASS`、読者としての感想、主要な報酬トレースは、その実行で成立したStory Craft品質の基準として扱う。ただしRegression自身が新しく対象読者をシミュレートし直したり、好みで点数を付け直したりはしない。
 
 確認することは次のとおり。
 
 1. Technical Reviewer / Finalizerの修正によって、採用した改善意図が弱くなった、消えた、別物へ変わったということがないか。
-2. Challengerで明確だった読者報酬が、Finalizer後に単なる出来事説明へ薄まっていないか。
-3. Challengerが強いと判断した有能感、承認、特別視、異性的魅力、獲得、生活改善、カタルシス、日常の楽しさ等のうち、作品方針と対象範囲に関係するものが弱くなっていないか。
+2. 改訂後Story Craft再判定で明確だった読者報酬が、Finalizer後に単なる出来事説明へ薄まっていないか。
+3. 改訂後再判定で強いと判断した有能感、承認、特別視、異性的魅力、獲得、生活改善、カタルシス、日常の楽しさ等のうち、作品方針と対象範囲に関係するものが弱くなっていないか。
 4. 作品方針が明示した欲望や魅力が、Technical Reviewの過程で `魅力的な人物`、`関係が深まる` 等の一般語へ平均化されていないか。
 5. 読者に与える満足、誰についてのことか、引き継ぎ元と、実際の出来事・人物判断・成果の対応がFinalizer後に弱くなっていないか。
 6. 各楽しみについて、成立に必要な前提、実現先、その後に残る変化までの対応がFinalizer後も追えるか。
@@ -54,7 +56,7 @@ Overallで細部をArcへ戻す修正、Arcで細部をEpisode Designへ戻す�
 ### 比較結果
 
 - 採用した改善意図がFinalizer後も保たれているか。
-- Challengerで確認した主要な読者報酬が弱体化していないか。
+- 改訂後Story Craft再判定で確認した主要な読者報酬が弱体化していないか。
 - 上位条件、日本語、参照関係に回帰がないか。
 - 問題がある場合は、修正前後の差と最小限戻す内容を書く。
 

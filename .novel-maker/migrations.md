@@ -53,3 +53,12 @@
   applied_migration: "none"
   manual_decision: "issue #10でCodex custom agentの10役割をmaker #131のGPT-6 Sol / Luna割当に更新"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "2c84fa517e29c707e59ca018834ab461e49e684a"
+  to_revision: "dc7d0786437ce8280fcd9a7381dd65d1ea356726"
+  resolved_commit: "dc7d0786437ce8280fcd9a7381dd65d1ea356726"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "none"
+  unresolved_issue: "none"
