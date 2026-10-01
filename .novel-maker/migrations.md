@@ -35,3 +35,12 @@
   applied_migration: "none"
   manual_decision: "issue #9で冒頭導入セットの採否判定契約を反映"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "d057210d9f64a930260c51edd3efea7bc8d18d53"
+  to_revision: "461c2178a5119e73db2455cddc417591da2efbfb"
+  resolved_commit: "461c2178a5119e73db2455cddc417591da2efbfb"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "issue #10でCodexのStory Craft Regression設定とPlanning Issue templateをmaker #129相当へ更新"
+  unresolved_issue: "none"

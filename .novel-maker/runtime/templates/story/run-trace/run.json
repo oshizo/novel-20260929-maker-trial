@@ -7,6 +7,10 @@
     "path": ""
   },
   "framework_revision": "",
+  "executor": {
+    "name": null,
+    "version": null
+  },
   "status": "running",
   "started_at": null,
   "completed_at": null,
