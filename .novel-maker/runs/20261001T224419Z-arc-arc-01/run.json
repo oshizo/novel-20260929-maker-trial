@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "run_id": "20261001T224419Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md"
+  },
+  "framework_revision": "a5abd3a47d5be2a571f2d46b1ca1e6493292aa92",
+  "executor": {
+    "name": "codex-collaboration",
+    "version": null
+  },
+  "status": "awaiting-human",
+  "started_at": "2026-10-01T22:44:19.295621Z",
+  "completed_at": null,
+  "summary": {
+    "initial_story_craft_verdict": "WEAK",
+    "revised_story_craft_verdict": "PASS",
+    "story_craft_recheck_attempt_count": 2,
+    "planner_revision_count": 2,
+    "planner_adopted_count": 11,
+    "planner_partially_adopted_count": 0,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 8,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "opening_sequence_pattern": "memory-awakening",
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "記憶覚醒前の今世、覚醒と二つの人生の受け止め、成人後の一人旅から姉妹救助へ接続する独立導入を置く。",
+    "human_review_status": "pending",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial.md"
+      ],
+      "review": "reviews/01-planner-initial.md"
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision.md"
+      ],
+      "review": "reviews/03-planner-revision.md"
+    },
+    {
+      "sequence": 4,
+      "stage": "story-craft-recheck",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/04-story-craft-recheck-attempt-1.md"
+    },
+    {
+      "sequence": 5,
+      "stage": "planner-revision",
+      "attempt": 2,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-6-luna",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-planner-revision-attempt-2.md"
+      ],
+      "review": "reviews/05-planner-revision-attempt-2.md"
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-recheck",
+      "attempt": 2,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-recheck-attempt-2.md"
+    },
+    {
+      "sequence": 7,
+      "stage": "technical-review",
+      "attempt": 1,
+      "configured_agent": "plot_reviewer",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "plot_reviewer",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/07-technical-review.md"
+    },
+    {
+      "sequence": 8,
+      "stage": "finalizer",
+      "attempt": 1,
+      "configured_agent": "plot_finalizer",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "plot_finalizer",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/08-finalizer.md"
+      ],
+      "review": "reviews/08-finalizer.md"
+    },
+    {
+      "sequence": 9,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "configured_agent": "story_craft_regression",
+      "configured_model": "gpt-6-sol",
+      "actual_agent": "story_craft_regression",
+      "actual_model": "gpt-6-sol",
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/09-story-craft-regression.md"
+    }
+  ]
+}

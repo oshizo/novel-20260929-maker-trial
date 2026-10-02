@@ -1,7 +1,7 @@
 source:
   repository: "oshizo/novel-maker"
-  requested_revision: "dc7d0786437ce8280fcd9a7381dd65d1ea356726"
-  resolved_commit: "dc7d0786437ce8280fcd9a7381dd65d1ea356726"
+  requested_revision: "a5abd3a47d5be2a571f2d46b1ca1e6493292aa92"
+  resolved_commit: "a5abd3a47d5be2a571f2d46b1ca1e6493292aa92"
   contract_version: 1
 runtime_files:
   - path: "docs/language-policy.md"
@@ -15,7 +15,7 @@ runtime_files:
   - path: "docs/plot-planning.md"
     sha256: "092a7ddc3ba9b5c962f8f8eca721e5c0847a1d18cb7f4e8c8b1d230e93666a0d"
   - path: "docs/story-craft.md"
-    sha256: "ef4661fac16c950c932f157bdaea9af2c7c86f8f4c7caef8d80a156814c14730"
+    sha256: "c23c2e272e986c42db369b14e96b9e3f908ab83ad4419316e87b8ae8475fa278"
   - path: "docs/reader-gratification.md"
     sha256: "126843d2f6832443fe8b8372adadaa03e4861bd7b085b506a94a002275770e36"
   - path: "docs/opening-sequence.md"
@@ -29,7 +29,7 @@ runtime_files:
   - path: "templates/story/planning/overall.md"
     sha256: "a3cf5c99fd390f2935cdd972ecc9853e10e66d678a6d1372b9ae2b7473bb042a"
   - path: "templates/story/planning/arcs/arc.md"
-    sha256: "407e4c191bccbc2586f433b8e1624aa6702e824e7735dc9bfda8aca181ee2d62"
+    sha256: "640cb99aa11de2d52f3598ebe28fef0cd555a15d3a76077fb53d3c0c6241996e"
   - path: "templates/story/planning/episodes/episode.design.md"
     sha256: "a2a504e55c373c700655aa40f0fcdf0473c10c271aa762aac7020e1fffdfbbab"
   - path: "templates/story/planning/episodes/episode.writer.md"
