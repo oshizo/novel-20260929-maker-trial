@@ -29,8 +29,8 @@
     "opening_sequence_pattern": "memory-awakening",
     "opening_sequence_decision": "採用",
     "opening_sequence_reason": "記憶覚醒前の今世、覚醒と二つの人生の受け止め、成人後の一人旅から姉妹救助へ接続する独立導入を置く。",
-    "human_review_status": "pending",
-    "human_required_change_count": null
+    "human_review_status": "changes-requested",
+    "human_required_change_count": 1
   },
   "stages": [
     {
