@@ -71,3 +71,12 @@
   applied_migration: "none"
   manual_decision: "Issue #12でarc-planner.tomlをmaker #137のtemplateから明示同期。GPT-6 Sol / Luna割当を維持"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "a5abd3a47d5be2a571f2d46b1ca1e6493292aa92"
+  to_revision: "f7811f1a83204fe45f102536f59f1f54f98b2673"
+  resolved_commit: "f7811f1a83204fe45f102536f59f1f54f98b2673"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "none"
+  unresolved_issue: "none"
