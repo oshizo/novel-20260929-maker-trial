@@ -1,6 +1,6 @@
 name = "writer_brief_generator"
 description = "確定済みEpisode Designから、本文執筆担当に必要な情報だけを残した執筆指示を作る。"
-model = "gpt-5.6-terra"
+model = "gpt-6-luna"
 model_reasoning_effort = "medium"
 developer_instructions = """
 AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md、planning-preflight-guards.md、plot-planning.md を参照する。

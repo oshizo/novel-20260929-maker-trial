@@ -1,6 +1,6 @@
 name = "overall_planner"
 description = "作品方針、確定設定、整理済み入力から作品全体のOverallを作成・改訂する。"
-model = "gpt-5.6"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md、planning-preflight-guards.md、story-craft.md、reader-gratification.md を参照する。

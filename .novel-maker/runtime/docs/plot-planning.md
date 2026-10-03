@@ -2,7 +2,7 @@
 
 状態: Plot成果物と計画手順の正本
 
-repositoryの所有境界は [`repository-contract.md`](repository-contract.md)、計画開始前の入力整理は [`planning-input.md`](planning-input.md)、読者向けの面白さを確認する観点は [`story-craft.md`](story-craft.md)、文章と言葉は [`language-policy.md`](language-policy.md) に従う。
+repositoryの所有境界は [`repository-contract.md`](repository-contract.md)、計画開始前の入力整理は [`planning-input.md`](planning-input.md)、読者向けの面白さを確認する観点は [`story-craft.md`](story-craft.md)、文章と言葉は [`language-policy.md`](language-policy.md)、pipelineの診断用履歴は [`pipeline-run-trace.md`](pipeline-run-trace.md) に従う。
 
 本書と [`../templates/story/planning/`](../templates/story/planning/) はframework側の正本であり、実作品のPlotはstory repo側を正本とする。
 
@@ -31,7 +31,7 @@ repositoryの所有境界は [`repository-contract.md`](repository-contract.md)�
 - Episode Designは本文執筆直前まで具体化する。
 - 場面構成はEpisode Designに含め、独立した場面計画を増やさない。
 - 執筆指示はEpisode Designを本文執筆担当向けに変換した成果物であり、作者側の設計理由をそのまま渡さない。
-- 一時的な確認結果は原則として恒久fileへ保存せず、採用結果だけをPlotへ反映する。
+- 一時的な確認結果は作品成果物へ保存せず、採用結果だけをPlotへ反映する。ただしmaker改善に必要な各stageの正式出力とsnapshotは、診断用実行履歴として `.novel-maker/runs/` へ隔離保存する。
 
 ### 長編ではrolling planningを基本とする
 
@@ -150,9 +150,11 @@ Overall開始時は、先に `planning-input.md` に従って入力整理とPlan
         ↓
 Planner 初稿
         ↓
-Story Craft Challenger
+Story Craft Challenger（初回確認）
         ↓
 同じ範囲のPlannerが改訂
+        ↓
+Story Craft Challenger（改訂後再判定）
         ↓
 Technical Reviewer
         ↓
@@ -165,46 +167,75 @@ Story Craft Regression
 ready化と下流影響判定
 ```
 
+対象範囲を決定して実際にPlannerを起動する直前に、親agentは [`pipeline-run-trace.md`](pipeline-run-trace.md) に従ってrun traceを開始する。OverallでPlanning Readinessを同じ操作内で行った場合は、その正式出力も同じrunへ記録する。
+
 1. **入力と変更禁止条件を確定する**  
    作品方針、上位Plot、関連する確定設定 / State、現在の作者指示を読む。OverallではPlanning Readinessも通す。
 
 2. **Plannerが初稿を作る**  
-   対象範囲のPlannerが `draft` を作る。初稿時点から、その範囲に許可されたStory Craft観点を使う。
+   対象範囲のPlannerが `draft` を作る。初稿時点から、その範囲に許可されたStory Craft観点を使う。作成直後の対象成果物をrun traceへsnapshotとして保存する。
 
-3. **Story Craft Challengerが面白さを確認する**  
-   別agentが、読者向けの面白さについて、残す点、改善候補、仮説を返す。技術的な不整合確認を兼任しない。
+3. **Story Craft Challengerが初稿の面白さを確認する**  
+   別agentが対象読者として初稿を読み、`PASS / WEAK / FAIL` と、残す点、不足、改善候補、仮説を返す。技術的な不整合確認を兼任しない。親agentは正式出力をrun traceへ保存し、この判定を `initial_story_craft_verdict` とする。
 
 4. **同じ範囲のPlannerが改訂する**  
-   初稿を作った会話を継ぎ足すのではなく、新しい実行として改訂する。Challengerの提案を全部採用せず、採用・一部採用・不採用を判断する。採用した改善意図だけを当該実行内で親agentへ返す。この中間工程ではversionを進めない。
+   初稿を作った会話を継ぎ足すのではなく、新しい実行として改訂する。Challengerの提案を全部採用せず、採用・一部採用・不採用を判断する。採用した改善意図だけを当該実行内で親agentへ返す。この中間工程ではversionを進めない。親agentは正式な採否結果と改訂後snapshotをrun traceへ保存する。
 
-5. **Technical Reviewerが技術上の問題を確認する**  
-   作品方針、上位Plot、確定設定、因果、視点、知識差、人物の主体性、継続性、仕込みと回収、状態管理を確認する。Story Craftの新しい改善案は出さない。
+5. **fresh Story Craft Challengerが改訂版を独立に再判定する**  
+   Planner Revision後は、新しいChallenger実行を起動する。初回Challengerの指摘全文、Planner Revisionの採否一覧、旧snapshot、過去runは再判定の通常contextへ入れない。改訂済みPlot、変更してはいけない上位条件、対象読者・Story Craft契約から、改訂版そのものを最初から読み直す。出力契約は初回と同じ `読者としての感想 / 報酬トレース / 判定 / Planner Revisionへ渡す内容` とする。親agentは最後の再判定を `revised_story_craft_verdict` として保存する。
 
-6. **Finalizerが必要な修正を閉じる**  
-   必須修正を優先し、必要なら置換・統合・削除で直す。説明を足すだけで済ませない。採用した改善意図は、上位条件や技術的正しさと両立する限り保つ。
+   `PASS` ならTechnical Reviewerへ進む。`WEAK / FAIL` なら、**追加のPlanner Revision → fresh再判定を最大1回だけ**行う。したがって1run中のPlanner Revisionは最大2回、改訂後再判定も最大2回とする。2回目の再判定でも `PASS` にならない場合は `story-craft-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。無制限に再生成しない。
 
-7. **Story Craft Regressionで改善意図の消失だけを確認する**  
-   Technical Review前の改訂版とFinalizer後を比較し、採用した改善意図が弱くなっていないかだけを見る。ここで新しいアイデアを追加しない。
+6. **Technical Reviewerが技術上の問題を確認する**  
+   改訂後再判定が `PASS` した成果物だけを対象に、作品方針、上位Plot、確定設定、因果、視点、知識差、人物の主体性、継続性、仕込みと回収、状態管理を確認する。Story Craftの新しい改善案は出さない。親agentは正式出力をrun traceへ保存する。
 
-8. **必要な作者確認を行う**  
-   `story.yaml` で設定された確認地点があれば、作者側の採否を確認する。技術上の未解決問題を作者の好みとして免除しない。
+7. **Finalizerが必要な修正を閉じる**  
+   必須修正を優先し、必要なら置換・統合・削除で直す。説明を足すだけで済ませない。採用した改善意図は、上位条件や技術的正しさと両立する限り保つ。修正後の対象成果物をrun traceへsnapshotとして保存する。
 
-9. **ready化と下流影響判定を行う**  
-   必要な確認をすべて通過したら `ready` にする。上流変更時は§4に従って影響する下流だけを `stale` にする。
+8. **Story Craft Regressionで改善意図の消失だけを確認する**  
+   Technical Review前の、Story Craft再判定で `PASS` した改訂版とFinalizer後を比較し、採用した改善意図や読者報酬が弱くなっていないかだけを見る。ここで新しいアイデアを追加しない。親agentは正式出力と判定をrun traceへ保存する。**Regression PASSは `revised_story_craft_verdict: PASS` の代わりではなく、最終Story Craft再判定でもない。**
+
+9. **必要な作者確認を行う**  
+   `story.yaml` で設定された確認地点があれば、作者側の採否を確認する。技術上の未解決問題を作者の好みとして免除しない。作者確認待ちになった時点でrun traceを `awaiting-human` にし、後日結果を同じrunへ追加できる。
+
+10. **ready化と下流影響判定を行う**  
+   `revised_story_craft_verdict: PASS` と正式なStory Craft Regression `PASS` を含む必要な確認をすべて通過したら `ready` にする。上流変更時は§4に従って影響する下流だけを `stale` にする。作者確認不要ならrun traceを `completed` にする。
 
 作者確認待ちでは `draft / pending` で止める。作者確認不要なら `review: not-required`、採用されたら `review: approved` とする。
 
-### 当該実行の中だけで渡す情報
+### 作品成果物へ保存しない中間情報
 
-次はstory repoの恒久成果物へ保存しない。
+次は作品の恒久成果物へ保存しない。
 
-- Story Craft Challengerの指摘全文
-- Plannerが各指摘を採用・不採用にした理由
-- 採用したStory Craft上の改善意図
-- Technical Reviewerの一時的な指摘
-- Story Craft Regressionの一時的な指摘
+- Story Craft Challengerの初回指摘全文。
+- Plannerが各指摘を採用・不採用にした理由。
+- Story Craft改訂後再判定の出力全文。
+- 採用したStory Craft上の改善意図。
+- Technical Reviewerの一時的な指摘。
+- Story Craft Regressionの一時的な指摘。
 
-Plotへ残すのは採用後の結果だけとする。
+後段agentへは、**当該実行の中だけで渡す情報**のうち、そのstageで契約上必要なものだけを渡す。診断履歴が存在することを理由に、過去のreview全文を追加contextとして渡さない。特にfresh Story Craft再判定へ、初回Challengerの指摘全文やPlanner Revisionの採否一覧を渡さない。
+
+一方、親agentはmaker改善用の診断情報として、上記の**正式出力**とPlanningの時点別snapshotを `.novel-maker/runs/<run-id>/` へ保存する。詳細は [`pipeline-run-trace.md`](pipeline-run-trace.md) を正本とする。
+
+Plotへ残すのは採用後の結果だけとする。モデルの内部思考やchain-of-thoughtはrun traceにも保存しない。
+
+### Story Craft再判定が通らない場合の一度だけの追加Revision
+
+最初の改訂後再判定が `WEAK / FAIL` の場合だけ、次を最大1回行う。
+
+```text
+Story Craft Challenger（改訂後再判定）: WEAK / FAIL
+        ↓
+fresh Planner Revision: 現在の再判定出力だけを使って追加改訂
+        ↓
+fresh Story Craft Challenger: 改訂版を再び最初から独立評価
+```
+
+- 追加Planner Revisionへ渡すのは、現在の改訂版、変更禁止条件、直前の再判定で正式に返された指摘に限る。旧runや初回Challenger全文を追加contextへ戻さない。
+- 2回目の再判定も `WEAK / FAIL` なら `story-craft-unresolved` としてrunを `blocked` にする。
+- Technical Reviewerへ進んでからStory Craft不足を技術修正で埋めようとしない。
+- `planner_revision_count` と `story_craft_recheck_attempt_count` を実回数で記録する。
 
 ### Story Craft Regression失敗時の一度だけの回復
 
@@ -222,9 +253,10 @@ Technical Reviewerが復元差分だけを再確認
 Story Craft Regressionを1回だけ再実行
 ```
 
-- PlannerやStory Craft Challengerを再起動しない。
+- PlannerやStory Craft Challengerを再起動しない。ここは**再判定で一度PASSしたStory Craftが技術修正で回帰した場合の回復**であり、新たなStory Craft改善ループではない。
 - 新しい改善案を追加しない。
-- 2回目もFAILなら `craft-regression-unresolved` として `draft` のまま停止する。
+- 回復中のFinalizer snapshot、Technical Reviewer出力、Regression再実行結果も同じrun traceへ追加する。
+- 2回目もFAILなら `craft-regression-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。
 - 未解決のsystem側問題を作者へ判断委譲しない。
 
 ### 範囲ごとの入出力
@@ -235,12 +267,14 @@ Story Craft Regressionを1回だけ再実行
 | `plan arc <id>` | `ready` なOverall、関連する確定設定 / State、隣接Arc、既存対象 | `planning/arcs/<id>.md`、必要な確定設定更新 | 親Overallが `ready` |
 | `plan episode <id>` | `ready` なOverall / 親Arc、関連する確定設定 / State、直近本文、既存対象 | Episode Design、必要な確定設定更新、執筆指示 | 親Arcが `ready` で執筆入口のStateが特定できる |
 
-Episodeでは、Story Craft Regressionを通過するまで執筆指示を作らない。
+Episodeでは、改訂後のStory Craft再判定とStory Craft Regressionを通過するまで執筆指示を作らない。
 
 ```text
 Episode Planner 初稿
-→ Story Craft Challenger
+→ Story Craft Challenger（初回確認）
 → Episode Planner 改訂
+→ Story Craft Challenger（改訂後再判定）
+→ 必要なら追加Planner Revision + 再判定を最大1回
 → Technical Reviewer
 → Finalizer
 → Story Craft Regression
@@ -249,7 +283,7 @@ Episode Planner 初稿
 → 必要なら作者確認
 ```
 
-Story Craft上の指摘や「読者をこう感じさせる」という設計理由を執筆指示へ直接渡さない。
+Story Craft上の指摘や「読者をこう感じさせる」という設計理由を執筆指示へ直接渡さない。同じ操作内でWriter Brief Generator / Reviewerを実行した場合は、その正式出力も同じrun traceのstageとして記録してよい。
 
 ## 6. 設定提案と依存関係
 
@@ -358,8 +392,9 @@ Finalizerは指摘ごとに文章を足すのではなく、必要なら既存�
 4. 同じ判断を複数の節で言い換えていない。
 5. 執筆指示なら§7を通過している。
 6. 設定提案の依存関係が完全である。
-7. Story Craft RegressionがPASSしている。
-8. 必要な作者確認が終わっている。
+7. 改訂後のStory Craft再判定が `PASS` している。
+8. Story Craft RegressionがPASSしている。
+9. 必要な作者確認が終わっている。
 
 ## 9. 作者確認
 
@@ -377,6 +412,8 @@ planning:
 
 作者確認は作者側の採否・好みを確認する工程であり、技術的な不整合診断を作者へ要求する工程ではない。
 
+作者確認の結果は作品成果物の `review` 状態へ反映する。加えて、machine判定との差を後から分析できるよう、該当runが特定できる場合は [`pipeline-run-trace.md`](pipeline-run-trace.md) に従ってHuman Reviewを診断履歴へ追加してよい。
+
 ## 10. `replan`
 
 作者の方向修正や上位変更で既存Plotを直す場合も、確認手順を省略しない。
@@ -385,8 +422,10 @@ planning:
 
 ```text
 Planner 改訂初稿
-→ Story Craft Challenger
+→ Story Craft Challenger（初回確認）
 → Planner 改訂
+→ Story Craft Challenger（改訂後再判定）
+→ 必要なら追加Planner Revision + 再判定を最大1回
 → Technical Reviewer
 → Finalizer
 → Story Craft Regression
@@ -401,18 +440,20 @@ Planner 改訂初稿
 - 執筆指示は元のEpisode Designが変わったら一旦 `stale` にし、§7を再確認する。
 - 執筆済みManuscriptは未来のPlotへ合わせて暗黙に書き換えない。
 
+replanは新しいrunとして記録する。過去runのsnapshotやreviewを書き換えて履歴を消さない。
+
 ## 11. `write-next` の開始条件
 
 本文生成前に次を満たす。
 
 - 対象の執筆指示が `ready`。
 - 元のEpisode Designが `ready` で `source_version` が一致する。
-- Episode DesignがTechnical Reviewer / FinalizerとStory Craft Regressionを通過済み。
+- Episode Designが改訂後のStory Craft再判定 `PASS`、Technical Reviewer / Finalizer、Story Craft Regression `PASS` を通過済み。
 - 親Arc / Overallが `stale` ではない。
 - 執筆指示に影響する設定提案が解決済み。
 - 設定された作者確認が完了している。
 
-本文執筆担当へ渡す情報は、readyな執筆指示、選択されたStyle資料、必要な直近本文に限定する。Episode Design、作品方針、Story Craftの一時指摘、Technical Reviewerの一時指摘を本文執筆担当へ直接渡さない。
+本文執筆担当へ渡す情報は、readyな執筆指示、選択されたStyle資料、必要な直近本文に限定する。Episode Design、作品方針、Story Craftの一時指摘、Technical Reviewerの一時指摘、`.novel-maker/runs/` の診断履歴を本文執筆担当へ直接渡さない。
 
 ## 12. 文章と用語
 

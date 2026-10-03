@@ -18,9 +18,9 @@ assignees: ""
 
 1. repo rootの `AGENTS.md` を読む。
 2. `story.yaml`、`story-direction.md`、`canon/`、`planning/`、`state/`、`manuscript/` の現在状態を確認する。
-3. `.novel-maker/runtime/docs/planning-input.md`、`.novel-maker/runtime/docs/plot-planning.md`、`.novel-maker/runtime/docs/story-artifacts.md`、`.novel-maker/runtime/docs/story-craft.md` に従う。
+3. `.novel-maker/runtime/docs/planning-input.md`、`.novel-maker/runtime/docs/plot-planning.md`、`.novel-maker/runtime/docs/story-artifacts.md`、`.novel-maker/runtime/docs/story-craft.md`、`.novel-maker/runtime/docs/pipeline-run-trace.md` に従う。
 4. 物語冒頭のArc / Episodeを扱う場合は `.novel-maker/runtime/docs/opening-sequence.md` も確認する。
-5. `.codex/agents/` がある場合は、`AGENTS.md` の役割分担どおりsubagentを使う。親agentがPlanner / Reviewer等を兼任しない。
+5. `.codex/agents/` がある場合は、`AGENTS.md` の役割分担どおりsubagentを使う。親agentがPlanner / Reviewer等を兼任しない。configured agent / modelが起動できない場合は、親agentや `*-fallback`、別modelで代走せずrunを `blocked` にする。
 
 ## 次の範囲の判定
 
@@ -49,7 +49,13 @@ assignees: ""
 
 一度に複数Arcを生成しない。
 
-物語の最初のArcをplanするとき、作品方針または現在の作者指示が主人公導入を主要事件の前に独立して置くことを求めている場合は `opening-sequence.md` をArc Plannerへの入力に含める。導入セットを採用するなら、Episode一覧の先頭を `episode-000`（主人公導入）→ `episode-001`（最初の主要事件・出会い・作品起動）として、2話の接続が分かるようにする。Episode 0を全作品へ機械的に追加しない。
+**物語の最初のArcをplanするときは、作品方針や作者指示にEpisode 0の明示指定がなくても `.novel-maker/runtime/docs/opening-sequence.md` をArc PlannerとStory Craft Challengerへの入力に含める。** Arc PlannerはEpisode一覧を確定する前に、冒頭導入を `採用 / Episode 1へ統合 / 不採用` のどれにするか判定する。
+
+- `採用`: Episode一覧の先頭を `episode-000`（主人公導入）→ `episode-001`（最初の主要事件・出会い・作品起動）とする。
+- `Episode 1へ統合`: 独立Episode 0を置かず、episode-001前半に主人公理解を行動として組み込む。
+- `不採用`: 最初の主要事件だけで主人公の現在・欲求・判断・能力と制約、必要なら転生・前世記憶が現在へ与える影響まで十分に伝わる場合に限る。
+
+Episode 0を全作品へ機械的に追加しない。採否と短い理由はrun traceへ記録し、PR本文にも残す。作品方針や作者指示が独立した冒頭導入を必須としている場合は、その上位条件を優先して `採用` とする。
 
 ### 4. 現在Arcがreadyの場合
 
@@ -88,7 +94,7 @@ Episode一覧の先頭が `episode-000` と `episode-001` で、両者が主人�
 
 次のPlanning開始時は、まずArc境界確認を行う。
 
-- 実際の `manuscript/`、`state/`、確定した設定を読む。
+- 実際の `manuscript/`、`state/`、確定設定を読む。
 - Overallの大きな方向 / 読者への約束に対して、実際に書いた結果がどこまで進んだか確認する。
 - 後続Arcの前提が変わった場合だけ、runtime契約に従って影響する成果物を `stale` / replan対象にする。
 - 既存のreadyな後続成果物を、本文を書いたという理由だけで機械的に捨てない。
@@ -97,6 +103,16 @@ Episode一覧の先頭が `episode-000` と `episode-001` で、両者が主人�
 ## 実行pipeline
 
 対象範囲が決まったら、`AGENTS.md` とruntime契約に定義された標準pipelineを省略せず実行する。
+
+実際に対象Plannerを起動する直前に `.novel-maker/runtime/docs/pipeline-run-trace.md` に従って `.novel-maker/runs/<run-id>/` を開始する。Codex等のexecutorを使う場合、取得できるexecutor名・versionを `run.json` へ記録する。各stageではconfigured agent / modelとactual agent / model / resultを記録する。
+
+**standard pipelineはfail-closedとする。** configured agent / modelが起動できない、別roleや別modelへfallbackした、親agentが代走した、またはrole固有の正式出力契約を満たさない場合、そのstageとrunを `blocked` にして停止する。fallback結果をconfigured roleの正式な `PASS / WEAK / FAIL` やRegression PASSとして記録しない。
+
+Story Craft Challengerの正式出力には少なくとも `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` が必要。Story Craft Regressionは `比較結果` と `判定` を返し、`PASS` 一語だけの出力は正式なRegression結果として扱わない。
+
+run traceは診断用であり、過去runをPlanner / Writerの通常contextへ入れない。
+
+物語の最初のArcでは、Arc Plannerが返した冒頭導入の `採用 / Episode 1へ統合 / 不採用` と短い理由を `run.json` に記録する。Story Craft Challengerがその判断を不足として覆した場合は、Planner Revision後の最終判断が追えるようにstage出力も残す。
 
 Overall / Arc / 通常のEpisode Designでは概ね次を行う。
 
@@ -131,10 +147,10 @@ Challengerには `opening-sequence.md` と2つのEpisode Designを渡し、0だ�
 
 Episode DesignはStory Craft Regression通過後、runtime契約どおり執筆指示の生成・確認へ進める。冒頭導入セットでも執筆指示はEpisodeごとに生成・確認する。
 
-- Challenger / Reviewer / Regressionの一時出力をstory成果物へ恒久保存しない。
+- Challenger / Reviewer / Regressionの一時出力を作品成果物へ恒久保存しない。親agentは正式出力をrun traceへ隔離保存する。
 - 設定提案 / 設定提案への依存はruntime契約どおり扱う。
 - 上位Planningの意味を勝手に変更しない。上位変更が必要なら対象範囲の生成で隠さず、停止理由を報告する。
-- Story Craft RegressionがFAILした場合はruntime契約の一度だけの回復手順に従う。
+- Story Craft RegressionがFAILした場合はruntime契約の一度だけの回復手順に従い、そのattemptも同じrun traceへ記録する。
 
 ## 作者確認checkpoint
 
@@ -144,28 +160,31 @@ Episode DesignはStory Craft Regression通過後、runtime契約どおり執筆�
 
 - AI内部pipeline完了後も `draft / pending` で残す。
 - PRを作成して作者確認待ちで停止する。
+- run traceを `awaiting-human` とし、作者確認結果を後から同じrunへ関連付けられる状態にする。
 - 作者承認を捏造しない。
 
-checkpointでなければruntime契約に従って `ready / not-required` へ進める。
+checkpointでなければruntime契約に従って `ready / not-required` へ進め、run traceを `completed` にする。
 
 ## Git / PR
 
 実際にPlanning成果物を変更する場合:
 
 1. このIssue専用branchを作る。
-2. 対象範囲と必要最小限の確定設定更新だけをcommitする。
+2. 対象範囲、必要最小限の確定設定更新、当該実行の `.novel-maker/runs/<run-id>/` だけをcommitする。
 3. PRを作る。
 4. PR本文に次を短く書く。
    - 自動判定した対象範囲
-   - 冒頭導入セットを使ったかどうか
+   - 物語の最初のArcなら、冒頭導入の `採用 / Episode 1へ統合 / 不採用` と短い理由
    - 参照した親Planning version（ある場合）
+   - executor名 / versionとconfigured stagesが完走したか
    - 標準pipeline完了状況
    - Story Craft Regression結果
+   - run-id
    - 設定提案 / 確定設定更新の有無
    - 作者確認待ちかどうか
    - 変更file一覧
 
-Planning成果物を変更せず停止した場合は、不要なbranch / PRを作らない。
+Planning成果物を変更せず停止した場合でも、Planning Readiness等の診断runを保存したなら、そのrun traceだけを残してよい。不要なPRを作る必要はない。
 
 ## 完了条件
 
@@ -173,6 +192,11 @@ Planning成果物を変更せず停止した場合は、不要なbranch / PRを�
 - [ ] Overall開始ならPlanning Readinessを通した
 - [ ] readyな現在Arcがある場合、未作成の次Arcより先にそのArcのEpisodeを確認した
 - [ ] 対象範囲の標準pipelineを省略していない
+- [ ] 当該pipelineのrun traceを `.novel-maker/runs/<run-id>/` に残した
+- [ ] executor名 / versionとconfigured / actual agent・modelを取得できる範囲で記録した
+- [ ] configured agent起動失敗、fallback、role出力契約欠落を通常の成功扱いにしていない
+- [ ] Story Craft Challenger / Regressionの正式出力契約を確認した
+- [ ] 物語の最初のArcなら、冒頭導入の採否と理由をArc Planner / Challengerで確認しrun traceへ残した
 - [ ] 作者確認待ちの既存成果物を勝手に上書きしていない
 - [ ] 通常は一度に複数Arc / 複数Episodeへ進んでいない
 - [ ] 冒頭導入セットを使った場合、Episode 0と1だけをセット扱いし、2以降へ広げていない

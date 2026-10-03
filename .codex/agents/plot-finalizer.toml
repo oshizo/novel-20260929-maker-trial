@@ -1,6 +1,6 @@
 name = "plot_finalizer"
 description = "独立したTechnical Reviewerの指摘を反映し、採用した改善意図を可能な限り保ってPlotを確定する。"
-model = "gpt-5.6"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md と planning-preflight-guards.md を参照する。

@@ -1,6 +1,6 @@
 name = "writer_brief_reviewer"
 description = "執筆指示が本文執筆担当に必要な情報だけを含み、継続条件を満たしているか独立に確認する。"
-model = "gpt-5.6"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """

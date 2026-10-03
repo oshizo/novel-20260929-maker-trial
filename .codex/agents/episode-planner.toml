@@ -1,6 +1,6 @@
 name = "episode_planner"
 description = "承認済みArcと現在状態からEpisode Designを作成・改訂する。"
-model = "gpt-5.6-terra"
+model = "gpt-6-luna"
 model_reasoning_effort = "medium"
 developer_instructions = """
 AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md、planning-preflight-guards.md、story-craft.md、reader-gratification.md を参照する。

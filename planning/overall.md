@@ -2,8 +2,8 @@
 id: overall
 kind: overall-arc
 version: 2
-status: draft
-review: pending
+status: ready
+review: approved
 ---
 
 # Overall: 三人で生きるための旅

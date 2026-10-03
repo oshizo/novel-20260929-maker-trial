@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "run_id": "",
+  "target": {
+    "kind": "",
+    "id": "",
+    "path": ""
+  },
+  "framework_revision": "",
+  "executor": {
+    "name": null,
+    "version": null
+  },
+  "status": "running",
+  "started_at": null,
+  "completed_at": null,
+  "summary": {
+    "initial_story_craft_verdict": null,
+    "revised_story_craft_verdict": null,
+    "story_craft_recheck_attempt_count": 0,
+    "planner_revision_count": 0,
+    "planner_adopted_count": null,
+    "planner_partially_adopted_count": null,
+    "planner_rejected_count": null,
+    "technical_required_fix_count": null,
+    "regression_verdict": null,
+    "regression_attempt_count": 0,
+    "recovery_count": 0,
+    "opening_sequence_pattern": null,
+    "opening_sequence_decision": null,
+    "opening_sequence_reason": null,
+    "human_review_status": "not-recorded",
+    "human_required_change_count": null
+  },
+  "stages": []
+}

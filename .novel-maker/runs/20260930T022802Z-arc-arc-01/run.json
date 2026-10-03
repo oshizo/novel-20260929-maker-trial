@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "run_id": "20260930T022802Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md"
+  },
+  "framework_revision": "8090fbfee3da7dc7c5ae6daaf0b08196172debe4",
+  "status": "completed",
+  "started_at": "2026-09-30T02:28:02Z",
+  "completed_at": "2026-09-30T02:51:12Z",
+  "summary": {
+    "initial_story_craft_verdict": "PASS",
+    "planner_revision_count": 1,
+    "planner_adopted_count": 1,
+    "planner_partially_adopted_count": 0,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 1,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "human_review_status": "changes-requested",
+    "human_required_change_count": 3
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "agent": "arc_planner",
+      "model": null,
+      "result": "completed",
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial.md"
+      ],
+      "review": null
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "agent": "story_craft_challenger",
+      "model": null,
+      "result": "completed",
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "agent": "arc_planner",
+      "model": null,
+      "result": "completed",
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision.md"
+      ],
+      "review": "reviews/03-planner-revision.md"
+    },
+    {
+      "sequence": 4,
+      "stage": "technical-review",
+      "attempt": 1,
+      "agent": "plot_reviewer",
+      "model": null,
+      "result": "completed",
+      "verdict": "REQUIRED_FIXES",
+      "snapshots": [],
+      "review": "reviews/04-technical-review.md"
+    },
+    {
+      "sequence": 5,
+      "stage": "finalizer",
+      "attempt": 1,
+      "agent": "plot_finalizer",
+      "model": null,
+      "result": "completed",
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-finalizer.md"
+      ],
+      "review": "reviews/05-finalizer.md"
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "agent": "story_craft_regression",
+      "model": null,
+      "result": "completed",
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-regression.md"
+    },
+    {
+      "sequence": 7,
+      "stage": "human-review",
+      "attempt": 1,
+      "agent": "human",
+      "model": null,
+      "result": "completed",
+      "verdict": "CHANGES_REQUESTED",
+      "snapshots": [],
+      "review": "reviews/07-human-review.md"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "run_id": "20261001T012449Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md"
+  },
+  "framework_revision": "461c2178a5119e73db2455cddc417591da2efbfb",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "blocked",
+  "started_at": "2026-10-01T01:24:49Z",
+  "completed_at": "2026-10-01T01:29:14Z",
+  "summary": {
+    "initial_story_craft_verdict": null,
+    "planner_revision_count": 0,
+    "planner_adopted_count": null,
+    "planner_partially_adopted_count": null,
+    "planner_rejected_count": null,
+    "technical_required_fix_count": null,
+    "regression_verdict": null,
+    "regression_attempt_count": 0,
+    "recovery_count": 0,
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "カイの一人旅、旅の目的、前世記憶由来の思考、魔力の強みと制約を主要事件前の行動で示し、姉妹救助へ因果でつなぐため。",
+    "human_review_status": "not-recorded",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-5.6-terra",
+      "actual_agent": "arc_planner",
+      "actual_model": "gpt-5.6-terra",
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial.md"
+      ],
+      "review": null
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-5.6",
+      "actual_agent": null,
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "blocked",
+      "failure_reason": "configured model gpt-5.6 の起動時に Codex が HTTP 400 を返した: The 'gpt-5.6' model is not supported when using Codex with a ChatGPT account.",
+      "verdict": null,
+      "snapshots": [],
+      "review": null
+    }
+  ]
+}
