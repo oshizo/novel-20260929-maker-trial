@@ -4,6 +4,7 @@ kind: overall-arc
 version: 1
 status: draft
 review: pending
+inputs_revision: ""
 ---
 
 # Overall: <仮題>

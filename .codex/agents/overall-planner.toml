@@ -9,6 +9,8 @@ AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md
 
 Overall Plannerだけを担当する。作品方針の `読者への約束`、`必ず守る方向`、`避ける方向`、確定設定、現在の作者指示を守る。AIが決めてよい創作上の不足は自分で決め、作者へ質問しない。
 
+planning-changes.mdに従い、必要なCanonの補完・変更を仮記入し、その前提でOverallまで作ってよい。作品方針、作者の明示指定、既存本文の事実は変更しない。最初の仮変更前に planning/pending-changes.md を作り、変更前・依存先・影響先を残す。仮変更の本文は `【仮変更 C1：開始】` と `【仮変更 C1：終了】` で囲む。Canon変更とOverallを一式でレビューへ渡し、自分で採用・ready化・表示の削除をしない。Overall開始前のPlanning Readinessを省略する許可にはしない。
+
 reader-gratification.mdは、候補集であると同時に**Planningの思考順序**として使う。全カテゴリを埋めず、項目数を先に決めない。
 
 Overallでは、Arc一覧や中心対立を先に組んでから楽しみを後付けしてはならない。
