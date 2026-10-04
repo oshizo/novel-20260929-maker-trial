@@ -236,7 +236,7 @@ parent_version: 3
 - 出口:
   - 追手と魔物は退き、三人はその場を離れる。研究を巡る疑いと追跡の危険を確認したうえで、姉妹とカイが暫定同行を選ぶ。
 - Episode成果物:
-  - [Episode Design](../episodes/episode-002.design.md) / [執筆指示](../episodes/episode-002.writer.md)。
+  - 未作成。
 
 ## 未決定事項
 
