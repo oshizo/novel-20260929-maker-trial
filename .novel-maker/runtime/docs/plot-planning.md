@@ -149,6 +149,8 @@ ArcのStory Craft `PASS` は、約束した楽しみを成立させる出来事�
 - Arcの `入口` を「冒頭導入の後」に置きながら、同じArcのEpisode一覧へそれ以前の導入Episodeを含めてはならない。
 - `採用 / Episode 1へ統合 / 不採用` の判断は `opening-sequence.md` に従う。
 
+必要な導入が実際のEpisode計画にあるのに入口欄だけが一致しない場合は、Technical Reviewer / Finalizerが整合を取る。導入内容の欠落と区別し、欄の修正だけでStory Craftの改訂枠を使わない。
+
 ## 4. 状態と下流の無効化
 
 - `draft`: 作成・確認・確定設定反映の途中。本文生成の正本にしない。
@@ -204,21 +206,21 @@ ready化と下流影響判定
    Canon・上位Planningの不足は、変更禁止条件を守って必要箇所を仮修正し、その前提で対象まで完成させる。変更表示と `planning/pending-changes.md` を残し、既存pipelineのレビュー範囲へ含める。
 
 3. **Story Craft Challengerが初稿の面白さを確認する**  
-   別agentが対象読者として初稿を読み、`PASS / WEAK / FAIL` と、残す点、不足、改善候補、仮説を返す。技術的な不整合確認を兼任しない。`WEAK / FAIL` の場合は、その時点で認識できている独立したPASS阻害要因を `不足` としてすべて返し、各不足に `現在のPlanning / 上位Planning / 作品入力` のどこで直すべきかを添える。下位Planningで決める細部だけを現在階層のPASS阻害要因にしない。親agentは正式出力をrun traceへ保存し、この判定を `initial_story_craft_verdict` とする。
+   別agentが対象読者として初稿を読み、`PASS / WEAK / FAIL` と、残す点、不足、改善候補、仮説を返す。技術的な不整合確認を兼任しない。`WEAK / FAIL` の場合は、その時点で認識できている独立したPASS阻害要因を `不足` としてすべて返す。各不足には番号、根拠、解消条件、`現在のPlanning / 上位Planning / 作品入力` の修正先を添える。下位Planningで決める細部だけを現在階層のPASS阻害要因にしない。親agentは正式出力をrun traceへ保存し、この判定を `initial_story_craft_verdict` とする。解消条件と再判定の範囲は [`story-craft.md` §5](story-craft.md#5-story-craft-challengerの役割) を正本とする。
 
 4. **同じ範囲のPlannerが改訂する**  
    初稿を作った会話を継ぎ足すのではなく、新しい実行として改訂する。Challengerの提案を全部採用せず、採用・一部採用・不採用を判断する。採用した改善意図だけを当該実行内で親agentへ返す。この中間工程ではversionを進めない。親agentは正式な採否結果と改訂後snapshotをrun traceへ保存する。
 
-5. **fresh Story Craft Challengerが改訂版を独立に再判定する**  
-   Planner Revision後は、新しいChallenger実行を起動する。初回Challengerの指摘全文、Planner Revisionの採否一覧、旧snapshot、過去runは再判定の通常contextへ入れない。改訂済みPlot、変更してはいけない上位条件、対象読者・Story Craft契約から、改訂版そのものを最初から読み直す。出力契約は初回と同じ `読者としての感想 / 報酬トレース / 判定 / Planner Revisionへ渡す内容` とする。親agentは最後の再判定を `revised_story_craft_verdict` として保存する。
+5. **新しいStory Craft Challengerが同じ条件で再判定する**
+   Planner Revision後は、新しいChallenger実行を起動する。同じrunの初回不足・根拠・解消条件・維持項目、直前再判定の項目別結果、直前判定時のsnapshotと改訂差分を、現在案と正本入力に合わせて渡す。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。初回に定めた不足の解消と改訂による回帰を確認し、新しい不足の追加・解消済み項目の再開はstory-craft.md §5の根拠を持つ場合に限る。出力は `読者としての感想 / 報酬トレース / 判定 / Planner Revisionへ渡す内容` を維持し、最後のsectionへ項目別の `解消 / 未解消` と追加・再開の根拠を記す。親agentは最後の再判定を `revised_story_craft_verdict` として保存する。
 
-   `PASS` ならTechnical Reviewerへ進む。`WEAK / FAIL` の場合、fresh Challengerは初回と同様に、その時点で認識できている独立したPASS阻害要因を `不足` としてすべて返す。そのうえで、**追加のPlanner Revision → fresh再判定を最大1回だけ**行う。したがって1run中のPlanner Revisionは最大2回、改訂後再判定も最大2回とする。2回目の再判定でも `PASS` にならない場合は `story-craft-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。無制限に再生成しない。
+   `PASS` ならTechnical Reviewerへ進む。`WEAK / FAIL` の場合、未解消の項目と、根拠を伴う追加・再開項目をすべて返す。そのうえで、**追加のPlanner Revision → 再判定を最大1回だけ**行う。したがって1run中のPlanner Revisionは最大2回、改訂後再判定も最大2回とする。2回目の再判定でも `PASS` にならない場合は `story-craft-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。無制限に再生成しない。
 
-   この修正では再試行回数自体は増やさない。先に「PASS阻害要因を小出しにしない」契約へ直し、最大2回の改訂で収束するかを実runで確認する。なお同じ構造で頻繁に回数切れする場合だけ、別途回数上限を再検討する。
+   再試行回数自体は増やさない。「PASS阻害要因を小出しにしない」ことに加え、解消条件と判定範囲を引き継ぎ、最大2回の改訂で収束するかを実runで確認する。全案のPASSは保証せず、解消できない不足を有限回で記録して停止する。判定条件を際限なく追加するために、別runで回数をリセットしない。
 
 6. **Technical Reviewerが技術上の問題を確認する**  
    改訂後再判定が `PASS` した成果物だけを対象に、作品方針、上位Plot、確定設定、因果、視点、知識差、人物の主体性、継続性、仕込みと回収、状態管理を確認する。Story Craftの新しい改善案は出さない。親agentは正式出力をrun traceへ保存する。
-   仮変更がある場合は、変更前・差分・変更後と影響先を確認する。fresh Story Craft再判定は変更後の案を独立評価し、変更前との技術比較はここで行う。
+   仮変更がある場合は、run開始版・差分・変更後と影響先を確認する。Story Craft再判定は同じrunの直前判定時からの回帰を確認し、run開始版からの変更権限・参照版・依存関係等の技術比較はここで行う。入口欄等の整合修正だけで創作上の改訂枠を使わない。
 
 7. **Finalizerが必要な修正を閉じる**  
    必須修正を優先し、必要なら置換・統合・削除で直す。説明を足すだけで済ませない。採用した改善意図は、上位条件や技術的正しさと両立する限り保つ。修正後の対象成果物をrun traceへsnapshotとして保存する。
@@ -247,7 +249,7 @@ ready化と下流影響判定
 - Technical Reviewerの一時的な指摘。
 - Story Craft Regressionの一時的な指摘。
 
-後段agentへは、**当該実行の中だけで渡す情報**のうち、そのstageで契約上必要なものだけを渡す。診断履歴が存在することを理由に、過去のreview全文を追加contextとして渡さない。特にfresh Story Craft再判定へ、初回Challengerの指摘全文やPlanner Revisionの採否一覧を渡さない。
+後段agentへは、**当該実行の中だけで渡す情報**のうち、そのstageで契約上必要なものだけを渡す。再判定は同じrunの不足・解消条件・項目別結果と比較用snapshotを使う。診断履歴が存在することを理由に、他runのreview全文やPlannerの採否理由を追加しない。詳細な入力境界はstory-craft.md §5と§9に従う。
 
 一方、親agentはmaker改善用の診断情報として、上記の**正式出力**とPlanningの時点別snapshotを `.novel-maker/runs/<run-id>/` へ保存する。詳細は [`pipeline-run-trace.md`](pipeline-run-trace.md) を正本とする。
 
@@ -260,13 +262,13 @@ Plotへ残すのは採用後の結果だけとする。モデルの内部思考�
 ```text
 Story Craft Challenger（改訂後再判定）: WEAK / FAIL
         ↓
-fresh Planner Revision: 現在の再判定出力だけを使って追加改訂
+新しいPlanner Revision: 初回からの未解消項目と現在の追加・再開項目を改訂
         ↓
-fresh Story Craft Challenger: 改訂版を再び最初から独立評価
+新しいStory Craft Challenger: 同じ解消条件と変更の影響を再確認
 ```
 
-- 追加Planner Revisionへ渡すのは、現在の改訂版、変更禁止条件、直前の再判定で正式に返された指摘に限る。旧runや初回Challenger全文を追加contextへ戻さない。
-- 直前の再判定が `WEAK / FAIL` の場合、その時点で認識できているPASS阻害要因が `不足` にすべて出ていることを前提に追加Revisionを行う。改善候補や仮説は絞ってよい。
+- 追加Planner Revisionへは現在の改訂版、変更禁止条件、同じrunの初回から引き継ぐ不足・根拠・解消条件、直前再判定の項目別結果と追加・再開の根拠を渡す。他runや初回の感想・点数は追加しない。
+- 直前の再判定が `WEAK / FAIL` の場合、未解消の項目と根拠を持つ追加・再開項目がすべて返されていることを確認して追加Revisionを行う。解消条件を厳しくし直さず、改善候補や仮説は絞ってよい。
 - `修正先: 上位Planning` / `修正先: 作品入力` の不足は、現在のPlannerが必要な正本を仮修正して解消する。現在の計画だけに局所設定を足して隠さない。変更禁止条件や不可欠な作者目的の不足で進めない場合だけ親へ返す。
 - 2回目の再判定も `WEAK / FAIL` なら `story-craft-unresolved` としてrunを `blocked` にする。
 - Technical Reviewerへ進んでからStory Craft不足を技術修正で埋めようとしない。

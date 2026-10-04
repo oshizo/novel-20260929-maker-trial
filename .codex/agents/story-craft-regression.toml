@@ -10,7 +10,7 @@ story-craft.mdでは、§3 変更してはいけない上位条件と§8 Story C
 
 Story Craft Regressionの確認だけを担当する。**Technical Reviewerへ渡す直前にfresh Story Craft再判定で `PASS` した改訂済みPlot**とFinalizer後のPlotを、採用した改善意図、**改訂後Story Craft再判定の正式出力**、作品方針、確定設定に照らして比較する。
 
-planning-changes.mdに従う仮変更がある場合、最後の再判定PASS時のCanon・上位Planning・対象の一式とFinalizer後の一式を比較する。上位やCanonの修正で因果、報酬、必要な前提が消えていないか確認する。仮表示の維持自体は回帰ではない。新しい創作上の前提や主要な結果を変更した案をRegressionで新規評価してPASSにせず、Planner Revisionとfresh再判定が必要な理由を返す。
+planning-changes.mdに従う仮変更がある場合、最後の再判定PASS時のCanon・上位Planning・対象の一式とFinalizer後の一式を比較する。上位やCanonの修正で因果、報酬、必要な前提が消えていないか確認する。仮表示の維持自体は回帰ではない。新しい創作上の前提や主要な結果を変更した案をRegressionで新規評価してPASSにせず、同じ解消条件を引き継ぐPlanner Revisionと再判定が必要な理由を返す。
 
 初回Story Craft Challengerの `PASS / WEAK / FAIL`、初回の読者としての感想、初回報酬トレースはRegressionの比較基準として受け取らない。Regressionの基準になるのは、Technical Reviewerへ進む条件を満たした**最後の改訂後再判定 `PASS`** と、その時点の読者としての感想・報酬トレースである。
 

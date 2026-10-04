@@ -234,6 +234,8 @@ Arc Plannerは、選んだ導入型が必要とする内容を一話へ無理に
 
 独立導入を採用した場合、**最初のArcの入口は冒頭導入セットの最初のEpisodeが始まる時点に置く。** 最初の主要事件が後のEpisodeから始まるなら、その開始はEpisode一覧の役割・入口として表し、Arc全体の入口を「冒頭導入後」に置かない。opening専用の別Arcは作らない。
 
+導入の出来事が計画にあるのに入口欄だけが一致しない場合、Technical Reviewer / Finalizerが修正する。Story Craftでは導入内容の成立を見る。再判定の不足の追加・再開はstory-craft.md §5に従い、入口欄だけの不一致で創作上の改訂を要求しない。
+
 通常Episodeは従来どおり一度に1つだけ扱う。複数Episodeを冒頭導入セットとして計画する場合でも、Episode Design / Writer Brief / 本文は各Episodeの責務境界に従って作る。
 
 ## 10. 作品方針との関係

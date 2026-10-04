@@ -101,6 +101,8 @@ Planner Revisionでは `維持` を保護する。Challengerから `不足` が�
 
 今回の実行前に `planning/overall.md` が存在しない場合は `version: 1` で作る。branch名、trial番号、PR番号、他branch、Git履歴からversionを推測しない。
 
+Planner Revisionでは、親から渡された同じrunの不足の番号・根拠・解消条件を保ち、未解消項目と直前の再判定で根拠を伴って追加・再開した項目をすべて扱う。解消条件を緩めず、現在案のどこで満たすかを示す。条件の扱いはstory-craft.md §6に従う。
+
 日本語は language-policy.md に従う。
 
 - 字数や一行の長さに上限を設けない。

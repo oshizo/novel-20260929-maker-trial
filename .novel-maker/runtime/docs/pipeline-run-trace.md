@@ -19,13 +19,13 @@ Planner 初稿
 → 必要な作者確認
 ```
 
-改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner Revisionとfresh Story Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。
+改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner RevisionとStory Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。再判定の入力と追加・再開条件はstory-craft.md §5に従う。
 
 最終成果物だけを残すと、後から次を確認できない。
 
 - 初回Challengerが何を問題視し、`PASS / WEAK / FAIL` のどれを返したか。
 - Planner Revisionが何を採用、一部採用、不採用にしたか。
-- 改訂後の成果物をfresh Challengerが独立にどう再判定したか。
+- 改訂後の成果物が同じ解消条件を満たし、改訂による回帰がないか。
 - 初稿、各Revision後、Finalizer後で何が変わったか。
 - Technical Reviewerが何件の必須修正を出したか。
 - Story Craft Regressionが何を確認してPASS / FAILしたか。
@@ -132,7 +132,21 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 
 ただし、モデルの内部思考、chain-of-thought、system prompt、認証情報、実行環境の秘密情報は保存しない。Planner Revisionで保存する理由も、親へ正式に返した短い採否理由だけでよく、内部推論を要求しない。
 
-**改訂後再判定のreview fileを保存することと、それを次のfresh Challengerへ入力することは別である。** 再判定agentへは旧review、旧snapshot、過去runを通常contextとして渡さない。
+**保存したreview全体を、次のagentへ無条件に渡さない。** 再判定にはstory-craft.md §5で指定した同じrunの不足・解消条件・維持項目・項目別結果と比較用snapshotを渡す。他runのreviewや初回の感想・点数、Plannerの採否理由は渡さない。
+
+新しい契約で開始するrunでは、`story-craft-recheck` stageに `review_basis` を記録する。これは入力の参照であり、別の評価台帳ではない。
+
+```json
+{
+  "initial_review": "reviews/02-story-craft-challenger.md",
+  "previous_recheck_review": null,
+  "previous_snapshots": ["snapshots/01-planner-initial-attempt-1.md"]
+}
+```
+
+`initial_review` は同じrunの初回正式出力、`previous_recheck_review` は2回目なら直前の正式出力（1回目はnull）、`previous_snapshots` は直前判定が読んだ一式を指す。初稿・Revision各snapshotの対応をstage記録で確認し、仮変更した上位やCanonも比較対象なら含める。初回の番号・根拠・解消条件を後から書き換えない。再判定の正式出力には各番号の `解消 / 未解消`、根拠箇所、追加・再開理由を残す。
+
+以前のrunにこの参照や解消条件がなければ、後付けして当時の判定を成立させない。旧判定・回数・停止を保存し、明示的に再計画するときは現在案を候補として新runの初回確認から始める。単に上限を増やすための新runは作らない。
 
 ### 4.3 executor / agent / model情報
 
@@ -222,7 +236,7 @@ run全体の状態には次を使う。
 集計用の値を置く。
 
 - `initial_story_craft_verdict`: 最初のChallenger判定。`PASS / WEAK / FAIL / null`。
-- `revised_story_craft_verdict`: Planner Revision後のfresh Story Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。
+- `revised_story_craft_verdict`: Planner Revision後のStory Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。新しい契約では同じ解消条件と回帰確認の結果であり、旧runの全体再評価とは判定範囲を区別する。
 - `story_craft_recheck_attempt_count`: 改訂後再判定を実行した回数。標準pipelineでは1、追加Revisionを使った場合は最大2。
 - `planner_revision_count`: Planner Revisionを実行した回数。標準pipelineでは最低1、追加Revisionを使った場合は最大2。
 - `planner_adopted_count`: Planner Revisionが `採用` としたChallenger指摘件数。複数Revisionがある場合は正式出力から一意に集計できるときだけ合計する。
@@ -279,7 +293,12 @@ run全体の状態には次を使う。
   "failure_reason": null,
   "verdict": "PASS",
   "snapshots": [],
-  "review": "reviews/04-story-craft-recheck.md"
+  "review": "reviews/04-story-craft-recheck.md",
+  "review_basis": {
+    "initial_review": "reviews/02-story-craft-challenger.md",
+    "previous_recheck_review": null,
+    "previous_snapshots": ["snapshots/01-planner-initial-attempt-1.md"]
+  }
 }
 ```
 
@@ -371,7 +390,7 @@ role固有の出力契約について、少なくとも次を確認する。
 - Canon / Planning / State / Style / Manuscriptの代わりにrun traceを参照しない。
 - `check-story` やframework-syncは、`.novel-maker/runs/` をruntime snapshotやPlanning成果物として解釈しない。
 
-Story Craft改訂後再判定でもこの隔離は維持する。fresh Challengerへは、**現在の改訂済みPlotと現在の正本入力だけ**を渡し、初回Challenger全文、Planner Revisionの採否一覧、旧snapshot、過去runを渡さない。
+Story Craft改訂後再判定でも他runからの隔離は維持する。同じrunの再判定には、story-craft.md §5で指定した不足・解消条件・項目別結果と比較用snapshotを、親agentが対象として明示して渡す。`review_basis` は何を渡したか追える参照であり、診断履歴の自由探索を許すものではない。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。
 
 同じ作業内の仮修正は、`planning-changes.md` に従って変更後の案を入力する。Technical ReviewerやRegressionへ必要な比較資料は親が今回の対象として明示して渡す。agentに過去runの自由探索を許すことにはしない。未確定の変更の継続は作業記録で識別し、別操作で診断snapshotを作品正本の代用にしない。
 

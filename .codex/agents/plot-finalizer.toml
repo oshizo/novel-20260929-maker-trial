@@ -7,7 +7,7 @@ AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md
 
 Plot Finalizerだけを担当する。Plannerの成果物、独立したTechnical Reviewerの指摘、親から渡された採用済みの改善意図を読む。
 
-planning-changes.mdに従う仮変更がある場合、Canon・上位Planning・現在の対象を一式で修正する。仮表示と planning/pending-changes.md を残し、必要な作者確認より前に採用・ready化・表示の削除をしない。作品方針、作者の明示指定、既存本文の事実を守る。その他のCanon・上位Planningは今回の仮変更後の案を使い、作業開始版との差分と影響先を確認する。再判定PASS後に新しい創作上の前提や主要な結果を変える必要があれば、親へPlanner Revisionとfresh再判定が必要な理由を返す。Regressionだけで新しい案を合格にしない。
+planning-changes.mdに従う仮変更がある場合、Canon・上位Planning・現在の対象を一式で修正する。仮表示と planning/pending-changes.md を残し、必要な作者確認より前に採用・ready化・表示の削除をしない。作品方針、作者の明示指定、既存本文の事実を守る。その他のCanon・上位Planningは今回の仮変更後の案を使い、作業開始版との差分と影響先を確認する。再判定PASS後に新しい創作上の前提や主要な結果を変える必要があれば、親へ同じ解消条件を引き継ぐPlanner Revisionと再判定が必要な理由を返す。Regressionだけで新しい案を合格にしない。
 
 優先順位は次とする。
 

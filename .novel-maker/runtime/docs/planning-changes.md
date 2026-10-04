@@ -72,7 +72,7 @@ PlannerはCanonへの追加・置換・削除、Overall / 親Arcの必要箇所�
 ```mermaid
 flowchart TD
     A["PlannerがCanon・上位Planningを仮修正"] --> B["その前提で現在の計画を完成"]
-    B --> C["既存のStory Craft確認・改訂・独立再判定"]
+    B --> C["Story Craft確認・改訂・同じ条件で再判定"]
     C --> D["Technical Reviewerが変更前・差分・影響先を確認"]
     D --> E["Finalizerが変更一式の必須修正を反映"]
     E --> F["Regressionと必要な作者確認"]
@@ -82,12 +82,12 @@ flowchart TD
 上位変更ごとに別Plannerや別runを必須にしない。現在のPlannerが上位の必要箇所も作成・改訂し、親agentは処理順、入力の受け渡し、正式出力の保存を担当する。Plannerは自分の案をレビュー・確定しない。
 
 - Story Craft Challengerは、現在の対象と、今回変更した上位Planningの範囲を、各階層の観点で評価する。上位変更があるという理由だけで不足扱いしない。変更した報酬の配置や因果が作品全体で成立するかも、影響する範囲で確認する。
-- fresh再判定へは、現在の変更後の案と変更禁止条件、評価するfile・範囲を渡す。初回指摘、Plannerの採否理由、旧snapshot、過去runを渡さない。作業開始版との比較はTechnical Reviewerの責務とし、fresh再判定を答え合わせにしない。
+- 再判定の条件と入力はstory-craft.md §5に従う。現在の変更後の一式、変更禁止条件、評価するfile・範囲に加え、同じrunの初回不足・解消条件・維持項目、直前の項目別結果、直前判定時snapshotと改訂差分を渡す。新しい上位変更の影響先も回帰確認へ含める。Plannerの採否理由、他run、作業記録全文は渡さない。run開始版からの変更権限・参照版・依存関係等の比較はTechnical Reviewerの責務とする。
 - Technical Reviewerには変更前、変更後、差分、依存先と影響先を渡す。固定条件を緩めて合格させていないか、Canonの肥大化、既存本文との矛盾、提案依存、最上位の影響箇所の見落としを確認する。上位の差分を読むだけで影響先の確認を済ませない。
 - Finalizerは対象と仮変更した上位・Canonの必須修正をまとめて反映する。表示や未確定の作業記録はまだ消さない。
 - Regressionは、最後のStory Craft再判定PASS時の変更一式とFinalizer後を比較する。上位やCanonの変更によって、採用した因果や報酬が失われていないかも見る。
 
-Story Craft再判定後に新しい創作上の前提や主要な結果を変える必要が生じたら、Planner Revisionとfresh再判定へ戻す。許可された改訂回数を超える場合は `blocked` とする。Regressionだけで新しい案を合格にせず、上位変更や別runを口実に回数をリセットしない。
+Story Craft再判定後に新しい創作上の前提や主要な結果を変える必要が生じたら、同じ解消条件を引き継いでPlanner Revisionと再判定へ戻す。許可された改訂回数を超える場合は `blocked` とする。Regressionだけで新しい案を合格にせず、上位変更や別runを口実に回数をリセットしない。表記・入口欄・参照等の技術修正だけならFinalizerが反映し、Regressionで内容の維持を確認する。
 
 作者確認で新しい判断や修正要求を受けた後の再計画は、通常のHuman Review規則に従って別runにできる。AI側の未解決を別runへ移して改訂回数を増やす場合とは区別する。
 

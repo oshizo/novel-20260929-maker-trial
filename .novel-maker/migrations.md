@@ -89,3 +89,12 @@
   applied_migration: "none"
   manual_decision: "Issue #16: 固定maker merge commitの10役instructions、Planning入口、bootstrap由来AGENTS説明を明示同期。作品独自追記なし。Sol系TOMLのgpt-6-solは互換用既定値とし、spawn時primaryはgpt-6.1-sol。"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "06f0d8ee07e1e2f2a01ee2e86530f764585cc048"
+  to_revision: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
+  resolved_commit: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "Issue #16継続: maker PR #151 merge commitから10役instructionsとPlanning入口を明示同期。bootstrap由来AGENTSを照合。作品独自追記なし。再判定はstory-craft.md §5の同じ解消条件を引き継ぐ。primaryと許可fallbackはcodex-model-policy.md。"
+  unresolved_issue: "none"
