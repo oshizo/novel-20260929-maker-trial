@@ -206,7 +206,7 @@ parent_version: 3
 - 出口:
   - カイは前世記憶を今世の自分へ加わったものとして受け止め、家族との関係を保つ。前世由来の好奇心を魔法へ向け、仕組みを確かめながら自分の技術を磨こうと決める。
 - Episode成果物:
-  - [Episode Design](../episodes/episode-000.design.md) / [執筆指示](../episodes/episode-000.writer.md)。
+  - 未作成。
 
 ### episode-001: 自分の技術を磨く旅
 
