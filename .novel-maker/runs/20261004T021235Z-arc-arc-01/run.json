@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "run_id": "20261004T021235Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md",
+    "paths": [
+      "planning/arcs/arc-01.md",
+      "planning/overall.md",
+      "planning/pending-changes.md"
+    ]
+  },
+  "framework_revision": "06f0d8ee07e1e2f2a01ee2e86530f764585cc048",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "blocked",
+  "started_at": "2026-10-04T02:12:35Z",
+  "completed_at": "2026-10-04T02:41:01Z",
+  "summary": {
+    "initial_story_craft_verdict": "WEAK",
+    "revised_story_craft_verdict": "WEAK",
+    "story_craft_recheck_attempt_count": 2,
+    "planner_revision_count": 2,
+    "planner_adopted_count": 8,
+    "planner_partially_adopted_count": 1,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": null,
+    "regression_verdict": null,
+    "regression_attempt_count": 0,
+    "recovery_count": 0,
+    "model_fallback_count": 0,
+    "opening_sequence_pattern": "memory-awakening",
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "Canonの十代半ばでの記憶覚醒とDirectionの明示に適合。覚醒前の今世人格・日本の前世・二つの人生の受け止めから現在の技術と旅の目的へつなぎ、独立導入を最初のArcに含める。",
+    "human_review_status": "not-recorded",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+        "snapshots/01-planner-initial-attempt-1-planning__pending-changes.md"
+      ],
+      "review": "reviews/01-planner-initial.md",
+      "started_at": "2026-10-04T02:12:35Z",
+      "completed_at": "2026-10-04T02:18:54Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/arc_initial",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md"
+      ],
+      "input_exclusions": [
+        "旧arc-01本文",
+        "過去runと旧review",
+        "Issue診断経緯"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "timestamp_elapsed_seconds": 379.0
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md",
+      "started_at": "2026-10-04T02:18:54Z",
+      "completed_at": "2026-10-04T02:23:25Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/craft_initial",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_exclusions": [
+        "過去runと旧review",
+        "Git履歴",
+        "初稿以前のArc",
+        "pending-changes全文"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "observed_independent_blocker_count": 5,
+      "timestamp_elapsed_seconds": 271.0
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+        "snapshots/03-planner-revision-attempt-1-planning__pending-changes.md"
+      ],
+      "review": "reviews/03-planner-revision.md",
+      "started_at": "2026-10-04T02:23:25Z",
+      "completed_at": "2026-10-04T02:30:29Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/arc_revision1",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md"
+      ],
+      "current_review_handoff": "/tmp/issue16-craft1.md",
+      "input_exclusions": [
+        "過去runと旧review",
+        "Git履歴",
+        "Issue診断経緯"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "adoption_counts": {
+        "adopted": 6,
+        "partially_adopted": 1,
+        "rejected": 0
+      },
+      "timestamp_elapsed_seconds": 424.0
+    },
+    {
+      "sequence": 4,
+      "stage": "story-craft-recheck",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/04-story-craft-recheck.md",
+      "started_at": "2026-10-04T02:30:30Z",
+      "completed_at": "2026-10-04T02:33:54Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/craft_recheck1",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md"
+      ],
+      "input_exclusions": [
+        "初回review",
+        "Planner採否",
+        "旧snapshot",
+        "過去run",
+        "Git履歴",
+        "pending-changes全文",
+        "/tmp handoff"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "observed_independent_blocker_count": 1,
+      "new_blocker_observation": "第1回改訂で追加した覚醒前の行動が、Overall・Arc・Episodeの入口より前に置かれた。主要報酬は成立と評価されたが導入境界が新たな不足として正式出力に出た。",
+      "timestamp_elapsed_seconds": 204.0
+    },
+    {
+      "sequence": 5,
+      "stage": "planner-revision",
+      "attempt": 2,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-planner-revision-attempt-2-planning__arcs__arc-01.md",
+        "snapshots/05-planner-revision-attempt-2-planning__overall.md",
+        "snapshots/05-planner-revision-attempt-2-planning__pending-changes.md"
+      ],
+      "review": "reviews/05-planner-revision-attempt-2.md",
+      "started_at": "2026-10-04T02:33:54Z",
+      "completed_at": "2026-10-04T02:37:28Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/arc_revision2",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md"
+      ],
+      "current_review_handoff": "/tmp/issue16-recheck1.md",
+      "input_exclusions": [
+        "初回指摘",
+        "旧採否",
+        "旧snapshot",
+        "過去run",
+        "Git履歴"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "adoption_counts": {
+        "adopted": 2,
+        "partially_adopted": 0,
+        "rejected": 0
+      },
+      "timestamp_elapsed_seconds": 214.0
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-recheck",
+      "attempt": 2,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "WEAK",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-recheck-attempt-2.md",
+      "started_at": "2026-10-04T02:37:28Z",
+      "completed_at": "2026-10-04T02:41:01Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/craft_recheck2",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md"
+      ],
+      "input_exclusions": [
+        "前回以前のreviewと判定",
+        "Planner採否",
+        "旧snapshot",
+        "過去run",
+        "Git履歴",
+        "pending-changes全文",
+        "/tmp handoff"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelを独立取得できないためactual_modelはnull。",
+      "observed_independent_blocker_count": 1,
+      "new_blocker_observation": "第1回再判定の正式不足は入口の不一致1件。第2回再判定では前世の人物像と本人の判断・他者との関わりの薄さが不足となった。初回指摘にも前世との自己接続は含まれていたが、第1回再判定の維持には前世人物像が含まれていた。各正式出力をそのまま保存。",
+      "timestamp_elapsed_seconds": 213.0
+    }
+  ],
+  "input_baseline": {
+    "story_start_commit": "eaf91bcf2e437ba0d9c4e3a9b748038ccbb7bf07",
+    "work_start_commit": "9a08dbc64cf2886d8414185e120ca003ee27cce7",
+    "paths": [
+      "story-direction.md",
+      "canon/",
+      "planning/overall.md",
+      "planning/arcs/arc-01.md"
+    ],
+    "uncommitted_inputs": []
+  },
+  "compatibility_check": {
+    "legacy_overall_inputs_revision": null,
+    "legacy_input_reference": "be66ea585ac4987f364919f8cd05d0646ec96826",
+    "evidence": "Overall v2のレビュー反映commitとDirection・Canonを現在入力と比較。Canonは差分なし。Directionは5ac023e32b09447d6ffbef211c1972d2278804c4と124f7a7a7329b00fc32df564955806bda1fc3165で導入と初対面の認識を追加。",
+    "external_input_changes": [
+      "Directionのmemory-awakening導入指定",
+      "姉妹との初対面での異性的認識"
+    ],
+    "affected_highest_planning": [
+      {
+        "path": "planning/overall.md",
+        "sections": [
+          "入口と最終出口 > 入口",
+          "中心となる対立と長期変化 > 主人公・能力と研究・生活と選択肢の開始時点",
+          "Arc一覧 > arc-01"
+        ],
+        "decision": "stale",
+        "reason": "救助から始まるOverall v2は、救助前に記憶覚醒と成人後の訓練・旅の目的を追う現在Directionと非互換。最終出口とarc-02以降の役割・因果は維持可能。"
+      }
+    ],
+    "existing_downstream": "arc-01 draft v7のみ。Episode・後続Arcの詳細file・本文は未作成。",
+    "ai_provisional_changes": [
+      {
+        "id": "C1",
+        "path": "planning/overall.md",
+        "scope": "入口、主人公の開始時点、arc-01の役割・境界",
+        "adoption": "pending"
+      }
+    ]
+  },
+  "observations": {
+    "parent_additional_decision_requests": 0,
+    "duplicate_cleanup_required_fixes": null,
+    "human_reading_quality": "未測定。今回の本文は作者承認後。",
+    "duplicate_cleanup_measurement": "Technical Reviewer未実行のため未測定。",
+    "parent_additional_decision_request_evidence": "Planner初稿・Revision 2回の正式出力で、上位や設定の保存先を理由とする追加判断依頼は0件。",
+    "arc_result": "WEAK / blocked",
+    "manuscript_reading_quality": "未測定。machine未完のためEpisode Design・Writer Brief・本文へ未到達。",
+    "timestamp_elapsed_seconds": 1706.0,
+    "elapsed_measurement": "runと各stageのUTC timestamp差。親による受け渡しと待機を含む。モデルの純粋な生成時間は未測定。"
+  },
+  "synchronization": {
+    "pinned_maker_merge_commit": "06f0d8ee07e1e2f2a01ee2e86530f764585cc048",
+    "runtime_file_count": 19,
+    "agent_instruction_count": 10,
+    "auxiliary_paths": [
+      ".codex/agents/",
+      ".github/ISSUE_TEMPLATE/plan-next.md",
+      "AGENTS.md"
+    ],
+    "template_custom_additions": "なし。agentsは旧pin template一致、Planning入口は461c2178a5119e73db2455cddc417591da2efbfbの旧template一致。",
+    "verified": "同期後runtimeと補助設定をpinのbytesと比較。check-story成功。構造確認とStory Craft合否は別。"
+  },
+  "stop_reason": "story-craft-unresolved",
+  "stop_detail": "Planner Revision 2回とfresh再判定2回を終えてもWEAK。日本の前世カイの判断・他者との関わり・大切にしていたことが未決定で、二つの人生への読者接続が弱い。Technical Reviewer以降へ進まず停止。",
+  "output_serialization": "正式出力は全文保存。03-planner-revision.mdのMarkdown改行用の行末空白2箇所だけ除去し、内容は変更していない。",
+  "version_policy": "仮変更を含む未確定の一式としてOverall v2、Arc v7、parent_version2を保持。機械側未完のためready化・採用・inputs_revision確定・意味変更version増加は未実施。元metadataと開始版はpending-changesおよびinput_baselineで保持。"
+}
