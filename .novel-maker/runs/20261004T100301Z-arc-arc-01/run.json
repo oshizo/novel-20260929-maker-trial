@@ -20,9 +20,9 @@
     "name": "codex",
     "version": "codex-cli 0.159.3"
   },
-  "status": "awaiting-human",
+  "status": "completed",
   "started_at": "2026-10-04T10:03:01Z",
-  "completed_at": null,
+  "completed_at": "2026-10-04T11:26:01Z",
   "summary": {
     "initial_story_craft_verdict": "PASS",
     "revised_story_craft_verdict": "PASS",
@@ -39,8 +39,8 @@
     "opening_sequence_pattern": "memory-awakening",
     "opening_sequence_decision": "採用",
     "opening_sequence_reason": "十代半ばの記憶覚醒というCanonに沿い、今世人格から前世記憶の接続・魔法の再認識・現在の目的を独立導入で描き、Episode 002へつなぐ。",
-    "human_review_status": "pending",
-    "human_required_change_count": null
+    "human_review_status": "approved",
+    "human_required_change_count": 0
   },
   "stages": [
     {
@@ -388,6 +388,35 @@
       },
       "actual_agent_id": "/root/continue_regression",
       "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。"
+    },
+    {
+      "sequence": 8,
+      "stage": "human-review",
+      "attempt": 1,
+      "configured_agent": null,
+      "configured_model": null,
+      "actual_agent": "author",
+      "actual_model": null,
+      "reasoning": null,
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "approved",
+      "snapshots": [
+        "snapshots/08-human-review-attempt-1-planning__overall.md",
+        "snapshots/08-human-review-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/08-human-review-attempt-1-canon__characters.md",
+        "snapshots/08-human-review-attempt-1-canon__factions.md",
+        "snapshots/08-human-review-attempt-1-canon__magic.md",
+        "snapshots/08-human-review-attempt-1-canon__relationships.md",
+        "snapshots/08-human-review-attempt-1-canon__travel-economy.md",
+        "snapshots/08-human-review-attempt-1-canon__world.md"
+      ],
+      "review": "reviews/08-human-review.md",
+      "started_at": "2026-10-04T11:26:01Z",
+      "completed_at": "2026-10-04T11:26:01Z",
+      "model_fallback": null,
+      "approval_source": "この会話の作者明示回答",
+      "pending_record_before_removal": "snapshots/06-finalizer-attempt-1-planning__pending-changes.md"
     }
   ],
   "continuation": {
@@ -563,6 +592,34 @@
     ],
     "decision_requested": "作品として採用するか。技術判定は内部で解消済み。",
     "planning_status": "draft / pending",
-    "next_after_approval": "同じrunへ作者結果を記録し一括確定した後、導入Episode・Writer Brief・先頭本文へ進む。"
+    "next_after_approval": "同じrunへ作者結果を記録し一括確定した後、導入Episode・Writer Brief・先頭本文へ進む。",
+    "decision": "approved"
+  },
+  "adoption": {
+    "approved_changes": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "input_commit": "147e32c2c9a655753a1d252a419dd78e3ed0596c",
+    "final_metadata": {
+      "overall": {
+        "version": 3,
+        "status": "ready",
+        "review": "approved",
+        "inputs_revision": "147e32c2c9a655753a1d252a419dd78e3ed0596c"
+      },
+      "arc-01": {
+        "version": 8,
+        "status": "ready",
+        "review": "approved",
+        "parent_version": 3,
+        "inputs_revision": "147e32c2c9a655753a1d252a419dd78e3ed0596c"
+      }
+    },
+    "downstream_impact": "既存の対象外Planning・執筆指示・本文なし。stale対象なし。",
+    "pending_changes_removed": true,
+    "next_target": "episode-000"
   }
 }
