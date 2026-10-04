@@ -6,6 +6,7 @@
 - 文章と言葉の規約は `.novel-maker/runtime/docs/language-policy.md` を読む。説明文は原則として自然で平易な日本語で書き、不要な英語ラベルや比喩的な造語を増やさない。
 - Planning開始前は `.novel-maker/runtime/docs/planning-input.md` を読む。
 - Plot操作は `.novel-maker/runtime/docs/plot-planning.md`、成果物の責務は `.novel-maker/runtime/docs/story-artifacts.md` を読む。
+- Planning中の仮修正と作品入力の途中変更は `.novel-maker/runtime/docs/planning-changes.md` を読む。未確定の変更は `planning/pending-changes.md` で識別し、同じ作業内の下書き作成だけに使う。
 - 作品固有の正本は `story-direction.md`、`canon/`、`planning/`、`style/`、`state/`、`manuscript/` に置く。
 - repository内のtextはUTF-8として扱い、shellの既定encodingへ依存しない。
 - 作者確認は作品として採用するかを作者が判断する工程である。技術的な不整合はReviewer / Finalizer側で解消する。
@@ -20,6 +21,8 @@
 - 現在ArcのEpisode Planningが揃ったら、本文より先に後続Arcを詳細化せず、本文執筆へ進める状態だと報告して停止する。
 - Arc境界では `manuscript/`、`state/`、確定設定を確認し、実際に書いた結果の影響がある後続成果物だけをstale / replan対象にする。
 - `draft / pending` の作者確認待ち成果物を勝手に上書きしない。
+- 作品入力の意味が途中変更されていれば、旧計画が参照した入力との互換性を確認してから範囲を選ぶ。古いreadyや参照版だけを根拠にしない。
+- 下位Plannerは必要な上位・確定設定を仮修正して現在の案まで作れる。既存レビューと必要な作者確認へ一式を渡し、採用後に影響する既存計画だけをstaleにする。
 - 範囲判定後のPlanner / Challenger / Reviewer / Finalizer / Regressionの詳細はruntime契約を正本とし、Issue本文へ書かれていない工程も省略しない。
 
 作品固有ruleが必要なら、このfileへ追加する。
@@ -40,46 +43,17 @@
 - 執筆指示生成: `writer_brief_generator`
 - 執筆指示確認: `writer_brief_reviewer`
 
-Overall / Arc / Episode Designは原則として次の順で処理する。
-
-```text
-Planning Readiness（Overall開始時）
-        ↓
-対象範囲のPlannerが初稿を作る
-        ↓
-story_craft_challenger
-        ↓
-同じ範囲のPlannerが改訂する
-        ↓
-plot_reviewer
-        ↓
-plot_finalizer
-        ↓
-story_craft_regression
-        ↓
-作者確認
-```
+Overall / Arc / Episode Designの工程順、Story Craftの再判定、回復条件、執筆指示へ進む条件は、pin済みの `.novel-maker/runtime/docs/plot-planning.md` の標準手順を正本とする。ここへ工程順を複製せず、そのrevisionの手順に従う。
 
 親agentは処理順の管理を担当し、Planner / Challenger / Reviewer / Finalizer / Regressionを自分で兼任しない。
 
-Plannerの改訂は、初稿を作った会話へ指摘を継ぎ足すのではなく、必要な入力を明示した新しいrunとして始める。Challengerの指摘を `採用 / 一部採用 / 不採用` に分け、採用した改善意図だけを親agentへ返す。
+各roleへ渡す入力と正式出力の条件もpin済みruntimeに従う。診断用に保存した過去runを、Planner / Writerの通常入力へ追加しない。
 
-Challengerの指摘全文、Plannerの採否理由、採用した改善意図、Technical Reviewerの指摘、Story Craft Regressionの指摘は、その実行中だけ受け渡す。story成果物へreview logとして保存しない。
-
-`plot_reviewer` には改訂済みPlot、変更してはいけない上位条件、技術上の規約、採用した改善意図を渡す。`plot_finalizer` は必須修正を解消しながら、採用した改善意図を可能な限り保つ。`story_craft_regression` はTechnical Review前の改訂済みPlotと最終Plotを比較し、新しい改善案を追加しない。
-
-Story Craft RegressionがFAILした場合は、Finalizerによる最小復元、復元差分だけのTechnical Reviewer再確認、必要なら必須修正だけの再適用を行い、Regressionを1回だけ再実行する。2回目もFAILなら対象を `draft` のまま停止し、作者確認へ進めない。
-
-Episode DesignはStory Craft Regression通過後にだけ、次の順で執筆指示へ進める。
-
-```text
-writer_brief_generator
-        ↓
-writer_brief_reviewer / 執筆指示へ渡す情報の境界を確認
-        ↓
-必要なら作者確認
-```
-
-作者確認の境界は `story.yaml` に従う。技術上の不備や未解決のStory Craft Regressionを作者の好みとして判断委譲しない。
+作者確認の境界は `story.yaml` に従う。技術上の不備や未解決の内部確認を作者の好みとして判断委譲しない。
 
 `.codex/agents/` はbootstrap時点のCodex用設定の写しであり、`.novel-maker/runtime/` の管理対象ではない。`framework-sync` で暗黙更新しない。
+
+
+## Codexのmodel起動方針
+
+primary model、reasoning、許可するmodel fallback、切替の記録は、pin済みの `.novel-maker/runtime/docs/codex-model-policy.md` を正本とする。既存agent TOMLのmodel値だけから起動方針を決めない。

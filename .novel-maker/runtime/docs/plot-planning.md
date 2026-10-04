@@ -4,6 +4,8 @@
 
 repositoryの所有境界は [`repository-contract.md`](repository-contract.md)、計画開始前の入力整理は [`planning-input.md`](planning-input.md)、読者向けの面白さを確認する観点は [`story-craft.md`](story-craft.md)、文章と言葉は [`language-policy.md`](language-policy.md)、pipelineの診断用履歴は [`pipeline-run-trace.md`](pipeline-run-trace.md) に従う。
 
+Canon・上位Planningの仮修正と、途中の作品入力変更への対応は [`planning-changes.md`](planning-changes.md) を正本とする。下位Plannerは必要な上位箇所も仮修正し、現在の計画と一式でレビューできる。
+
 本書と [`../templates/story/planning/`](../templates/story/planning/) はframework側の正本であり、実作品のPlotはstory repo側を正本とする。
 
 ## 1. 目的と原則
@@ -99,6 +101,7 @@ parent_version: 1
 | `parent` / `parent_version` | 直接の上位成果物と、参照した版。Overallでは不要 |
 | `source` / `source_version` | 執筆指示が参照したEpisode Designとその版 |
 | `stale_reason` | `stale` にした理由と再計画範囲 |
+| `inputs_revision` | 採用した作品入力を保持するGitの40文字commit SHA。確定時に記録する |
 
 ### versionの扱い
 
@@ -125,11 +128,36 @@ parent_version: 1
 
 テンプレートの空欄を埋めるためだけに同じ内容を言い換えて増やさない。情報がなければ不要な行を削るか、必要に応じて `なし` とする。
 
+### ArcとEpisode Designで決めること
+
+**Arcでは、主要な出来事について、誰が何を理由に判断し、何を行い、その結果として何が変わるかを決める。Episode Designでは、それを読者が理解し楽しめる場面へ具体化する。場面や道具を選び直すことで、主要な結果、人物の判断理由、後続へ引き継ぐ条件まで変わる事項は、Arcで解決する。**
+
+Arcが約束した読者報酬の成立に必要な範囲で、前提、比較基準、相手の扱いの変化、Episodeへの配置を確認する。能力の比較や関係進展を、すべてのArcに共通する必須項目にしない。
+
+上記の決定を守って複数の場面を作れるなら、その場面の選択はEpisode Plannerへ任せる。道具の名称、台詞、動作といった情報の種類だけで、Arcに必要かどうかを決めない。作者指示、確定設定、上位Plotが具体的な場面や道具を指定している場合は、その指定を守る。
+
+ArcのStory Craft `PASS` は、約束した楽しみを成立させる出来事と変化が計画されているという判定である。Episodeの場面としての楽しさや、本文品質まで保証する判定ではない。
+
+この区別により、主要な因果が未決定のまま下位へ進むことと、場面の詳しさだけを理由にArcの改訂を続けることを避ける。
+
+### 最初のArcと冒頭導入の境界
+
+物語の最初のArcで独立した冒頭導入Episodeを採用する場合、その導入Episodeは**最初のArcの一部**として扱う。opening専用の別Arcは作らない。
+
+- Arcの `入口` は、そのArcに含まれる最初のEpisodeが始まる時点を表す。
+- 最初の主要事件が導入Episodeの後から始まる場合、その開始は該当Episodeの役割・入口で表す。
+- Arcの `入口` を「冒頭導入の後」に置きながら、同じArcのEpisode一覧へそれ以前の導入Episodeを含めてはならない。
+- `採用 / Episode 1へ統合 / 不採用` の判断は `opening-sequence.md` に従う。
+
+必要な導入が実際のEpisode計画にあるのに入口欄だけが一致しない場合は、Technical Reviewer / Finalizerが整合を取る。導入内容の欠落と区別し、欄の修正だけでStory Craftの改訂枠を使わない。
+
 ## 4. 状態と下流の無効化
 
 - `draft`: 作成・確認・確定設定反映の途中。本文生成の正本にしない。
 - `ready`: 必要な確認が終わり、下流が利用できる。
 - `stale`: 上流変更で前提が古くなった。再計画材料として残すが本文生成へ使わない。
+
+`planning/pending-changes.md` がある間は、仮変更を同じ作業内の下書き作成だけに使う。変更した上位が `draft / stale` でも、その変更一式の下位案は作れる。別操作や本文執筆へ渡す許可にはならない。
 
 上流が変わったとき、下流を機械的に全部捨てない。直接の子ごとに意味上の影響を確認する。
 
@@ -171,23 +199,28 @@ ready化と下流影響判定
 
 1. **入力と変更禁止条件を確定する**  
    作品方針、上位Plot、関連する確定設定 / State、現在の作者指示を読む。OverallではPlanning Readinessも通す。
+   作品入力が途中変更されている場合は、旧計画が参照した入力と比較して最上位の影響箇所を確認する。runの作業開始版を記録し、仮変更中なら同じ作業の継続であることを確認する。
 
 2. **Plannerが初稿を作る**  
    対象範囲のPlannerが `draft` を作る。初稿時点から、その範囲に許可されたStory Craft観点を使う。作成直後の対象成果物をrun traceへsnapshotとして保存する。
+   Canon・上位Planningの不足は、変更禁止条件を守って必要箇所を仮修正し、その前提で対象まで完成させる。変更表示と `planning/pending-changes.md` を残し、既存pipelineのレビュー範囲へ含める。
 
 3. **Story Craft Challengerが初稿の面白さを確認する**  
-   別agentが対象読者として初稿を読み、`PASS / WEAK / FAIL` と、残す点、不足、改善候補、仮説を返す。技術的な不整合確認を兼任しない。親agentは正式出力をrun traceへ保存し、この判定を `initial_story_craft_verdict` とする。
+   別agentが対象読者として初稿を読み、`PASS / WEAK / FAIL` と、残す点、不足、改善候補、仮説を返す。技術的な不整合確認を兼任しない。`WEAK / FAIL` の場合は、その時点で認識できている独立したPASS阻害要因を `不足` としてすべて返す。各不足には番号、根拠、解消条件、`現在のPlanning / 上位Planning / 作品入力` の修正先を添える。下位Planningで決める細部だけを現在階層のPASS阻害要因にしない。親agentは正式出力をrun traceへ保存し、この判定を `initial_story_craft_verdict` とする。解消条件と再判定の範囲は [`story-craft.md` §5](story-craft.md#5-story-craft-challengerの役割) を正本とする。
 
 4. **同じ範囲のPlannerが改訂する**  
    初稿を作った会話を継ぎ足すのではなく、新しい実行として改訂する。Challengerの提案を全部採用せず、採用・一部採用・不採用を判断する。採用した改善意図だけを当該実行内で親agentへ返す。この中間工程ではversionを進めない。親agentは正式な採否結果と改訂後snapshotをrun traceへ保存する。
 
-5. **fresh Story Craft Challengerが改訂版を独立に再判定する**  
-   Planner Revision後は、新しいChallenger実行を起動する。初回Challengerの指摘全文、Planner Revisionの採否一覧、旧snapshot、過去runは再判定の通常contextへ入れない。改訂済みPlot、変更してはいけない上位条件、対象読者・Story Craft契約から、改訂版そのものを最初から読み直す。出力契約は初回と同じ `読者としての感想 / 報酬トレース / 判定 / Planner Revisionへ渡す内容` とする。親agentは最後の再判定を `revised_story_craft_verdict` として保存する。
+5. **新しいStory Craft Challengerが同じ条件で再判定する**
+   Planner Revision後は、新しいChallenger実行を起動する。同じrunの初回不足・根拠・解消条件・維持項目、直前再判定の項目別結果、直前判定時のsnapshotと改訂差分を、現在案と正本入力に合わせて渡す。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。初回に定めた不足の解消と改訂による回帰を確認し、新しい不足の追加・解消済み項目の再開はstory-craft.md §5の根拠を持つ場合に限る。出力は `読者としての感想 / 報酬トレース / 判定 / Planner Revisionへ渡す内容` を維持し、最後のsectionへ項目別の `解消 / 未解消` と追加・再開の根拠を記す。親agentは最後の再判定を `revised_story_craft_verdict` として保存する。
 
-   `PASS` ならTechnical Reviewerへ進む。`WEAK / FAIL` なら、**追加のPlanner Revision → fresh再判定を最大1回だけ**行う。したがって1run中のPlanner Revisionは最大2回、改訂後再判定も最大2回とする。2回目の再判定でも `PASS` にならない場合は `story-craft-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。無制限に再生成しない。
+   `PASS` ならTechnical Reviewerへ進む。`WEAK / FAIL` の場合、未解消の項目と、根拠を伴う追加・再開項目をすべて返す。そのうえで、**追加のPlanner Revision → 再判定を最大1回だけ**行う。したがって1run中のPlanner Revisionは最大2回、改訂後再判定も最大2回とする。2回目の再判定でも `PASS` にならない場合は `story-craft-unresolved` として `draft` のまま停止し、run traceを `blocked` にする。無制限に再生成しない。
+
+   再試行回数自体は増やさない。「PASS阻害要因を小出しにしない」ことに加え、解消条件と判定範囲を引き継ぎ、最大2回の改訂で収束するかを実runで確認する。全案のPASSは保証せず、解消できない不足を有限回で記録して停止する。判定条件を際限なく追加するために、別runで回数をリセットしない。
 
 6. **Technical Reviewerが技術上の問題を確認する**  
    改訂後再判定が `PASS` した成果物だけを対象に、作品方針、上位Plot、確定設定、因果、視点、知識差、人物の主体性、継続性、仕込みと回収、状態管理を確認する。Story Craftの新しい改善案は出さない。親agentは正式出力をrun traceへ保存する。
+   仮変更がある場合は、run開始版・差分・変更後と影響先を確認する。Story Craft再判定は同じrunの直前判定時からの回帰を確認し、run開始版からの変更権限・参照版・依存関係等の技術比較はここで行う。入口欄等の整合修正だけで創作上の改訂枠を使わない。
 
 7. **Finalizerが必要な修正を閉じる**  
    必須修正を優先し、必要なら置換・統合・削除で直す。説明を足すだけで済ませない。採用した改善意図は、上位条件や技術的正しさと両立する限り保つ。修正後の対象成果物をrun traceへsnapshotとして保存する。
@@ -197,9 +230,11 @@ ready化と下流影響判定
 
 9. **必要な作者確認を行う**  
    `story.yaml` で設定された確認地点があれば、作者側の採否を確認する。技術上の未解決問題を作者の好みとして免除しない。作者確認待ちになった時点でrun traceを `awaiting-human` にし、後日結果を同じrunへ追加できる。
+   仮変更した上位も確認対象なら、現在の対象と一式で提示する。上位の旧承認を意味の変わった案へ引き継がない。
 
 10. **ready化と下流影響判定を行う**  
    `revised_story_craft_verdict: PASS` と正式なStory Craft Regression `PASS` を含む必要な確認をすべて通過したら `ready` にする。上流変更時は§4に従って影響する下流だけを `stale` にする。作者確認不要ならrun traceを `completed` にする。
+   仮変更は `planning-changes.md` の一括確定に従う。採用する入力をGitへ保存し、`inputs_revision`、参照版、設定提案への依存を揃えてから、変更表示と作業記録を除く。
 
 作者確認待ちでは `draft / pending` で止める。作者確認不要なら `review: not-required`、採用されたら `review: approved` とする。
 
@@ -214,7 +249,7 @@ ready化と下流影響判定
 - Technical Reviewerの一時的な指摘。
 - Story Craft Regressionの一時的な指摘。
 
-後段agentへは、**当該実行の中だけで渡す情報**のうち、そのstageで契約上必要なものだけを渡す。診断履歴が存在することを理由に、過去のreview全文を追加contextとして渡さない。特にfresh Story Craft再判定へ、初回Challengerの指摘全文やPlanner Revisionの採否一覧を渡さない。
+後段agentへは、**当該実行の中だけで渡す情報**のうち、そのstageで契約上必要なものだけを渡す。再判定は同じrunの不足・解消条件・項目別結果と比較用snapshotを使う。診断履歴が存在することを理由に、他runのreview全文やPlannerの採否理由を追加しない。詳細な入力境界はstory-craft.md §5と§9に従う。
 
 一方、親agentはmaker改善用の診断情報として、上記の**正式出力**とPlanningの時点別snapshotを `.novel-maker/runs/<run-id>/` へ保存する。詳細は [`pipeline-run-trace.md`](pipeline-run-trace.md) を正本とする。
 
@@ -227,12 +262,14 @@ Plotへ残すのは採用後の結果だけとする。モデルの内部思考�
 ```text
 Story Craft Challenger（改訂後再判定）: WEAK / FAIL
         ↓
-fresh Planner Revision: 現在の再判定出力だけを使って追加改訂
+新しいPlanner Revision: 初回からの未解消項目と現在の追加・再開項目を改訂
         ↓
-fresh Story Craft Challenger: 改訂版を再び最初から独立評価
+新しいStory Craft Challenger: 同じ解消条件と変更の影響を再確認
 ```
 
-- 追加Planner Revisionへ渡すのは、現在の改訂版、変更禁止条件、直前の再判定で正式に返された指摘に限る。旧runや初回Challenger全文を追加contextへ戻さない。
+- 追加Planner Revisionへは現在の改訂版、変更禁止条件、同じrunの初回から引き継ぐ不足・根拠・解消条件、直前再判定の項目別結果と追加・再開の根拠を渡す。他runや初回の感想・点数は追加しない。
+- 直前の再判定が `WEAK / FAIL` の場合、未解消の項目と根拠を持つ追加・再開項目がすべて返されていることを確認して追加Revisionを行う。解消条件を厳しくし直さず、改善候補や仮説は絞ってよい。
+- `修正先: 上位Planning` / `修正先: 作品入力` の不足は、現在のPlannerが必要な正本を仮修正して解消する。現在の計画だけに局所設定を足して隠さない。変更禁止条件や不可欠な作者目的の不足で進めない場合だけ親へ返す。
 - 2回目の再判定も `WEAK / FAIL` なら `story-craft-unresolved` としてrunを `blocked` にする。
 - Technical Reviewerへ進んでからStory Craft不足を技術修正で埋めようとしない。
 - `planner_revision_count` と `story_craft_recheck_attempt_count` を実回数で記録する。
@@ -267,6 +304,8 @@ Story Craft Regressionを1回だけ再実行
 | `plan arc <id>` | `ready` なOverall、関連する確定設定 / State、隣接Arc、既存対象 | `planning/arcs/<id>.md`、必要な確定設定更新 | 親Overallが `ready` |
 | `plan episode <id>` | `ready` なOverall / 親Arc、関連する確定設定 / State、直近本文、既存対象 | Episode Design、必要な確定設定更新、執筆指示 | 親Arcが `ready` で執筆入口のStateが特定できる |
 
+これは通常の確定済み入力の条件である。`planning-changes.md` に従い、必要な上位箇所も同じ一式で修正する下書きでは、その上位が `draft / stale` でも進めてよい。下位の対象範囲を判断できない場合は、先に上位の計画を対象にする。
+
 Episodeでは、改訂後のStory Craft再判定とStory Craft Regressionを通過するまで執筆指示を作らない。
 
 ```text
@@ -288,6 +327,8 @@ Story Craft上の指摘や「読者をこう感じさせる」という設計理
 ## 6. 設定提案と依存関係
 
 Plot作成中に新設定を提案してよい。ただし、確定した設定をPlot内へ重複定義し続けない。
+
+継続的な事実は `planning-changes.md` に従ってCanonへ仮記入し、同じ作業内で利用してよい。設定提案は確定前なら `open` のままとし、仮表示や依存する下書きを `promoted / ready` と取り違えない。提案本文の正本は仮記入先とし、提案欄と作業記録にはIDと参照だけを残す。
 
 `設定提案` の `確定状況` は次を使う。
 
@@ -313,6 +354,8 @@ Overall / Arc / Episode Designを `ready` にする前に、対象自身と、�
 - 依存がなければ、全候補を確認した後で `なし` と記す。
 
 執筆指示は `設定提案への依存` を持たず、依存表を転記・新設しない。元のEpisode Designが `ready` で、その依存関係が解決済みであることを確認してから執筆指示を作る。
+
+仮変更を含む同じ一式の下書きでは `planning-changes.md` の例外に従い、Episodeの内部確認後にdraftの執筆指示を生成・確認できる。未解決の案を本文へ渡す例外ではない。
 
 ### #49 CP-03 依存表完全性の回帰fixture
 
@@ -419,6 +462,8 @@ planning:
 作者の方向修正や上位変更で既存Plotを直す場合も、確認手順を省略しない。
 
 変更が必要な**最上位の成果物**から標準手順を再実行する。
+
+最上位まで確認・修正することと、階層ごとに確定待ちすることは分ける。`planning-changes.md` に従い、下位Plannerが必要な上位箇所と現在の対象をまとめて改訂し、同じ標準手順で変更一式をレビューしてよい。各階層に別runを必須とせず、上位・影響先の確認を省略しない。
 
 ```text
 Planner 改訂初稿

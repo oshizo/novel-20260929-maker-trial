@@ -19,13 +19,13 @@ Planner 初稿
 → 必要な作者確認
 ```
 
-改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner Revisionとfresh Story Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。
+改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner RevisionとStory Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。再判定の入力と追加・再開条件はstory-craft.md §5に従う。
 
 最終成果物だけを残すと、後から次を確認できない。
 
 - 初回Challengerが何を問題視し、`PASS / WEAK / FAIL` のどれを返したか。
 - Planner Revisionが何を採用、一部採用、不採用にしたか。
-- 改訂後の成果物をfresh Challengerが独立にどう再判定したか。
+- 改訂後の成果物が同じ解消条件を満たし、改訂による回帰がないか。
 - 初稿、各Revision後、Finalizer後で何が変わったか。
 - Technical Reviewerが何件の必須修正を出したか。
 - Story Craft Regressionが何を確認してPASS / FAILしたか。
@@ -41,6 +41,8 @@ Planner 初稿
 ## 2. 保存場所
 
 1つの `plan` / `replan` 対象を、原則として1つのrunとして扱う。
+
+`planning-changes.md` に従ってCanon・上位Planningを仮修正する場合も、現在の対象と変更一式を同じrunで記録する。保存先が上位という理由で別runを作り、改訂回数をリセットしない。
 
 ```text
 .novel-maker/runs/<run-id>/
@@ -111,6 +113,8 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 
 冒頭導入セットなど複数fileを1範囲として扱う場合は、対象fileごとにsnapshotを分け、`run.json` の同じstageから複数pathを参照する。
 
+仮変更がある場合は、現在の対象だけでなく、変更したCanon・上位Planningと `planning/pending-changes.md` も各時点で保存する。作業開始版のcommit・path、未commit入力のsnapshotを最初に保持し、確定後は表示を除いた最終fileと採否・既存計画への影響判定を残す。作業記録を削除する前に最後の記録を保存する。モデルの内部思考は保存しない。
+
 ### 4.2 review
 
 次のagentが親agentへ返した**正式な出力**を保存する。
@@ -128,7 +132,21 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 
 ただし、モデルの内部思考、chain-of-thought、system prompt、認証情報、実行環境の秘密情報は保存しない。Planner Revisionで保存する理由も、親へ正式に返した短い採否理由だけでよく、内部推論を要求しない。
 
-**改訂後再判定のreview fileを保存することと、それを次のfresh Challengerへ入力することは別である。** 再判定agentへは旧review、旧snapshot、過去runを通常contextとして渡さない。
+**保存したreview全体を、次のagentへ無条件に渡さない。** 再判定にはstory-craft.md §5で指定した同じrunの不足・解消条件・維持項目・項目別結果と比較用snapshotを渡す。他runのreviewや初回の感想・点数、Plannerの採否理由は渡さない。
+
+新しい契約で開始するrunでは、`story-craft-recheck` stageに `review_basis` を記録する。これは入力の参照であり、別の評価台帳ではない。
+
+```json
+{
+  "initial_review": "reviews/02-story-craft-challenger.md",
+  "previous_recheck_review": null,
+  "previous_snapshots": ["snapshots/01-planner-initial-attempt-1.md"]
+}
+```
+
+`initial_review` は同じrunの初回正式出力、`previous_recheck_review` は2回目なら直前の正式出力（1回目はnull）、`previous_snapshots` は直前判定が読んだ一式を指す。初稿・Revision各snapshotの対応をstage記録で確認し、仮変更した上位やCanonも比較対象なら含める。初回の番号・根拠・解消条件を後から書き換えない。再判定の正式出力には各番号の `解消 / 未解消`、根拠箇所、追加・再開理由を残す。
+
+以前のrunにこの参照や解消条件がなければ、後付けして当時の判定を成立させない。旧判定・回数・停止を保存し、明示的に再計画するときは現在案を候補として新runの初回確認から始める。単に上限を増やすための新runは作らない。
 
 ### 4.3 executor / agent / model情報
 
@@ -140,14 +158,16 @@ run開始時に、実行に使うexecutorを取得できる範囲で記録する
 各stageには、設定上期待したroleと実際に動いたroleを分けて記録する。
 
 - `configured_agent`: stageで起動する予定だったagent名。
-- `configured_model`: agent設定に書かれたmodel名。指定しない場合は `null`。
+- `configured_model`: そのstageで起動する予定のmodel名。executor方針による明示overrideがある場合は、適用後の値を記録する。指定しない場合は `null`。
 - `actual_agent`: 実際に起動したagent名。起動前に失敗した場合は `null`。
 - `actual_model`: 実際に確認できたmodel名。確認できない場合は `null`。
 - `reasoning`: reasoning設定など比較に必要な公開設定。
 - `result`: `completed / blocked / failed`。
 - `failure_reason`: 正常完了なら `null`。起動失敗や契約違反なら短い理由。
 
-framework共通契約は特定providerのmodel名を必須にしない。ただし、**configured agent / modelが明示されているstandard pipelineでは、実際に別role・別modelへ自動fallbackして成功扱いにしてはならない。**
+framework共通契約は特定providerのmodel名を必須にしない。standard pipelineでは、executor方針が許可しない別role・別modelへ自動fallbackして成功扱いにしてはならない。
+
+Codexのprimary modelと許可するmodel fallbackは [`codex-model-policy.md`](codex-model-policy.md) に従う。許可されたmodel fallbackで同じroleの正式出力契約を満たした場合は標準stageとして扱い、同文書に従って `model_fallback` とsummaryの `model_fallback_count` を記録する。model切替を理由にStory Craft判定や改訂回数をリセットしない。
 
 actual modelをexecutorから確実に取得できない場合、推測してconfigured modelをコピーしない。`null` のままでもよい。ただしagent起動自体が成功したかは必ず判定する。
 
@@ -199,6 +219,8 @@ actual modelをexecutorから確実に取得できない場合、推測してcon
 
 `kind` は少なくとも `overall`, `arc`, `episode` を使える。冒頭導入セットなど複数fileを1範囲とする場合は `kind: episode-set` とし、`paths` を追加してよい。
 
+上位・Canonの仮変更がある場合は、`kind / id / path` は現在の対象を保ち、`paths` に変更一式のfileを追加してよい。stageの `snapshots` から各fileの時点別内容を辿れるようにする。新しいstageや状態値は増やさない。
+
 ### 5.2 status
 
 run全体の状態には次を使う。
@@ -214,7 +236,7 @@ run全体の状態には次を使う。
 集計用の値を置く。
 
 - `initial_story_craft_verdict`: 最初のChallenger判定。`PASS / WEAK / FAIL / null`。
-- `revised_story_craft_verdict`: Planner Revision後のfresh Story Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。
+- `revised_story_craft_verdict`: Planner Revision後のStory Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。新しい契約では同じ解消条件と回帰確認の結果であり、旧runの全体再評価とは判定範囲を区別する。
 - `story_craft_recheck_attempt_count`: 改訂後再判定を実行した回数。標準pipelineでは1、追加Revisionを使った場合は最大2。
 - `planner_revision_count`: Planner Revisionを実行した回数。標準pipelineでは最低1、追加Revisionを使った場合は最大2。
 - `planner_adopted_count`: Planner Revisionが `採用` としたChallenger指摘件数。複数Revisionがある場合は正式出力から一意に集計できるときだけ合計する。
@@ -271,7 +293,12 @@ run全体の状態には次を使う。
   "failure_reason": null,
   "verdict": "PASS",
   "snapshots": [],
-  "review": "reviews/04-story-craft-recheck.md"
+  "review": "reviews/04-story-craft-recheck.md",
+  "review_basis": {
+    "initial_review": "reviews/02-story-craft-challenger.md",
+    "previous_recheck_review": null,
+    "previous_snapshots": ["snapshots/01-planner-initial-attempt-1.md"]
+  }
 }
 ```
 
@@ -317,15 +344,15 @@ standard pipelineではconfigured role contractを満たした実行だけを正
 
 次の場合、そのstageを `completed` にせずrunを `blocked` にする。
 
-- configured agentが起動できない。
-- configured modelがunsupported、認証不可、利用不可等で起動前に失敗した。
+- 許可されたmodel fallbackを含めてもconfigured agentが起動できない。
+- configured modelが起動前に失敗し、executor方針で許可されたmodel fallbackでも解決できない。
 - 親agentがconfigured subagentを使わず自分で代行した。
 - `*-fallback` 等の別roleへ自動切替した。
-- configured modelから別modelへ自動fallbackしたことが分かった。
+- executor方針で許可されないmodel fallbackを行った。
 - role固有の正式出力契約を満たさない。
 - 改訂後Story Craft再判定が、許可された追加Revision後も `WEAK / FAIL` のまま解消しない。
 
-fallbackを使って診断を続けたい場合は、standard pipelineとは別の実験として明示する。その結果をconfigured roleの `PASS / WEAK / FAIL`、Technical Review完了、Regression PASSとして記録しない。
+executor方針で許可されないfallbackを使って診断を続けたい場合は、standard pipelineとは別の実験として明示する。その結果をconfigured roleの `PASS / WEAK / FAIL`、Technical Review完了、Regression PASSとして記録しない。
 
 role固有の出力契約について、少なくとも次を確認する。
 
@@ -338,7 +365,7 @@ role固有の出力契約について、少なくとも次を確認する。
 
 1. 対象範囲を決定し、実際にPlannerを起動する直前にrun directoryと `run.json` を作る。executor名とversionを取得できる場合はこの時点で記録する。
 2. stage開始前にconfigured agent / modelを `run.json > stages` へ記録する。
-3. configured agentを起動する。起動できなければstageを `blocked`、runを `blocked` として停止する。別roleや別modelで穴埋めしない。
+3. configured agentを起動する。model起動失敗時はexecutor方針が許可するmodel fallbackを適用し、切替理由と結果を記録する。許可された範囲で起動できなければstageを `blocked`、runを `blocked` として停止する。別roleや親agentで代行しない。
 4. agentから正式出力を受け取ったらrole固有の出力契約を確認する。不足していればstage / runを `blocked` として停止する。
 5. 正式出力を受け取った直後にreview fileへ保存する。
 6. Planner初稿、各Planner Revision、Finalizerが対象成果物を書き換えた直後にsnapshotを取る。
@@ -346,6 +373,7 @@ role固有の出力契約について、少なくとも次を確認する。
 8. 最初の改訂後再判定が `WEAK / FAIL` なら、追加Planner Revisionと再判定を最大1回だけ行う。2回目も `PASS` でなければrunを `blocked` にする。
 9. `revised_story_craft_verdict: PASS` 後にTechnical Reviewer / Finalizer / Regressionへ進む。
 10. Regressionが正式な `PASS` を返し、作者確認が必要なら `awaiting-human` とする。不要なら `completed` とする。
+    仮変更がある場合は、変更した上位も含めた確認対象を一式で提示する。確認不要または承認後に `planning-changes.md` の確定処理を終えてから `completed` とする。未確定のCanonや古い参照版を残して完了にしない。
 11. Regression未解決、Readinessの停止条件などで進めない場合は `blocked` とし、停止理由をstageへ残す。
 12. 後日作者確認が行われた場合、同じrunへHuman Reviewを追加し、`human_review_status` とrun `status` を更新する。
 
@@ -362,7 +390,9 @@ role固有の出力契約について、少なくとも次を確認する。
 - Canon / Planning / State / Style / Manuscriptの代わりにrun traceを参照しない。
 - `check-story` やframework-syncは、`.novel-maker/runs/` をruntime snapshotやPlanning成果物として解釈しない。
 
-Story Craft改訂後再判定でもこの隔離は維持する。fresh Challengerへは、**現在の改訂済みPlotと現在の正本入力だけ**を渡し、初回Challenger全文、Planner Revisionの採否一覧、旧snapshot、過去runを渡さない。
+Story Craft改訂後再判定でも他runからの隔離は維持する。同じrunの再判定には、story-craft.md §5で指定した不足・解消条件・項目別結果と比較用snapshotを、親agentが対象として明示して渡す。`review_basis` は何を渡したか追える参照であり、診断履歴の自由探索を許すものではない。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。
+
+同じ作業内の仮修正は、`planning-changes.md` に従って変更後の案を入力する。Technical ReviewerやRegressionへ必要な比較資料は親が今回の対象として明示して渡す。agentに過去runの自由探索を許すことにはしない。未確定の変更の継続は作業記録で識別し、別操作で診断snapshotを作品正本の代用にしない。
 
 過去runを読むのは次の場合だけとする。
 

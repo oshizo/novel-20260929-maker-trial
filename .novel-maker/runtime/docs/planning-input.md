@@ -4,6 +4,8 @@
 
 Plotの作成・確認・再計画は [`plot-planning.md`](plot-planning.md)、repositoryの所有境界は [`repository-contract.md`](repository-contract.md)、文章と言葉は [`language-policy.md`](language-policy.md) に従う。
 
+Planning中にCanon・上位計画を補う場合と、作品入力を途中変更した場合は [`planning-changes.md`](planning-changes.md) に従う。保存先がCanonや上位であることだけを理由に、現在のPlannerの創作判断を親へ返さない。
+
 ## 1. 目的
 
 Overallを作る前に、作品固有の入力をAIが自走できる状態へ整理する。
@@ -131,7 +133,7 @@ Planning Readinessを判定する前に、入力の置き場所を確認する�
 
 原則として次をすべて満たす場合だけ作者へ返す。
 
-1. Overall前に決めないと作品の主要方向が定まらない。
+1. 現在のPlanningに不可欠で、決めないと作品の主要方向が定まらない。
 2. 欠けているのがPlotの具体化ではなく、読者への約束、関係性の方向、結末の方向など作者側の目的に近い。
 3. 既存の作品方針から合理的に決められない。
 4. 作者から包括的な委任を受けていない。

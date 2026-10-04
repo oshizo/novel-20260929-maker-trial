@@ -4,6 +4,7 @@ kind: episode-design
 version: 1
 status: draft
 review: pending
+inputs_revision: ""
 parent: <arc-id>
 parent_version: 1
 ---

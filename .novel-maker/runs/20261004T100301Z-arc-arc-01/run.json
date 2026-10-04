@@ -1,0 +1,625 @@
+{
+  "schema_version": 1,
+  "run_id": "20261004T100301Z-arc-arc-01",
+  "target": {
+    "kind": "arc",
+    "id": "arc-01",
+    "path": "planning/arcs/arc-01.md",
+    "paths": [
+      "planning/arcs/arc-01.md",
+      "planning/overall.md",
+      "planning/pending-changes.md",
+      "canon/characters.md",
+      "canon/world.md",
+      "canon/relationships.md",
+      "canon/magic.md"
+    ]
+  },
+  "framework_revision": "f4491ce08c3c3be8f092ed20f48587e89e80ec87",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "completed",
+  "started_at": "2026-10-04T10:03:01Z",
+  "completed_at": "2026-10-04T11:26:01Z",
+  "summary": {
+    "initial_story_craft_verdict": "PASS",
+    "revised_story_craft_verdict": "PASS",
+    "story_craft_recheck_attempt_count": 1,
+    "planner_revision_count": 1,
+    "planner_adopted_count": 1,
+    "planner_partially_adopted_count": 1,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 9,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "model_fallback_count": 0,
+    "opening_sequence_pattern": "memory-awakening",
+    "opening_sequence_decision": "採用",
+    "opening_sequence_reason": "十代半ばの記憶覚醒というCanonに沿い、今世人格から前世記憶の接続・魔法の再認識・現在の目的を独立導入で描き、Episode 002へつなぐ。",
+    "human_review_status": "approved",
+    "human_required_change_count": 0
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+        "snapshots/01-planner-initial-attempt-1-planning__pending-changes.md",
+        "snapshots/01-planner-initial-attempt-1-canon__characters.md",
+        "snapshots/01-planner-initial-attempt-1-canon__factions.md",
+        "snapshots/01-planner-initial-attempt-1-canon__magic.md",
+        "snapshots/01-planner-initial-attempt-1-canon__relationships.md",
+        "snapshots/01-planner-initial-attempt-1-canon__travel-economy.md",
+        "snapshots/01-planner-initial-attempt-1-canon__world.md"
+      ],
+      "review": "reviews/01-planner-initial.md",
+      "started_at": "2026-10-04T10:03:01Z",
+      "completed_at": "2026-10-04T10:08:51Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/continue_arc_initial",
+      "input_paths": [
+        "story-direction.md",
+        "canon/*.md",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md"
+      ],
+      "input_exclusions": [
+        "他runのreviewと採否",
+        "旧snapshot",
+        "Human Review",
+        "Git履歴",
+        "Issue診断経緯"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。",
+      "canonical_snapshot_source": "新run開始版497e738にあるCanon。初稿stageはCanonを変更せず、初回Challenger入力と同一。"
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md",
+      "started_at": "2026-10-04T10:08:51Z",
+      "completed_at": "2026-10-04T10:12:34Z",
+      "model_fallback": null,
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md"
+      ],
+      "excluded_inputs": [
+        "他runのreview・snapshot・HumanReview",
+        "Git履歴・旧診断",
+        "planning/pending-changes.md全文",
+        "Planner採否理由"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "actual_agent_id": "/root/continue_craft_initial",
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "arc_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "arc_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+        "snapshots/03-planner-revision-attempt-1-planning__pending-changes.md",
+        "snapshots/03-planner-revision-attempt-1-canon__characters.md",
+        "snapshots/03-planner-revision-attempt-1-canon__world.md",
+        "snapshots/03-planner-revision-attempt-1-canon__travel-economy.md",
+        "snapshots/03-planner-revision-attempt-1-canon__relationships.md",
+        "snapshots/03-planner-revision-attempt-1-canon__magic.md",
+        "snapshots/03-planner-revision-attempt-1-canon__factions.md"
+      ],
+      "review": "reviews/03-planner-revision-attempt-1.md",
+      "started_at": "2026-10-04T10:12:34Z",
+      "completed_at": "2026-10-04T10:16:36Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/continue_arc_revision1",
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md",
+        "/tmp/issue16b-craft-initial.md"
+      ],
+      "input_exclusions": [
+        "他run・Git履歴・旧snapshot・HumanReview"
+      ],
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。"
+    },
+    {
+      "sequence": 4,
+      "stage": "story-craft-recheck",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/04-story-craft-recheck-attempt-1.md",
+      "started_at": "2026-10-04T10:16:36Z",
+      "completed_at": "2026-10-04T10:19:33Z",
+      "model_fallback": null,
+      "review_basis": {
+        "initial_review": "reviews/02-story-craft-challenger.md",
+        "previous_recheck_review": null,
+        "previous_snapshots": [
+          "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+          "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+          "snapshots/01-planner-initial-attempt-1-canon__characters.md",
+          "snapshots/01-planner-initial-attempt-1-canon__factions.md",
+          "snapshots/01-planner-initial-attempt-1-canon__magic.md",
+          "snapshots/01-planner-initial-attempt-1-canon__relationships.md",
+          "snapshots/01-planner-initial-attempt-1-canon__travel-economy.md",
+          "snapshots/01-planner-initial-attempt-1-canon__world.md"
+        ]
+      },
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "/tmp/issue16b-initial-conditions.md",
+        "/tmp/issue16b-recheck1-before/",
+        "/tmp/issue16b-recheck1.diff"
+      ],
+      "input_exclusions": [
+        "初回感想・点数・判定",
+        "Planner採否理由",
+        "他runのreview・snapshot・HumanReview",
+        "planning/pending-changes.md全文"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "actual_agent_id": "/root/continue_craft_recheck1",
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。",
+      "initial_condition_handoff_sections": [
+        "Planner Revisionへ渡す内容 > 維持",
+        "Planner Revisionへ渡す内容 > 不足（なし）"
+      ],
+      "added_or_reopened_deficiency_count": 0
+    },
+    {
+      "sequence": 5,
+      "stage": "technical-review",
+      "attempt": 1,
+      "configured_agent": "plot_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/05-technical-review.md",
+      "started_at": "2026-10-04T10:19:33Z",
+      "completed_at": "2026-10-04T10:28:53Z",
+      "model_fallback": null,
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md",
+        "/tmp/issue16b-start/",
+        "/tmp/issue16b-before-C1/",
+        "/tmp/issue16b-legacy-adopted-input/",
+        "/tmp/issue16b-technical-work-start.diff",
+        "/tmp/issue16b-technical-before-C1.diff",
+        "/tmp/issue16b-adopted-intents.md"
+      ],
+      "input_exclusions": [
+        "初回感想・点数",
+        "他runのreview・snapshot・HumanReview",
+        "旧Issue診断"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "actual_agent_id": "/root/continue_technical",
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。",
+      "required_fix_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09"
+      ],
+      "duplicate_cleanup_ids": [
+        "T03",
+        "T04"
+      ]
+    },
+    {
+      "sequence": 6,
+      "stage": "finalizer",
+      "attempt": 1,
+      "configured_agent": "plot_finalizer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_finalizer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/06-finalizer-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/06-finalizer-attempt-1-planning__overall.md",
+        "snapshots/06-finalizer-attempt-1-planning__pending-changes.md",
+        "snapshots/06-finalizer-attempt-1-canon__characters.md",
+        "snapshots/06-finalizer-attempt-1-canon__world.md",
+        "snapshots/06-finalizer-attempt-1-canon__travel-economy.md",
+        "snapshots/06-finalizer-attempt-1-canon__relationships.md",
+        "snapshots/06-finalizer-attempt-1-canon__magic.md",
+        "snapshots/06-finalizer-attempt-1-canon__factions.md"
+      ],
+      "review": "reviews/06-finalizer.md",
+      "started_at": "2026-10-04T10:28:53Z",
+      "completed_at": "2026-10-04T10:40:18Z",
+      "model_fallback": null,
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "planning/pending-changes.md",
+        "/tmp/issue16b-technical-review.md",
+        "/tmp/issue16b-adopted-intents.md",
+        "/tmp/issue16b-start/",
+        "/tmp/issue16b-before-C1/"
+      ],
+      "input_exclusions": [
+        "初回感想・点数",
+        "他runのreview・snapshot・HumanReview",
+        "旧Issue診断"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "actual_agent_id": "/root/continue_finalizer",
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。",
+      "required_fix_results": {
+        "T01": "解消",
+        "T02": "解消",
+        "T03": "解消",
+        "T04": "解消",
+        "T05": "解消",
+        "T06": "解消",
+        "T07": "解消",
+        "T08": "解消",
+        "T09": "解消"
+      }
+    },
+    {
+      "sequence": 7,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "configured_agent": "story_craft_regression",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_regression",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/07-story-craft-regression-attempt-1.md",
+      "started_at": "2026-10-04T10:40:18Z",
+      "completed_at": "2026-10-04T10:42:50Z",
+      "model_fallback": null,
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "/tmp/issue16b-craft-pass-before/",
+        "/tmp/issue16b-regression.diff",
+        "/tmp/issue16b-craft-pass.md",
+        "/tmp/issue16b-adopted-intents.md"
+      ],
+      "input_exclusions": [
+        "初回感想・点数・判定",
+        "他runのreview・snapshot・HumanReview",
+        "Planner採否理由",
+        "planning/pending-changes.md全文"
+      ],
+      "spawn_model_override": "gpt-6.1-sol",
+      "comparison_basis": {
+        "passing_recheck_review": "reviews/04-story-craft-recheck-attempt-1.md",
+        "passing_snapshots": [
+          "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+          "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+          "snapshots/03-planner-revision-attempt-1-canon__characters.md",
+          "snapshots/03-planner-revision-attempt-1-canon__world.md",
+          "snapshots/03-planner-revision-attempt-1-canon__travel-economy.md",
+          "snapshots/03-planner-revision-attempt-1-canon__relationships.md",
+          "snapshots/03-planner-revision-attempt-1-canon__magic.md",
+          "snapshots/03-planner-revision-attempt-1-canon__factions.md"
+        ],
+        "finalizer_snapshots": [
+          "snapshots/06-finalizer-attempt-1-planning__arcs__arc-01.md",
+          "snapshots/06-finalizer-attempt-1-planning__overall.md",
+          "snapshots/06-finalizer-attempt-1-canon__characters.md",
+          "snapshots/06-finalizer-attempt-1-canon__world.md",
+          "snapshots/06-finalizer-attempt-1-canon__travel-economy.md",
+          "snapshots/06-finalizer-attempt-1-canon__relationships.md",
+          "snapshots/06-finalizer-attempt-1-canon__magic.md",
+          "snapshots/06-finalizer-attempt-1-canon__factions.md"
+        ]
+      },
+      "actual_agent_id": "/root/continue_regression",
+      "model_evidence": "spawn指定は受理。実働modelは独立取得できないためactual_modelはnull。"
+    },
+    {
+      "sequence": 8,
+      "stage": "human-review",
+      "attempt": 1,
+      "configured_agent": null,
+      "configured_model": null,
+      "actual_agent": "author",
+      "actual_model": null,
+      "reasoning": null,
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "approved",
+      "snapshots": [
+        "snapshots/08-human-review-attempt-1-planning__overall.md",
+        "snapshots/08-human-review-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/08-human-review-attempt-1-canon__characters.md",
+        "snapshots/08-human-review-attempt-1-canon__factions.md",
+        "snapshots/08-human-review-attempt-1-canon__magic.md",
+        "snapshots/08-human-review-attempt-1-canon__relationships.md",
+        "snapshots/08-human-review-attempt-1-canon__travel-economy.md",
+        "snapshots/08-human-review-attempt-1-canon__world.md"
+      ],
+      "review": "reviews/08-human-review.md",
+      "started_at": "2026-10-04T11:26:01Z",
+      "completed_at": "2026-10-04T11:26:01Z",
+      "model_fallback": null,
+      "approval_source": "この会話の作者明示回答",
+      "pending_record_before_removal": "snapshots/06-finalizer-attempt-1-planning__pending-changes.md"
+    }
+  ],
+  "continuation": {
+    "source_pr": 17,
+    "source_run_id": "20261004T021235Z-arc-arc-01",
+    "reason": "2026-10-04の作者明示指示とmaker PR #151の契約変更により、PR #17の現在候補を新runの初回確認から継続する。旧runの判定・回数・停止は変更しない。",
+    "recheck_contract": "story-craft.md §5: 初回の番号・根拠・解消条件を維持し、同じrun内の比較で解消と回帰を確認。"
+  },
+  "input_baseline": {
+    "story_start_commit": "b4ea267a453f585eed589e97b23f3829b338bd5b",
+    "work_start_commit": "497e738e11b7f1b8e0cb21297ba7ba2bd554915d",
+    "paths": [
+      "story-direction.md",
+      "canon/",
+      "planning/overall.md",
+      "planning/arcs/arc-01.md",
+      "planning/pending-changes.md"
+    ],
+    "uncommitted_inputs": [],
+    "C1_original_reference": "9a08dbc64cf2886d8414185e120ca003ee27cce7",
+    "legacy_adopted_input_reference": "be66ea585ac4987f364919f8cd05d0646ec96826",
+    "starting_metadata": {
+      "overall": {
+        "version": 2,
+        "status": "draft",
+        "review": "pending"
+      },
+      "arc-01": {
+        "version": 7,
+        "status": "draft",
+        "review": "pending",
+        "parent_version": 2
+      }
+    }
+  },
+  "compatibility_check": {
+    "external_story_input_changes": [],
+    "evidence": "PR #17最新headから現在Direction・Canonは不変。現在Overall・Arcはmemory-awakening導入、現在の仕事、姉妹救助、暫定同行を含む候補。必須条件の内容の充足は新run初回Challengerで確認し、参照・開始時点表現等はTechnical Reviewerで確認する。",
+    "legacy_inputs_revision": "Overallは欠落、Arcは空値。C1提案前と旧承認時のGit参照を保持し、draftを確定済みと扱わない。",
+    "provisional_changes": [
+      {
+        "id": "C1",
+        "files": [
+          "planning/overall.md",
+          "planning/arcs/arc-01.md"
+        ],
+        "adoption": "pending",
+        "original_reference": "9a08dbc64cf2886d8414185e120ca003ee27cce7"
+      },
+      {
+        "id": "C2",
+        "files": [
+          "canon/characters.md",
+          "planning/overall.md",
+          "planning/arcs/arc-01.md"
+        ],
+        "adoption": "pending",
+        "original_reference": "497e738e11b7f1b8e0cb21297ba7ba2bd554915d"
+      },
+      {
+        "id": "C3",
+        "files": [
+          "canon/characters.md",
+          "canon/world.md",
+          "canon/relationships.md",
+          "canon/magic.md",
+          "planning/overall.md",
+          "planning/arcs/arc-01.md"
+        ],
+        "adoption": "pending",
+        "reason": "冒頭と救助事件の時点整理。既存事実を維持する技術修正。",
+        "original_reference": "497e738e11b7f1b8e0cb21297ba7ba2bd554915d"
+      },
+      {
+        "id": "C4",
+        "files": [
+          "planning/overall.md"
+        ],
+        "adoption": "pending",
+        "reason": "Overallの説明重複を整理し、状態とArc一覧への一方向参照へ統合。",
+        "original_reference": "497e738e11b7f1b8e0cb21297ba7ba2bd554915d"
+      }
+    ],
+    "downstream": "Episode・後続Arcの詳細・本文は未作成。全体の最終出口と後続Arcの役割・主要因果は維持する。"
+  },
+  "synchronization": {
+    "maker_merge_commit": "f4491ce08c3c3be8f092ed20f48587e89e80ec87",
+    "runtime_file_count": 19,
+    "agent_instruction_count": 10,
+    "auxiliary_paths": [
+      ".codex/agents/",
+      ".github/ISSUE_TEMPLATE/plan-next.md",
+      "AGENTS.md"
+    ],
+    "custom_additions": "旧pin templateとの一致を確認。独自追記なし。",
+    "protected_file_count": 110,
+    "checks": "runtime・補助設定をpinのbytesと照合、作品・Planning・pending-changes・旧runは同期前後で不変。check-story成功。"
+  },
+  "observations": {
+    "parent_additional_decision_requests": 0,
+    "duplicate_cleanup_required_fixes": 2,
+    "manuscript_reading_quality": "未測定。本文は作者確認と一括確定後。",
+    "elapsed_seconds_from_trace": 2389.0,
+    "stage_elapsed_seconds_from_trace": [
+      {
+        "sequence": 1,
+        "stage": "planner-initial",
+        "seconds": 350.0
+      },
+      {
+        "sequence": 2,
+        "stage": "story-craft-challenger",
+        "seconds": 223.0
+      },
+      {
+        "sequence": 3,
+        "stage": "planner-revision",
+        "seconds": 242.0
+      },
+      {
+        "sequence": 4,
+        "stage": "story-craft-recheck",
+        "seconds": 177.0
+      },
+      {
+        "sequence": 5,
+        "stage": "technical-review",
+        "seconds": 560.0
+      },
+      {
+        "sequence": 6,
+        "stage": "finalizer",
+        "seconds": 685.0
+      },
+      {
+        "sequence": 7,
+        "stage": "story-craft-regression",
+        "seconds": 152.0
+      }
+    ],
+    "timing_scope": "記録した開始/完了timestampの差。親の受け渡し・記録待ちを含む経過時間であり、model推論時間は未測定。",
+    "initial_deficiency_count": 0,
+    "recheck_added_or_reopened_deficiency_count": 0,
+    "bounded_revision_convergence_with_unresolved_items": "未測定。今回は初回に不足がなかったため、不足ありの改訂収束を実証しない。",
+    "technical_examples": [
+      "T01: 導入は十代半ばだがCanonの開始時点は成人後を含んでいたため時点を区別。",
+      "T07/T08: C2仮表示と変更記録の不整合を技術確認で検出。",
+      "T03/T04: 重複整理2件を一方向参照へ統合しRegression PASS。"
+    ]
+  },
+  "machine_completed_at": "2026-10-04T10:42:50Z",
+  "validation": {
+    "check_story": "passed",
+    "pinned_runtime_match": 19,
+    "pinned_agents_match": 10,
+    "planning_entry_and_AGENTS_match": true,
+    "old_runs_and_direction_style_state_manuscript_preserved_files": 98,
+    "review_basis_paths": "passed",
+    "finalizer_snapshot_matches_working_files": "passed",
+    "formal_role_output_contracts": "passed",
+    "git_diff_check": "passed",
+    "quality_note": "構造検査はStory Craftや本文品質のPASSとして数えない。"
+  },
+  "author_checkpoint": {
+    "source": [
+      "story.yaml: planning.human_review.checkpoints",
+      "Issue #16 §3"
+    ],
+    "targets": [
+      "planning/overall.md",
+      "planning/arcs/arc-01.md",
+      "関連Canonを含むC1–C4仮変更一式"
+    ],
+    "decision_requested": "作品として採用するか。技術判定は内部で解消済み。",
+    "planning_status": "draft / pending",
+    "next_after_approval": "同じrunへ作者結果を記録し一括確定した後、導入Episode・Writer Brief・先頭本文へ進む。",
+    "decision": "approved"
+  },
+  "adoption": {
+    "approved_changes": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "input_commit": "147e32c2c9a655753a1d252a419dd78e3ed0596c",
+    "final_metadata": {
+      "overall": {
+        "version": 3,
+        "status": "ready",
+        "review": "approved",
+        "inputs_revision": "147e32c2c9a655753a1d252a419dd78e3ed0596c"
+      },
+      "arc-01": {
+        "version": 8,
+        "status": "ready",
+        "review": "approved",
+        "parent_version": 3,
+        "inputs_revision": "147e32c2c9a655753a1d252a419dd78e3ed0596c"
+      }
+    },
+    "downstream_impact": "既存の対象外Planning・執筆指示・本文なし。stale対象なし。",
+    "pending_changes_removed": true,
+    "next_target": "episode-000"
+  }
+}
