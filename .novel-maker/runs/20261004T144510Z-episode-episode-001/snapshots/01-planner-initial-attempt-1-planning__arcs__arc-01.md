@@ -220,7 +220,7 @@ parent_version: 3
 - 出口:
   - カイは追跡の痕跡と負傷者の可能性を確かめ、助けられる見込みと退く条件を考えて現場へ向かう。
 - Episode成果物:
-  - [Episode Design](../episodes/episode-001.design.md) / [執筆指示](../episodes/episode-001.writer.md)。
+  - 未作成。
 
 ### episode-002: 追手から姉妹を救う
 

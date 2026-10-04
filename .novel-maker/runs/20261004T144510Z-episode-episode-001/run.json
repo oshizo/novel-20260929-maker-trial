@@ -1,0 +1,737 @@
+{
+  "schema_version": 1,
+  "run_id": "20261004T144510Z-episode-episode-001",
+  "target": {
+    "kind": "episode",
+    "id": "episode-001",
+    "path": "planning/episodes/episode-001.design.md"
+  },
+  "framework_revision": "f4491ce08c3c3be8f092ed20f48587e89e80ec87",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3"
+  },
+  "status": "completed",
+  "started_at": "2026-10-04T14:45:10Z",
+  "completed_at": "2026-10-04T15:36:00Z",
+  "summary": {
+    "initial_story_craft_verdict": "PASS",
+    "revised_story_craft_verdict": "PASS",
+    "story_craft_recheck_attempt_count": 1,
+    "planner_revision_count": 1,
+    "planner_adopted_count": 0,
+    "planner_partially_adopted_count": 0,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 8,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "model_fallback_count": 0,
+    "opening_sequence_pattern": null,
+    "opening_sequence_decision": null,
+    "opening_sequence_reason": null,
+    "human_review_status": "not-required",
+    "human_required_change_count": null
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "episode_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "episode_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial-attempt-1-story-direction.md",
+        "snapshots/01-planner-initial-attempt-1-canon__characters.md",
+        "snapshots/01-planner-initial-attempt-1-canon__factions.md",
+        "snapshots/01-planner-initial-attempt-1-canon__magic.md",
+        "snapshots/01-planner-initial-attempt-1-canon__relationships.md",
+        "snapshots/01-planner-initial-attempt-1-canon__travel-economy.md",
+        "snapshots/01-planner-initial-attempt-1-canon__world.md",
+        "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+        "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/01-planner-initial-attempt-1-style__profile.md",
+        "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-001.design.md",
+        "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-000.design.md"
+      ],
+      "review": "reviews/01-planner-initial.md",
+      "started_at": "2026-10-04T14:45:10Z",
+      "completed_at": "2026-10-04T14:50:12Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_initial",
+      "input_paths": [
+        "story-direction.md",
+        "canon/",
+        "planning/overall.md",
+        "planning/arcs/arc-01.md",
+        "style/profile.md",
+        "planning/episodes/episode-000.design.md"
+      ],
+      "input_exclusions": [
+        "過去run/レビュー/採否/HumanReview",
+        "Git履歴",
+        "Issue診断",
+        "未執筆結果をStateとして新設"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "story-direction.md": "snapshots/01-planner-initial-attempt-1-story-direction.md",
+        "canon/characters.md": "snapshots/01-planner-initial-attempt-1-canon__characters.md",
+        "canon/factions.md": "snapshots/01-planner-initial-attempt-1-canon__factions.md",
+        "canon/magic.md": "snapshots/01-planner-initial-attempt-1-canon__magic.md",
+        "canon/relationships.md": "snapshots/01-planner-initial-attempt-1-canon__relationships.md",
+        "canon/travel-economy.md": "snapshots/01-planner-initial-attempt-1-canon__travel-economy.md",
+        "canon/world.md": "snapshots/01-planner-initial-attempt-1-canon__world.md",
+        "planning/overall.md": "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+        "planning/arcs/arc-01.md": "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+        "style/profile.md": "snapshots/01-planner-initial-attempt-1-style__profile.md",
+        "planning/episodes/episode-001.design.md": "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-001.design.md",
+        "planning/episodes/episode-000.design.md": "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-000.design.md"
+      }
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger.md",
+      "started_at": "2026-10-04T14:50:12Z",
+      "completed_at": "2026-10-04T14:53:16Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_craft_initial",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "Direction/Canon/Overall/親Arc/Style",
+        "現在Episode001",
+        "先行ready Episode000（計画）"
+      ],
+      "input_exclusions": [
+        "他run/review",
+        "Planner自己評価・採否",
+        "Git履歴・Issue診断・HumanReview",
+        "Stateの自由探索"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "episode_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "episode_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision-attempt-1-story-direction.md",
+        "snapshots/03-planner-revision-attempt-1-canon__characters.md",
+        "snapshots/03-planner-revision-attempt-1-canon__factions.md",
+        "snapshots/03-planner-revision-attempt-1-canon__magic.md",
+        "snapshots/03-planner-revision-attempt-1-canon__relationships.md",
+        "snapshots/03-planner-revision-attempt-1-canon__travel-economy.md",
+        "snapshots/03-planner-revision-attempt-1-canon__world.md",
+        "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+        "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/03-planner-revision-attempt-1-style__profile.md",
+        "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-001.design.md",
+        "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-000.design.md"
+      ],
+      "review": "reviews/03-planner-revision-attempt-1.md",
+      "started_at": "2026-10-04T14:53:16Z",
+      "completed_at": "2026-10-04T14:55:25Z",
+      "model_fallback": null,
+      "input_paths": [
+        "現在の正本とEpisode001",
+        "/tmp/arc01-episode-001-conditions.md"
+      ],
+      "input_exclusions": [
+        "初回感想・点数",
+        "他run/Git履歴/Issue診断"
+      ],
+      "actual_agent_id": "/root/ep001_revision1",
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "story-direction.md": "snapshots/03-planner-revision-attempt-1-story-direction.md",
+        "canon/characters.md": "snapshots/03-planner-revision-attempt-1-canon__characters.md",
+        "canon/factions.md": "snapshots/03-planner-revision-attempt-1-canon__factions.md",
+        "canon/magic.md": "snapshots/03-planner-revision-attempt-1-canon__magic.md",
+        "canon/relationships.md": "snapshots/03-planner-revision-attempt-1-canon__relationships.md",
+        "canon/travel-economy.md": "snapshots/03-planner-revision-attempt-1-canon__travel-economy.md",
+        "canon/world.md": "snapshots/03-planner-revision-attempt-1-canon__world.md",
+        "planning/overall.md": "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+        "planning/arcs/arc-01.md": "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+        "style/profile.md": "snapshots/03-planner-revision-attempt-1-style__profile.md",
+        "planning/episodes/episode-001.design.md": "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-001.design.md",
+        "planning/episodes/episode-000.design.md": "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-000.design.md"
+      }
+    },
+    {
+      "sequence": 4,
+      "stage": "story-craft-recheck",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/04-story-craft-recheck-attempt-1.md",
+      "started_at": "2026-10-04T14:55:25Z",
+      "completed_at": "2026-10-04T14:58:16Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_recheck1",
+      "spawn_model_override": "gpt-6.1-sol",
+      "review_basis": {
+        "initial_review": "reviews/02-story-craft-challenger.md",
+        "previous_recheck_review": null,
+        "previous_snapshots": [
+          "snapshots/01-planner-initial-attempt-1-story-direction.md",
+          "snapshots/01-planner-initial-attempt-1-canon__characters.md",
+          "snapshots/01-planner-initial-attempt-1-canon__factions.md",
+          "snapshots/01-planner-initial-attempt-1-canon__magic.md",
+          "snapshots/01-planner-initial-attempt-1-canon__relationships.md",
+          "snapshots/01-planner-initial-attempt-1-canon__travel-economy.md",
+          "snapshots/01-planner-initial-attempt-1-canon__world.md",
+          "snapshots/01-planner-initial-attempt-1-planning__overall.md",
+          "snapshots/01-planner-initial-attempt-1-planning__arcs__arc-01.md",
+          "snapshots/01-planner-initial-attempt-1-style__profile.md",
+          "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-001.design.md",
+          "snapshots/01-planner-initial-attempt-1-planning__episodes__episode-000.design.md"
+        ]
+      },
+      "input_paths": [
+        "現在の正本/Episode001と先行readyEpisode000",
+        "/tmp/arc01-episode-001-conditions.md",
+        "/tmp/arc01-episode-001-compare-1/",
+        "/tmp/arc01-episode-001-compare-1.diff"
+      ],
+      "input_exclusions": [
+        "初回感想/点数/判定",
+        "Planner採否理由",
+        "他run/HumanReview/Git履歴/Issue診断"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 5,
+      "stage": "technical-review",
+      "attempt": 1,
+      "configured_agent": "plot_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/05-technical-review.md",
+      "started_at": "2026-10-04T14:58:16Z",
+      "completed_at": "2026-10-04T15:05:23Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_technical",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "現在の正本/Episode001/先行Episode000",
+        "/tmp/arc01-episode-001-adopted-intents.md",
+        "/tmp/arc01-episode-001-compare-0/",
+        "/tmp/arc01-episode-001-compare-0.diff",
+        "/tmp/arc01-episode-001-compare-3/（必要な技術比較）"
+      ],
+      "input_exclusions": [
+        "初回/再判定の感想・点数",
+        "他run/HumanReview/Git履歴/Issue診断",
+        "Planner自己評価"
+      ],
+      "required_fix_ids": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "duplicate_cleanup_ids": [
+        "T6",
+        "T7"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 6,
+      "stage": "finalizer",
+      "attempt": 1,
+      "configured_agent": "plot_finalizer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_finalizer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/06-finalizer-attempt-1-story-direction.md",
+        "snapshots/06-finalizer-attempt-1-canon__characters.md",
+        "snapshots/06-finalizer-attempt-1-canon__factions.md",
+        "snapshots/06-finalizer-attempt-1-canon__magic.md",
+        "snapshots/06-finalizer-attempt-1-canon__relationships.md",
+        "snapshots/06-finalizer-attempt-1-canon__travel-economy.md",
+        "snapshots/06-finalizer-attempt-1-canon__world.md",
+        "snapshots/06-finalizer-attempt-1-planning__overall.md",
+        "snapshots/06-finalizer-attempt-1-planning__arcs__arc-01.md",
+        "snapshots/06-finalizer-attempt-1-style__profile.md",
+        "snapshots/06-finalizer-attempt-1-planning__episodes__episode-001.design.md",
+        "snapshots/06-finalizer-attempt-1-planning__episodes__episode-000.design.md"
+      ],
+      "review": "reviews/06-finalizer.md",
+      "started_at": "2026-10-04T15:05:24Z",
+      "completed_at": "2026-10-04T15:13:44Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_finalizer",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "現在正本/Episode001/先行Episode000",
+        "/tmp/arc01-episode-001-technical.md",
+        "/tmp/arc01-episode-001-adopted-intents.md",
+        "/tmp/arc01-episode-001-compare-0/"
+      ],
+      "input_exclusions": [
+        "初回/再判定感想点数",
+        "他run/Git履歴/Issue診断/採否理由"
+      ],
+      "closed_required_fix_ids": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "formal_output_contract_satisfied": true,
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "story-direction.md": "snapshots/06-finalizer-attempt-1-story-direction.md",
+        "canon/characters.md": "snapshots/06-finalizer-attempt-1-canon__characters.md",
+        "canon/factions.md": "snapshots/06-finalizer-attempt-1-canon__factions.md",
+        "canon/magic.md": "snapshots/06-finalizer-attempt-1-canon__magic.md",
+        "canon/relationships.md": "snapshots/06-finalizer-attempt-1-canon__relationships.md",
+        "canon/travel-economy.md": "snapshots/06-finalizer-attempt-1-canon__travel-economy.md",
+        "canon/world.md": "snapshots/06-finalizer-attempt-1-canon__world.md",
+        "planning/overall.md": "snapshots/06-finalizer-attempt-1-planning__overall.md",
+        "planning/arcs/arc-01.md": "snapshots/06-finalizer-attempt-1-planning__arcs__arc-01.md",
+        "style/profile.md": "snapshots/06-finalizer-attempt-1-style__profile.md",
+        "planning/episodes/episode-001.design.md": "snapshots/06-finalizer-attempt-1-planning__episodes__episode-001.design.md",
+        "planning/episodes/episode-000.design.md": "snapshots/06-finalizer-attempt-1-planning__episodes__episode-000.design.md"
+      }
+    },
+    {
+      "sequence": 7,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "configured_agent": "story_craft_regression",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_regression",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/07-story-craft-regression-attempt-1.md",
+      "started_at": "2026-10-04T15:13:45Z",
+      "completed_at": "2026-10-04T15:16:28Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_regression",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "現在正本/Episode001/先行Episode000",
+        "/tmp/arc01-episode-001-craft-pass.md",
+        "/tmp/arc01-episode-001-adopted-intents.md",
+        "/tmp/arc01-episode-001-compare-3/",
+        "/tmp/arc01-episode-001-compare-3.diff"
+      ],
+      "input_exclusions": [
+        "初回感想点数/判定",
+        "Planner採否理由",
+        "Tech/Finalizer指摘",
+        "他run/Git/Issue診断/HumanReview"
+      ],
+      "review_basis": {
+        "revised_story_craft_review": "reviews/04-story-craft-recheck-attempt-1.md",
+        "previous_snapshots": [
+          "snapshots/03-planner-revision-attempt-1-story-direction.md",
+          "snapshots/03-planner-revision-attempt-1-canon__characters.md",
+          "snapshots/03-planner-revision-attempt-1-canon__factions.md",
+          "snapshots/03-planner-revision-attempt-1-canon__magic.md",
+          "snapshots/03-planner-revision-attempt-1-canon__relationships.md",
+          "snapshots/03-planner-revision-attempt-1-canon__travel-economy.md",
+          "snapshots/03-planner-revision-attempt-1-canon__world.md",
+          "snapshots/03-planner-revision-attempt-1-planning__overall.md",
+          "snapshots/03-planner-revision-attempt-1-planning__arcs__arc-01.md",
+          "snapshots/03-planner-revision-attempt-1-style__profile.md",
+          "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-001.design.md",
+          "snapshots/03-planner-revision-attempt-1-planning__episodes__episode-000.design.md"
+        ]
+      },
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 8,
+      "stage": "writer-brief-generator",
+      "attempt": 1,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.writer.md",
+        "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.design.md"
+      ],
+      "review": "reviews/08-writer-brief-generator.md",
+      "started_at": "2026-10-04T15:16:28Z",
+      "completed_at": "2026-10-04T15:20:09Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_brief_generator",
+      "input_paths": [
+        "ready Episode001 v1",
+        "関連Canon/Style",
+        "親と先行readyEpisodeの継続条件のみ"
+      ],
+      "input_exclusions": [
+        "設計採用意図/レビュー/点数",
+        "他run/Git履歴/Issue診断",
+        "作者向け設計理由"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "planning/episodes/episode-001.writer.md": "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.writer.md",
+        "planning/episodes/episode-001.design.md": "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.design.md"
+      }
+    },
+    {
+      "sequence": 9,
+      "stage": "writer-brief-reviewer",
+      "attempt": 1,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/09-writer-brief-reviewer-attempt-1.md",
+      "started_at": "2026-10-04T15:20:09Z",
+      "completed_at": "2026-10-04T15:24:49Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_brief_review",
+      "spawn_model_override": "gpt-6.1-sol",
+      "input_paths": [
+        "ready Episode001/Writer Brief draft",
+        "関連Canon/Style/上位と先行Episodeの継続条件"
+      ],
+      "input_exclusions": [
+        "Generator自己評価",
+        "レビュー/点数/設計採用意図",
+        "他run/Git履歴/Issue診断"
+      ],
+      "review_outcome": "changes-required",
+      "required_fix_count": 4,
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 10,
+      "stage": "writer-brief-generator",
+      "attempt": 2,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.writer.md",
+        "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.design.md"
+      ],
+      "review": "reviews/10-writer-brief-generator-attempt-2.md",
+      "started_at": "2026-10-04T15:24:49Z",
+      "completed_at": "2026-10-04T15:27:12Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_brief_generator",
+      "input_paths": [
+        "ready Episode001/現行Brief",
+        "reviews/09-writer-brief-reviewer-attempt-1.md（同じrunの技術handoff）"
+      ],
+      "input_exclusions": [
+        "他run/その他レビュー/Git履歴/Issue診断",
+        "新規創作改善"
+      ],
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "planning/episodes/episode-001.writer.md": "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.writer.md",
+        "planning/episodes/episode-001.design.md": "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.design.md"
+      }
+    },
+    {
+      "sequence": 11,
+      "stage": "writer-brief-reviewer",
+      "attempt": 2,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/11-writer-brief-reviewer-attempt-2.md",
+      "started_at": "2026-10-04T15:27:12Z",
+      "completed_at": "2026-10-04T15:29:34Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_brief_review",
+      "spawn_model_override": "gpt-6.1-sol",
+      "review_outcome": "changes-required",
+      "resolved_previous_items": [
+        1,
+        2,
+        3
+      ],
+      "remaining_previous_items": [
+        4
+      ],
+      "additional_fix": "人数の全容の日本語",
+      "review_basis": {
+        "previous_review": "reviews/09-writer-brief-reviewer-attempt-1.md",
+        "previous_snapshots": [
+          "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.writer.md",
+          "snapshots/08-writer-brief-generator-attempt-1-planning__episodes__episode-001.design.md"
+        ]
+      },
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    },
+    {
+      "sequence": 12,
+      "stage": "writer-brief-generator",
+      "attempt": 3,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/12-writer-brief-generator-attempt-3-planning__episodes__episode-001.writer.md",
+        "snapshots/12-writer-brief-generator-attempt-3-planning__episodes__episode-001.design.md"
+      ],
+      "review": "reviews/12-writer-brief-generator-attempt-3.md",
+      "started_at": "2026-10-04T15:29:34Z",
+      "completed_at": "2026-10-04T15:34:51Z",
+      "model_fallback": null,
+      "actual_agent_id": "/root/ep001_brief_generator",
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。",
+      "snapshot_sources": {
+        "planning/episodes/episode-001.writer.md": "snapshots/12-writer-brief-generator-attempt-3-planning__episodes__episode-001.writer.md",
+        "planning/episodes/episode-001.design.md": "snapshots/12-writer-brief-generator-attempt-3-planning__episodes__episode-001.design.md"
+      },
+      "review_basis": {
+        "previous_review": "reviews/11-writer-brief-reviewer-attempt-2.md"
+      }
+    },
+    {
+      "sequence": 13,
+      "stage": "writer-brief-reviewer",
+      "attempt": 3,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/13-writer-brief-reviewer-attempt-3.md",
+      "started_at": "2026-10-04T15:34:51Z",
+      "completed_at": "2026-10-04T15:35:59Z",
+      "model_fallback": null,
+      "review_basis": {
+        "previous_review": "reviews/11-writer-brief-reviewer-attempt-2.md",
+        "previous_snapshots": [
+          "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.writer.md",
+          "snapshots/10-writer-brief-generator-attempt-2-planning__episodes__episode-001.design.md"
+        ]
+      },
+      "actual_agent_id": "/root/ep001_brief_review",
+      "model_evidence": "configured modelのspawn指定は受理。実働modelは独立取得できずnull。"
+    }
+  ],
+  "input_baseline": {
+    "work_start_commit": "f5ddd95f91be569c26f4e7847d32f80e5ca2bda5",
+    "adopted_inputs_revision": "f5ddd95f91be569c26f4e7847d32f80e5ca2bda5",
+    "snapshots": {
+      "story-direction.md": "snapshots/00-input-baseline-story-direction.md",
+      "canon/characters.md": "snapshots/00-input-baseline-canon__characters.md",
+      "canon/factions.md": "snapshots/00-input-baseline-canon__factions.md",
+      "canon/magic.md": "snapshots/00-input-baseline-canon__magic.md",
+      "canon/relationships.md": "snapshots/00-input-baseline-canon__relationships.md",
+      "canon/travel-economy.md": "snapshots/00-input-baseline-canon__travel-economy.md",
+      "canon/world.md": "snapshots/00-input-baseline-canon__world.md",
+      "planning/overall.md": "snapshots/00-input-baseline-planning__overall.md",
+      "planning/arcs/arc-01.md": "snapshots/00-input-baseline-planning__arcs__arc-01.md",
+      "style/profile.md": "snapshots/00-input-baseline-style__profile.md",
+      "planning/episodes/episode-000.design.md": "snapshots/00-input-baseline-planning__episodes__episode-000.design.md"
+    },
+    "state": "本文/Stateは未作成。入口は承認済みArcと先行ready Episodeの計画上の連続から特定し、実際に書いた事実とは扱わない。"
+  },
+  "author_scope": {
+    "instruction": "そのまま執筆直前までをep03（arc01の範囲）まで進めてみてくれ",
+    "boundary": "Arc01の既存Episodeを順にDesignとWriter Briefまで。本文/State/後続Arcは扱わない。",
+    "numbering": "作者指定「Arc01の範囲」に従い、現行の全3本episode-000〜002を対象とする。任意の番号確認を提示し返答機会を置いたうえで、この解釈を作者へ明示した。episode-003の新設や番号変更はしない。"
+  },
+  "observations": {
+    "parent_additional_decision_requests": 0,
+    "actual_model_note": "spawn指定と実働modelを区別。独立した実働model証拠を取得できない場合はnull。",
+    "manuscript_reading_quality": "作者指示により本文は対象外・未測定。",
+    "initial_deficiency_count": 0,
+    "recheck_added_or_reopened_deficiency_count": 0,
+    "duplicate_cleanup_required_fixes": 2,
+    "writer_brief_required_fixes": 4,
+    "stage_elapsed_seconds_from_trace": [
+      {
+        "sequence": 1,
+        "stage": "planner-initial",
+        "seconds": 302.0
+      },
+      {
+        "sequence": 2,
+        "stage": "story-craft-challenger",
+        "seconds": 184.0
+      },
+      {
+        "sequence": 3,
+        "stage": "planner-revision",
+        "seconds": 129.0
+      },
+      {
+        "sequence": 4,
+        "stage": "story-craft-recheck",
+        "seconds": 171.0
+      },
+      {
+        "sequence": 5,
+        "stage": "technical-review",
+        "seconds": 427.0
+      },
+      {
+        "sequence": 6,
+        "stage": "finalizer",
+        "seconds": 500.0
+      },
+      {
+        "sequence": 7,
+        "stage": "story-craft-regression",
+        "seconds": 163.0
+      },
+      {
+        "sequence": 8,
+        "stage": "writer-brief-generator",
+        "seconds": 221.0
+      },
+      {
+        "sequence": 9,
+        "stage": "writer-brief-reviewer",
+        "seconds": 280.0
+      },
+      {
+        "sequence": 10,
+        "stage": "writer-brief-generator",
+        "seconds": 143.0
+      },
+      {
+        "sequence": 11,
+        "stage": "writer-brief-reviewer",
+        "seconds": 142.0
+      },
+      {
+        "sequence": 12,
+        "stage": "writer-brief-generator",
+        "seconds": 317.0
+      },
+      {
+        "sequence": 13,
+        "stage": "writer-brief-reviewer",
+        "seconds": 68.0
+      }
+    ],
+    "elapsed_seconds_from_trace": 3050.0,
+    "timing_scope": "timestamp差。受け渡し/保存待ちを含み、model推論時間は未測定。"
+  },
+  "input_compatibility": {
+    "baseline": "f5ddd95f91be569c26f4e7847d32f80e5ca2bda5",
+    "source_changes": "Direction/Canon/Style/上位/State/本文に差分なし。最新指示は計画対象の拡張で、物語の意味変更ではない。",
+    "stale_required": false,
+    "scope_clarification_requested": true
+  },
+  "scope_resolution": {
+    "basis": "作者のArc01の範囲という指定と正本のEpisode一覧",
+    "range": [
+      "episode-000",
+      "episode-001",
+      "episode-002"
+    ],
+    "note": "番号確認への回答はまだないため、既存Arc01の3本を完了する解釈で進める。安定IDを改番せずepisode-003を追加しない。"
+  },
+  "design_readiness": {
+    "status": "ready",
+    "review": "not-required",
+    "version": 1,
+    "inputs_revision": "f5ddd95f91be569c26f4e7847d32f80e5ca2bda5",
+    "snapshots": {
+      "planning/episodes/episode-001.design.md": "snapshots/07-design-ready-planning__episodes__episode-001.design.md"
+    }
+  },
+  "completion": {
+    "snapshots": {
+      "planning/episodes/episode-001.design.md": "snapshots/13-ready-planning__episodes__episode-001.design.md",
+      "planning/episodes/episode-001.writer.md": "snapshots/13-ready-planning__episodes__episode-001.writer.md",
+      "planning/arcs/arc-01.md": "snapshots/13-ready-planning__arcs__arc-01.md"
+    },
+    "upstream_change": "成果物欄のリンク更新のみ。意味/版/承認の変更なし。",
+    "downstream_impact": "新規EpisodeとBrief。既存対象の意味変更なし、stale対象なし。",
+    "manuscript_and_state": "未変更"
+  }
+}
