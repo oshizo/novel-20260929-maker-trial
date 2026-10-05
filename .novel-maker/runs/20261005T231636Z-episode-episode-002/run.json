@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "run_id": "20261005T231636Z-episode-episode-002",
+  "target": {
+    "kind": "episode",
+    "id": "episode-002",
+    "path": "planning/episodes/episode-002.design.md"
+  },
+  "framework_revision": "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a",
+  "executor": {
+    "name": "codex",
+    "version": "codex-cli 0.159.3",
+    "actual_model_note": "Sol roleへgpt-6.1-sol/highをspawn時に明示指定。起動応答に実model識別子がないためactual_modelはnull。Luna roleも実model取得不能のためnull。"
+  },
+  "status": "completed",
+  "started_at": "2026-10-05T23:16:36Z",
+  "completed_at": "2026-10-05T23:48:11Z",
+  "summary": {
+    "initial_story_craft_verdict": "REVISE",
+    "revised_story_craft_verdict": null,
+    "story_craft_recheck_attempt_count": 0,
+    "planner_revision_count": 1,
+    "planner_adopted_count": 2,
+    "planner_partially_adopted_count": 1,
+    "planner_rejected_count": 0,
+    "technical_required_fix_count": 8,
+    "regression_verdict": "PASS",
+    "regression_attempt_count": 1,
+    "recovery_count": 0,
+    "model_fallback_count": 0,
+    "opening_sequence_pattern": null,
+    "opening_sequence_decision": null,
+    "opening_sequence_reason": null,
+    "human_review_status": "not-required",
+    "human_required_change_count": null,
+    "writer_brief_initial_required_fix_count": 7
+  },
+  "stages": [
+    {
+      "sequence": 1,
+      "stage": "planner-initial",
+      "attempt": 1,
+      "configured_agent": "episode_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "episode_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/01-planner-initial-attempt-1.md"
+      ],
+      "review": "reviews/01-planner-initial-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:16:36Z",
+      "completed_at": "2026-10-05T23:20:49Z",
+      "agent_id": "/root/episode002_initial"
+    },
+    {
+      "sequence": 2,
+      "stage": "story-craft-challenger",
+      "attempt": 1,
+      "configured_agent": "story_craft_challenger",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_challenger",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "REVISE",
+      "snapshots": [],
+      "review": "reviews/02-story-craft-challenger-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:20:49Z",
+      "completed_at": "2026-10-05T23:24:07Z",
+      "agent_id": "/root/episode002_craft"
+    },
+    {
+      "sequence": 3,
+      "stage": "planner-revision",
+      "attempt": 1,
+      "configured_agent": "episode_planner",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "episode_planner",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/03-planner-revision-attempt-1.md"
+      ],
+      "review": "reviews/03-planner-revision-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:24:07Z",
+      "completed_at": "2026-10-05T23:25:33Z",
+      "agent_id": "/root/episode002_revision"
+    },
+    {
+      "sequence": 4,
+      "stage": "technical-review",
+      "attempt": 1,
+      "configured_agent": "plot_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [],
+      "review": "reviews/04-technical-review-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:25:33Z",
+      "completed_at": "2026-10-05T23:29:37Z",
+      "agent_id": "/root/episode002_technical"
+    },
+    {
+      "sequence": 5,
+      "stage": "finalizer",
+      "attempt": 1,
+      "configured_agent": "plot_finalizer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "plot_finalizer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/05-finalizer-attempt-1.md"
+      ],
+      "review": "reviews/05-finalizer-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:29:37Z",
+      "completed_at": "2026-10-05T23:35:14Z",
+      "agent_id": "/root/episode002_finalizer"
+    },
+    {
+      "sequence": 6,
+      "stage": "story-craft-regression",
+      "attempt": 1,
+      "configured_agent": "story_craft_regression",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "story_craft_regression",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/06-story-craft-regression-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:35:14Z",
+      "completed_at": "2026-10-05T23:37:41Z",
+      "agent_id": "/root/episode002_regression"
+    },
+    {
+      "sequence": 7,
+      "stage": "writer-brief-generator",
+      "attempt": 1,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/07-writer-brief-generator-attempt-1.md"
+      ],
+      "review": "reviews/07-writer-brief-generator-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:37:42Z",
+      "completed_at": "2026-10-05T23:40:37Z",
+      "agent_id": "/root/episode002_writer"
+    },
+    {
+      "sequence": 8,
+      "stage": "writer-brief-reviewer",
+      "attempt": 1,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "CHANGES_REQUIRED",
+      "snapshots": [],
+      "review": "reviews/08-writer-brief-reviewer-attempt-1.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:40:38Z",
+      "completed_at": "2026-10-05T23:43:46Z",
+      "agent_id": "/root/episode002_writer_review"
+    },
+    {
+      "sequence": 9,
+      "stage": "writer-brief-generator",
+      "attempt": 2,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/09-writer-brief-generator-attempt-2.md"
+      ],
+      "review": "reviews/09-writer-brief-generator-attempt-2.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:43:47Z",
+      "completed_at": "2026-10-05T23:45:39Z",
+      "agent_id": "/root/episode002_writer"
+    },
+    {
+      "sequence": 10,
+      "stage": "writer-brief-reviewer",
+      "attempt": 2,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "CHANGES_REQUIRED",
+      "snapshots": [],
+      "review": "reviews/10-writer-brief-reviewer-attempt-2.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:45:40Z",
+      "completed_at": "2026-10-05T23:46:43Z",
+      "agent_id": "/root/episode002_writer_review"
+    },
+    {
+      "sequence": 11,
+      "stage": "writer-brief-generator",
+      "attempt": 3,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/11-writer-brief-generator-attempt-3.md"
+      ],
+      "review": "reviews/11-writer-brief-generator-attempt-3.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:46:43Z",
+      "completed_at": "2026-10-05T23:47:30Z",
+      "agent_id": "/root/episode002_writer"
+    },
+    {
+      "sequence": 12,
+      "stage": "writer-brief-reviewer",
+      "attempt": 3,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/12-writer-brief-reviewer-attempt-3.md",
+      "model_fallback": null,
+      "started_at": "2026-10-05T23:47:30Z",
+      "completed_at": "2026-10-05T23:48:11Z",
+      "agent_id": "/root/episode002_writer_review"
+    }
+  ],
+  "source_revisions": {
+    "maker_merge_commit": "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a",
+    "comparison_pr17_head": "ee1c4abac2684bc85131a744bbc0ce98bde437c9",
+    "issue18_baseline_commit": "75bc7124c4be89f8383ea10bea215304af6f53bb",
+    "story_start_commit": "5dc275801d2d8f459866c99ea76d4c272c65f737"
+  },
+  "input_boundary": {
+    "fresh_plan": true,
+    "prior_episode_artifacts_removed": true,
+    "prior_runs_used": false,
+    "issue_expectations_supplied": false,
+    "allowed_story_paths": [
+      "story-direction.md",
+      "canon/",
+      "planning/overall.md",
+      "planning/arcs/arc-01.md",
+      "style/",
+      "state/",
+      "manuscript/"
+    ],
+    "adjacent_episode_ids": [
+      "episode-000",
+      "episode-001"
+    ]
+  },
+  "story_craft_basis_snapshot": "snapshots/03-planner-revision-attempt-1.md",
+  "story_input_files": [
+    {
+      "path": "story-direction.md",
+      "sha256": "718985c52aeadb2098affb51b4ad87cbfb27006be70b23040d3450c37163a81d"
+    },
+    {
+      "path": "planning/overall.md",
+      "sha256": "06decea09343c11d360f0eb02f7eb637f4c5e51054eb5a1925aac4e5088661da"
+    },
+    {
+      "path": "planning/arcs/arc-01.md",
+      "sha256": "39a84078518f97cd9aee6f89cd578ccf29995a405ee25c8158843bdd7726aebe"
+    },
+    {
+      "path": "canon/characters.md",
+      "sha256": "46b37a4a7a498d3af0a0c23bb969aed819052d881ecfb09e5f9f9e5cf0607243"
+    },
+    {
+      "path": "canon/factions.md",
+      "sha256": "edaa1033163320912253414fb83921adcc36c0623e064853b28bc3e14c6216de"
+    },
+    {
+      "path": "canon/magic.md",
+      "sha256": "8e1cc26204df7050c4a75efac6ceabb8279b1e8679f77955d9b83c9c24a648ed"
+    },
+    {
+      "path": "canon/relationships.md",
+      "sha256": "9241e37231dcb72267263f240891e33d71377da060dd324516a805db4ed1a94d"
+    },
+    {
+      "path": "canon/travel-economy.md",
+      "sha256": "7f4071558392be321026a6b2e392dc87388a70afae8b4036259e6047d8a21a02"
+    },
+    {
+      "path": "canon/world.md",
+      "sha256": "a9f25864095537347a5302e670fae4e5aa47042375aa9cffee2ec932b2c6539e"
+    },
+    {
+      "path": "style/profile.md",
+      "sha256": "2f1ecc29b0a62f58a2fb8c5f8bdded5aace84a5edc5d74887b8cba550abde49e"
+    }
+  ],
+  "adjacent_inputs": [
+    {
+      "path": "inputs/adjacent-episodes.md",
+      "source_paths": [
+        "planning/episodes/episode-000.design.md",
+        "planning/episodes/episode-001.design.md"
+      ],
+      "source_commit": "5dc275801d2d8f459866c99ea76d4c272c65f737",
+      "sha256": "421d2b9e6b01ac6139cf84e90ea27456e75f04ccdaf33ad436e5177b1bf6f9a1",
+      "scope": "今回fresh planでreadyとなった先行Episodeの出口・最終場面の継続情報のみ。途中場面・reviewは含まない。"
+    }
+  ],
+  "metadata_adjustments": [
+    {
+      "after_sequence": 7,
+      "path": "planning/episodes/episode-002.writer.md",
+      "field": "review",
+      "before": "pending",
+      "after": "not-required",
+      "reason": "story.yamlの作者確認checkpointはOverall/Arcのみ。独立AIレビュー待ちを作者確認pendingとして記録しない。親agentが状態管理として修正、本文変更なし。"
+    }
+  ],
+  "final_snapshots": [
+    "snapshots/final-design.md",
+    "snapshots/final-writer.md"
+  ]
+}
