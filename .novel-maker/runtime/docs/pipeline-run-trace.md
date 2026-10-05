@@ -6,7 +6,7 @@
 
 ## 1. 目的
 
-Plot Planningでは、初稿から最終成果物までに複数のagentが確認と修正を行う。
+Plot Planningでは、初稿から最終成果物までに複数のagentが確認と修正を行う。Overall / Arcは次のStory Craft gateを使う。
 
 ```text
 Planner 初稿
@@ -19,20 +19,35 @@ Planner 初稿
 → 必要な作者確認
 ```
 
-改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner RevisionとStory Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。再判定の入力と追加・再開条件はstory-craft.md §5に従う。
+Overall / Arcで改訂後再判定が `WEAK / FAIL` の場合は、追加のPlanner RevisionとStory Craft再判定を最大1回だけ行う。再判定が `PASS` するまでTechnical Reviewerへ進まない。再判定の入力と追加・再開条件はstory-craft.md §5に従う。
+
+EpisodeはStory Craft Challengerを一回だけ使う。
+
+```text
+Episode Planner 初稿
+→ Story Craft Challenger（一回確認）
+   ├ PASS → Technical Reviewer
+   ├ REVISE → Episode Planner 一回改訂 → Technical Reviewer
+   └ BLOCKED → 停止
+→ Finalizer
+→ Story Craft Regression
+→ 必要な作者確認
+```
+
+Episodeでは `REVISE` 後にStory Craft再判定を行わない。一回改訂後snapshotをStory Craft基準時点として後段へ渡す。`BLOCKED` はEpisode自体を計画できない固定条件の両立不能等に限る。
 
 最終成果物だけを残すと、後から次を確認できない。
 
-- 初回Challengerが何を問題視し、`PASS / WEAK / FAIL` のどれを返したか。
-- Planner Revisionが何を採用、一部採用、不採用にしたか。
-- 改訂後の成果物が同じ解消条件を満たし、改訂による回帰がないか。
+- 初回Challengerが何を問題視し、Overall / Arcでは `PASS / WEAK / FAIL`、Episodeでは `PASS / REVISE / BLOCKED` のどれを返したか。
+- Planner Revisionが何を採用、一部採用、不採用にしたか。EpisodeではPASSならRevisionなし、REVISEなら一回だけ行ったことも区別する。
+- Overall / Arcでは、改訂後の成果物が同じ解消条件を満たし、改訂による回帰がないか。
 - 初稿、各Revision後、Finalizer後で何が変わったか。
 - Technical Reviewerが何件の必須修正を出したか。
 - Story Craft Regressionが何を確認してPASS / FAILしたか。
 - machine側がPASSした後に作者がどんな修正を求めたか。
 - framework revision、executor version、configured agent / model、実際に動いたagent / modelの違いで結果がどう変わったか。
 
-特に、**Story Craft Regressionの `PASS` と、改訂後Story Craft再判定の `PASS` は別の意味を持つ。** RegressionはTechnical Review / Finalizerによる回帰がないことを確認するstageであり、改訂済みPlotそのものを対象読者として新規評価するstageではない。
+特に、Overall / Arcでは**Story Craft Regressionの `PASS` と、改訂後Story Craft再判定の `PASS` は別の意味を持つ。** Episodeでは改訂後再判定を行わず、初回PASSまたは一回Revision後の基準snapshotとFinalizer後をRegressionで比較する。いずれもRegressionはTechnical Review / Finalizerによる回帰がないことを確認するstageであり、対象読者として新規評価するstageではない。
 
 これらは `novel-maker` 自体を改善するための重要な観測情報である。一方、通常のPlannerやWriterへ渡すとcontextを汚染する。
 
@@ -122,7 +137,7 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 - Planning Readiness。
 - Story Craft Challengerの初回確認。
 - Planner Revisionの採否結果と採用した改善意図。
-- Story Craft Challengerの改訂後再判定。追加再判定もattemptごとに保存する。
+- Story Craft Challengerの改訂後再判定（Overall / Arcのみ）。追加再判定もattemptごとに保存する。Episodeではこのreviewを作らない。
 - Technical Reviewer。
 - Story Craft Regression。
 - Writer Brief Reviewerを同じ操作内で実行した場合はその確認結果。
@@ -132,9 +147,9 @@ snapshotは差分や要約ではなく、**その時点の対象成果物全体*
 
 ただし、モデルの内部思考、chain-of-thought、system prompt、認証情報、実行環境の秘密情報は保存しない。Planner Revisionで保存する理由も、親へ正式に返した短い採否理由だけでよく、内部推論を要求しない。
 
-**保存したreview全体を、次のagentへ無条件に渡さない。** 再判定にはstory-craft.md §5で指定した同じrunの不足・解消条件・維持項目・項目別結果と比較用snapshotを渡す。他runのreviewや初回の感想・点数、Plannerの採否理由は渡さない。
+**保存したreview全体を、次のagentへ無条件に渡さない。** Overall / Arcの再判定にはstory-craft.md §5で指定した同じrunの不足・解消条件・維持項目・項目別結果と比較用snapshotを渡す。他runのreviewや初回の感想・点数、Plannerの採否理由は渡さない。EpisodeではStory Craft再判定を起動しない。
 
-新しい契約で開始するrunでは、`story-craft-recheck` stageに `review_basis` を記録する。これは入力の参照であり、別の評価台帳ではない。
+Overall / Arcの新しい契約で開始するrunでは、`story-craft-recheck` stageに `review_basis` を記録する。これは入力の参照であり、別の評価台帳ではない。Episodeには `story-craft-recheck` stageを作らない。
 
 ```json
 {
@@ -235,10 +250,10 @@ run全体の状態には次を使う。
 
 集計用の値を置く。
 
-- `initial_story_craft_verdict`: 最初のChallenger判定。`PASS / WEAK / FAIL / null`。
-- `revised_story_craft_verdict`: Planner Revision後のStory Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。新しい契約では同じ解消条件と回帰確認の結果であり、旧runの全体再評価とは判定範囲を区別する。
-- `story_craft_recheck_attempt_count`: 改訂後再判定を実行した回数。標準pipelineでは1、追加Revisionを使った場合は最大2。
-- `planner_revision_count`: Planner Revisionを実行した回数。標準pipelineでは最低1、追加Revisionを使った場合は最大2。
+- `initial_story_craft_verdict`: 最初のChallenger判定。Overall / Arcでは `PASS / WEAK / FAIL / null`、Episodeでは `PASS / REVISE / BLOCKED / null`。
+- `revised_story_craft_verdict`: Overall / ArcのPlanner Revision後Story Craft再判定の**最後の正式判定**。`PASS / WEAK / FAIL / null`。Regression判定をここへ転記しない。Episodeでは再判定しないため常に `null`。
+- `story_craft_recheck_attempt_count`: Overall / Arcで改訂後再判定を実行した回数。通常1、追加Revisionを使った場合は最大2。Episodeでは `0`。
+- `planner_revision_count`: Planner Revisionを実行した回数。Overall / Arcでは通常1、追加Revisionを使った場合は最大2。Episodeでは初回PASSなら `0`、REVISEなら `1`。
 - `planner_adopted_count`: Planner Revisionが `採用` としたChallenger指摘件数。複数Revisionがある場合は正式出力から一意に集計できるときだけ合計する。
 - `planner_partially_adopted_count`: `一部採用` とした件数。
 - `planner_rejected_count`: `不採用` とした件数。
@@ -251,7 +266,7 @@ run全体の状態には次を使う。
 
 数字を推測して埋めない。正式出力から一意に数えられない場合は `null` とする。
 
-`initial_story_craft_verdict: WEAK` かつ `regression_verdict: PASS` でも、`revised_story_craft_verdict` が `PASS` でなければ「最終的にStory CraftがPASSした」と扱わない。
+Overall / Arcでは、`initial_story_craft_verdict: WEAK` かつ `regression_verdict: PASS` でも、`revised_story_craft_verdict` が `PASS` でなければ「最終的にStory CraftがPASSした」と扱わない。Episodeでは `revised_story_craft_verdict` を使わず、一回Story Craft手順を完了した基準snapshotとRegression結果を別に読む。
 
 ### 5.4 stages
 
@@ -350,13 +365,14 @@ standard pipelineではconfigured role contractを満たした実行だけを正
 - `*-fallback` 等の別roleへ自動切替した。
 - executor方針で許可されないmodel fallbackを行った。
 - role固有の正式出力契約を満たさない。
-- 改訂後Story Craft再判定が、許可された追加Revision後も `WEAK / FAIL` のまま解消しない。
+- Overall / Arcの改訂後Story Craft再判定が、許可された追加Revision後も `WEAK / FAIL` のまま解消しない。
+- Episodeの一回Challengerが `BLOCKED` を返す。
 
 executor方針で許可されないfallbackを使って診断を続けたい場合は、standard pipelineとは別の実験として明示する。その結果をconfigured roleの `PASS / WEAK / FAIL`、Technical Review完了、Regression PASSとして記録しない。
 
 role固有の出力契約について、少なくとも次を確認する。
 
-- Story Craft Challengerの初回確認 / 改訂後再判定: `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` がある。再判定も同じ正式出力契約を満たす。
+- Story Craft Challenger: `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` がある。Overall / Arcの再判定も同じ正式出力契約を満たす。Episodeの判定は `PASS / REVISE / BLOCKED` で、REVISE時は `改善要求`、必要なら最大一つの `参考対案` を含める。
 - Story Craft Regression: `比較結果` と `判定` があり、判定は `PASS / FAIL` のどちらかである。`PASS` 一語だけは正式出力としない。
 
 ## 6. 親agentの記録手順
@@ -369,9 +385,9 @@ role固有の出力契約について、少なくとも次を確認する。
 4. agentから正式出力を受け取ったらrole固有の出力契約を確認する。不足していればstage / runを `blocked` として停止する。
 5. 正式出力を受け取った直後にreview fileへ保存する。
 6. Planner初稿、各Planner Revision、Finalizerが対象成果物を書き換えた直後にsnapshotを取る。
-7. 初回Challenger終了時に `initial_story_craft_verdict` を更新する。改訂後再判定の各attempt終了時に `story_craft_recheck_attempt_count` と `revised_story_craft_verdict` を更新する。Regression結果で `revised_story_craft_verdict` を上書きしない。
-8. 最初の改訂後再判定が `WEAK / FAIL` なら、追加Planner Revisionと再判定を最大1回だけ行う。2回目も `PASS` でなければrunを `blocked` にする。
-9. `revised_story_craft_verdict: PASS` 後にTechnical Reviewer / Finalizer / Regressionへ進む。
+7. 初回Challenger終了時に `initial_story_craft_verdict` を更新する。Overall / Arcでは、改訂後再判定の各attempt終了時に `story_craft_recheck_attempt_count` と `revised_story_craft_verdict` を更新する。Regression結果で `revised_story_craft_verdict` を上書きしない。Episodeでは `revised_story_craft_verdict: null`、`story_craft_recheck_attempt_count: 0` を維持する。
+8. Overall / Arcで最初の改訂後再判定が `WEAK / FAIL` なら、追加Planner Revisionと再判定を最大1回だけ行う。2回目も `PASS` でなければrunを `blocked` にする。Episodeでは初回PASSならRevisionせず、REVISEなら一回Revisionして基準snapshotを保存し、再判定せず進む。BLOCKEDならrunを `blocked` にする。
+9. Overall / Arcは `revised_story_craft_verdict: PASS` 後にTechnical Reviewer / Finalizer / Regressionへ進む。Episodeは初回PASSまたはREVISE後の一回Revision完了後にTechnical Reviewer / Finalizer / Regressionへ進む。
 10. Regressionが正式な `PASS` を返し、作者確認が必要なら `awaiting-human` とする。不要なら `completed` とする。
     仮変更がある場合は、変更した上位も含めた確認対象を一式で提示する。確認不要または承認後に `planning-changes.md` の確定処理を終えてから `completed` とする。未確定のCanonや古い参照版を残して完了にしない。
 11. Regression未解決、Readinessの停止条件などで進めない場合は `blocked` とし、停止理由をstageへ残す。

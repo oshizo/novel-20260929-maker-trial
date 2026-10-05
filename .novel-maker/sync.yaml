@@ -1,7 +1,7 @@
 source:
   repository: "oshizo/novel-maker"
-  requested_revision: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
-  resolved_commit: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
+  requested_revision: "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a"
+  resolved_commit: "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a"
   contract_version: 1
 runtime_files:
   - path: "docs/language-policy.md"
@@ -15,9 +15,9 @@ runtime_files:
   - path: "docs/planning-preflight-guards.md"
     sha256: "af3517be9b8f64e38c44c0d020c485d6f5db97afc53f246a8111f8553397ad9b"
   - path: "docs/plot-planning.md"
-    sha256: "9185385f9e68e884735c82d66b9401e9c2b5ed7cb843a792d3909831fd323bc7"
+    sha256: "c9b88745d438ed687660a26ae19d5d4a66b8e0ece450071029a0e3630af9b81c"
   - path: "docs/story-craft.md"
-    sha256: "d62a0cc442bb7c80439dcbddb5929f7ad097f650d127256aff2de106d2ac4170"
+    sha256: "056450ef70d8856a8568559b2f720f475909f50a25c27d227746373d9dc77a57"
   - path: "docs/reader-gratification.md"
     sha256: "126843d2f6832443fe8b8372adadaa03e4861bd7b085b506a94a002275770e36"
   - path: "docs/opening-sequence.md"
@@ -25,7 +25,7 @@ runtime_files:
   - path: "docs/story-artifacts.md"
     sha256: "f1e65bed020f6021eb0c4cc3014c34ac3592536bf2b68bc20f155c750f0ab532"
   - path: "docs/pipeline-run-trace.md"
-    sha256: "710d836fec2b93a0ec4da3b733ec74284c49dd8711ee56e13822a3cb89313129"
+    sha256: "03a142d3bb36684628e3e1408d507941cfbff474255c6b3116d30e2b3299319c"
   - path: "docs/codex-model-policy.md"
     sha256: "700e6dd71e0d03c55762b9ec0b2f94cb2b37ae9295e9992e229d0049abcb6b69"
   - path: "templates/story/story-direction.md"
