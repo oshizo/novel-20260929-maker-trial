@@ -121,17 +121,17 @@ Episode 0を全作品へ機械的に追加しない。一方、異世界転生�
 
 実際に対象Plannerを起動する直前に `.novel-maker/runtime/docs/pipeline-run-trace.md` に従って `.novel-maker/runs/<run-id>/` を開始する。Codex等のexecutorを使う場合、取得できるexecutor名・versionを `run.json` へ記録する。各stageではconfigured agent / modelとactual agent / model / resultを記録する。
 
-**standard pipelineはfail-closedとする。** configured agent / modelが起動できない場合はmodel方針を適用する。許可されたmodel fallbackで同じroleの正式出力契約を満たした場合は、切替をrun traceへ記録して続行できる。それでも起動できない、許可されない別roleや別modelへ切り替えた、親agentが代走した、または正式出力契約を満たさない場合、そのstageとrunを `blocked` にして停止する。許可されない代走の結果をconfigured roleの正式な `PASS / WEAK / FAIL` やRegression PASSとして記録しない。
+**standard pipelineはfail-closedとする。** configured agent / modelが起動できない場合はmodel方針を適用する。許可されたmodel fallbackで同じroleの正式出力契約を満たした場合は、切替をrun traceへ記録して続行できる。それでも起動できない、許可されない別roleや別modelへ切り替えた、親agentが代走した、または正式出力契約を満たさない場合、そのstageとrunを `blocked` にして停止する。許可されない代走の結果をconfigured roleの正式な判定やRegression PASSとして記録しない。
 
-Story Craft Challengerの初回確認と改訂後再判定は、どちらも正式出力として少なくとも `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` が必要。Story Craft Regressionは `比較結果` と `判定` を返し、`PASS` 一語だけの出力は正式なRegression結果として扱わない。
+Story Craft Challengerは正式出力として少なくとも `読者としての感想`、`報酬トレース`、`判定`、`Planner Revisionへ渡す内容` が必要。Overall / Arcの初回確認と改訂後再判定は同じ出力契約を使う。Episodeは一回確認だけを行い、`PASS / REVISE / BLOCKED` を返す。Story Craft Regressionは `比較結果` と `判定` を返し、`PASS` 一語だけの出力は正式なRegression結果として扱わない。
 
-不足がある場合は番号・根拠・解消条件・修正先を確認する。再判定は引き継いだ全項目の解消結果を返し、追加・再開にはstory-craft.md §5の根拠を添える。Plannerが解消したと言っただけではPASSにせず、根拠のない新しい好みを理由に改訂へ戻さない。
+Overall / Arcで不足がある場合は番号・根拠・解消条件・修正先を確認する。再判定は引き継いだ全項目の解消結果を返し、追加・再開にはstory-craft.md §5の根拠を添える。Plannerが解消したと言っただけではPASSにせず、根拠のない新しい好みを理由に改訂へ戻さない。EpisodeのREVISEでは高い確度の `改善要求` を初回でまとめ、一回Revision後に再判定しない。
 
-run traceは診断用であり、過去runをPlanner / Writerの通常contextへ入れない。再判定は `story-craft.md` §5に従い、同じrunの初回不足・根拠・解消条件・維持項目、直前の項目別結果、直前判定時snapshotと改訂差分を使う。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。参照をstageの `review_basis` に残す。
+run traceは診断用であり、過去runをPlanner / Writerの通常contextへ入れない。Overall / Arcの再判定は `story-craft.md` §5に従い、同じrunの初回不足・根拠・解消条件・維持項目、直前の項目別結果、直前判定時snapshotと改訂差分を使う。初回の感想・点数、Plannerの採否理由、他runのreview・snapshotは渡さない。参照をstageの `review_basis` に残す。EpisodeではStory Craft再判定stageを作らない。
 
 物語の最初のArcでは、Arc Plannerが返した `opening_sequence_pattern`、冒頭導入の `採用 / Episode 1へ統合 / 不採用`、短い理由を `run.json` に記録する。Story Craft Challengerがその判断を不足として覆した場合は、Planner Revision後の最終判断が追えるようにstage出力も残す。
 
-Overall / Arc / 通常のEpisode Designでは次を行う。
+Overall / Arcでは次を行う。
 
 ```text
 対象Planner 初稿
@@ -151,6 +151,25 @@ Overall / Arc / 通常のEpisode Designでは次を行う。
 - Regression PASSを `revised_story_craft_verdict: PASS` の代わりにしない。
 - 2回目の改訂後再判定でも `PASS` でなければ `story-craft-unresolved` としてrunを `blocked` にし、Technical Reviewerへ進まない。
 
+通常のEpisode Designでは次を行う。
+
+```text
+Episode Planner 初稿
+→ Story Craft Challenger（一回確認）
+   ├ PASS → Plot Reviewer
+   ├ REVISE → fresh Episode Plannerで一回改訂 → Plot Reviewer
+   └ BLOCKED → runをblockedにして停止
+→ Plot Finalizer
+→ Story Craft Regression
+→ 必要な作者確認
+```
+
+- EpisodeのChallenger判定は `initial_story_craft_verdict` に `PASS / REVISE / BLOCKED` で記録する。
+- `PASS` ならPlanner Revisionを起動しない。`REVISE` なら一回だけRevisionし、改訂後snapshotをStory Craft基準時点として保存する。
+- Episodeでは改訂後Story Craft Challengerを起動せず、`revised_story_craft_verdict: null`、`story_craft_recheck_attempt_count: 0` とする。
+- `BLOCKED` は固定された作品条件が両立せずEpisode自体を計画できない場合だけに使う。報酬の弱さや明白な増幅余地は `REVISE` とする。
+- Story Craft Regressionは基準snapshotから後段修正で弱体化していないかだけを確認し、REVISEの十分性を再評価しない。
+
 Overall開始時はその前にPlanning Readinessを行う。
 
 ### 冒頭導入セットのpipeline
@@ -161,26 +180,26 @@ Overall開始時はその前にPlanning Readinessを行う。
 Episode Planner: 導入セット先頭Episode 初稿
 → Episode Planner: 次の導入Episode 初稿（直前Episodeを隣接Episodeとして参照）
 → 必要な導入Episodeまで繰り返す
-→ Story Craft Challenger: 導入セット全体を初回確認
-→ fresh Episode Planner: 必要なEpisodeを改訂
-→ 新しいStory Craft Challenger: 同じ解消条件と導入セット内の変更の影響を確認
-→ WEAK / FAILなら追加Planner Revision + 再判定を最大1回
-→ PASSならPlot Reviewer: Episode間の境界・重複・因果・知識差をまとめて確認
+→ Story Craft Challenger: 導入セット全体を一回確認
+   ├ PASS → Plot Reviewer
+   ├ REVISE → fresh Episode Planner: 必要なEpisodeを一回だけ改訂 → Plot Reviewer
+   └ BLOCKED → runをblockedにして停止
+→ Plot Reviewer: Episode間の境界・重複・因果・知識差をまとめて確認
 → Plot Finalizer: 必須修正を各Episodeへ反映
-→ Story Craft Regression: 主人公接続から最初の主要事件までの意図が失われていないか確認
+→ Story Craft Regression: Story Craft基準snapshotから意図が失われていないか確認
 → 必要な作者確認
 ```
 
 Challengerには `opening-sequence.md` と導入セット内のEpisode Designを渡す。異世界転生では特に、**前世の主人公から今世の主人公へ読者が接続し、転生/記憶覚醒によって世界を見直したうえで、最初の主要事件までに作品の主要な面白さが起動するか**を確認させる。
 
-改訂後再判定には改訂済み導入セット、現在の正本入力、同じrunの不足・解消条件と比較用snapshotを渡す。変更したEpisodeだけでなく、前後のEpisodeへの影響も確認する。
+導入セットのChallengerは一回だけ起動する。`REVISE` の場合は改善要求を初回でまとめ、必要なEpisodeを一回のPlanner Revisionで直す。改訂後Challengerは起動しない。変更したEpisodeだけでなく前後境界もRevisionとTechnical Reviewで整える。
 
-Episode Designは改訂後Story Craft再判定 `PASS` とStory Craft Regression `PASS` の両方を通過後、runtime契約どおり執筆指示の生成・確認へ進める。冒頭導入セットでも執筆指示はEpisodeごとに生成・確認する。
+Episode Designは一回Story Craft手順とStory Craft Regression `PASS` の両方を完了後、runtime契約どおり執筆指示の生成・確認へ進める。冒頭導入セットでも執筆指示はEpisodeごとに生成・確認する。
 
 - Challenger / Reviewer / Regressionの一時出力を作品成果物へ恒久保存しない。親agentは正式出力をrun traceへ隔離保存する。
 - 設定提案 / 設定提案への依存はruntime契約どおり扱う。
 - 必要なCanon・上位Planningはplanning-changes.mdに従って仮修正する。変更前、変更表示、依存先と影響先を残し、対象範囲だけの局所設定で隠さない。作品方針、作者の明示指定、既存本文の事実は守る。
-- Story Craft確認には変更後の一式と各階層の必要な観点を渡す。再判定では同じrunの直前判定時snapshot・改訂差分を回帰確認に使い、仮変更の採否理由・作業記録全文は渡さない。Technical Reviewerにはrun開始版・差分・変更後・影響先を渡す。Finalizer / Regressionも一式を対象にする。
+- Story Craft確認には変更後の一式と各階層の必要な観点を渡す。Overall / Arcの再判定では同じrunの直前判定時snapshot・改訂差分を回帰確認に使い、仮変更の採否理由・作業記録全文は渡さない。Episode / 導入セットでは再判定を起動しない。Technical Reviewerにはrun開始版・差分・変更後・影響先を渡す。Finalizer / Regressionも一式を対象にする。
 - Story Craft RegressionがFAILした場合はruntime契約の一度だけの回復手順に従い、そのattemptも同じrun traceへ記録する。Regression回復では新しいStory Craft Challengerを起動しない。
 
 ## 作者確認checkpoint

@@ -98,3 +98,12 @@
   applied_migration: "none"
   manual_decision: "Issue #16継続: maker PR #151 merge commitから10役instructionsとPlanning入口を明示同期。bootstrap由来AGENTSを照合。作品独自追記なし。再判定はstory-craft.md §5の同じ解消条件を引き継ぐ。primaryと許可fallbackはcodex-model-policy.md。"
   unresolved_issue: "none"
+
+- kind: framework-sync
+  from_revision: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
+  to_revision: "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a"
+  resolved_commit: "2e6aa815635cb9ea8c553ec0e4ad7dbab612038a"
+  contract_version: 1
+  applied_migration: "none"
+  manual_decision: "none"
+  unresolved_issue: "none"

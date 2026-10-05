@@ -171,7 +171,7 @@ ArcのStory Craft `PASS` は、約束した楽しみを成立させる出来事�
 
 Overall開始時は、先に `planning-input.md` に従って入力整理とPlanning Readinessを完了する。
 
-各Plotは次の順で作る。
+Overall / Arcは次の順で作る。Episodeはこの節の後半にある一回Story Craft手順を使い、改訂後再判定を行わない。
 
 ```text
 入力整理 / Planning Readiness
@@ -194,6 +194,8 @@ Story Craft Regression
         ↓
 ready化と下流影響判定
 ```
+
+この図と以下の1〜10はOverall / ArcのStory Craft gateを表す。EpisodeはChallengerを一度だけ使うため、後述のEpisode手順を優先する。
 
 対象範囲を決定して実際にPlannerを起動する直前に、親agentは [`pipeline-run-trace.md`](pipeline-run-trace.md) に従ってrun traceを開始する。OverallでPlanning Readinessを同じ操作内で行った場合は、その正式出力も同じrunへ記録する。
 
@@ -237,6 +239,41 @@ ready化と下流影響判定
    仮変更は `planning-changes.md` の一括確定に従う。採用する入力をGitへ保存し、`inputs_revision`、参照版、設定提案への依存を揃えてから、変更表示と作業記録を除く。
 
 作者確認待ちでは `draft / pending` で止める。作者確認不要なら `review: not-required`、採用されたら `review: approved` とする。
+
+### Episodeの一回Story Craft手順
+
+Episodeでは、Challengerを合格するまで回す品質gateにしない。局所的な報酬増幅を一度だけ外からchallengeし、必要ならPlannerが一回だけ磨いてからTechnical Reviewerへ進む。
+
+```text
+Episode Planner 初稿
+        ↓
+Story Craft Challenger（一回確認）
+        ├ PASS → Technical Reviewer
+        ├ REVISE → Episode Planner 一回改訂 → Technical Reviewer
+        └ BLOCKED → 停止
+        ↓
+Finalizer
+        ↓
+Story Craft Regression
+        ↓
+必要な作者確認
+        ↓
+ready化
+```
+
+Episodeの初回Challengerは `PASS / REVISE / BLOCKED` を返す。`REVISE` は、現在の材料と上位条件を保った局所変更だけで中心報酬を明白に一段強くできる場合に使う。報酬が弱い、主人公固有性が弱い、明白な機会を取り逃している等は `REVISE` であり、`BLOCKED` ではない。
+
+`BLOCKED` は、作品入力・作者の固定条件・親Planningが相互に両立せず、AIに許された補完やplanning-changes.mdの仮修正でもEpisode自体を計画できない場合だけに使う。
+
+`PASS` ならPlanner Revisionを行わない。`REVISE` なら同じEpisode Planner roleを新しい実行として**一回だけ**起動し、`維持` と `改善要求` を確認して改訂する。参考対案は採用必須ではない。一回改訂後はStory Craft Challengerを再実行せず、改訂後snapshotをEpisode Story Craft基準時点としてTechnical Reviewerへ渡す。
+
+Episodeでは `revised_story_craft_verdict` を作らず `null` のままにし、`story_craft_recheck_attempt_count` は `0` とする。`initial_story_craft_verdict` は `PASS / REVISE / BLOCKED` を記録する。`planner_revision_count` はPASSなら `0`、REVISEなら `1` とする。
+
+Technical Reviewer / FinalizerはStory Craftの新しい改善要求を追加しない。Story Craft Regressionは、Episode Story Craft基準snapshot（PASSなら初稿、REVISEなら一回改訂後）とFinalizer後を比較し、採用した改善意図や読者報酬が後段修正で弱まっていないかだけを見る。RegressionがREVISE解消の十分性を再評価してはならない。
+
+Episodeを `ready` にするには、初回Challengerが `PASS`、または `REVISE` 後の一回Planner Revisionが完了していること、Technical Review / Finalizerの必須修正が解決していること、Story Craft Regressionが `PASS` であること、必要な作者確認が完了していることを確認する。初回 `BLOCKED` は停止する。
+
+Writer BriefはこのEpisode手順とStory Craft Regressionを完了した後だけ生成する。
 
 ### 作品成果物へ保存しない中間情報
 
@@ -306,15 +343,14 @@ Story Craft Regressionを1回だけ再実行
 
 これは通常の確定済み入力の条件である。`planning-changes.md` に従い、必要な上位箇所も同じ一式で修正する下書きでは、その上位が `draft / stale` でも進めてよい。下位の対象範囲を判断できない場合は、先に上位の計画を対象にする。
 
-Episodeでは、改訂後のStory Craft再判定とStory Craft Regressionを通過するまで執筆指示を作らない。
+Episodeでは、一回Story Craft手順とStory Craft Regressionを完了するまで執筆指示を作らない。
 
 ```text
 Episode Planner 初稿
-→ Story Craft Challenger（初回確認）
-→ Episode Planner 改訂
-→ Story Craft Challenger（改訂後再判定）
-→ 必要なら追加Planner Revision + 再判定を最大1回
-→ Technical Reviewer
+→ Story Craft Challenger（一回確認）
+   ├ PASS → Technical Reviewer
+   ├ REVISE → Episode Planner 一回改訂 → Technical Reviewer
+   └ BLOCKED → 停止
 → Finalizer
 → Story Craft Regression
 → 執筆指示生成
