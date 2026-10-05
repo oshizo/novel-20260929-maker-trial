@@ -397,7 +397,11 @@
       "source_path": "planning/episodes/episode-000.design.md",
       "source_version": 1,
       "source_revision": "aa806018c0392b5dd5435cf3f5020991888da2a2",
-      "provided_excerpt": "inputs/adjacent-episode-000.md"
+      "provided_excerpt": "inputs/adjacent-episode-000.md",
+      "supplied_sha256": "327ee5c315fa2f4f5ac17bf33bd566196e741dfec1b42456424f0ac1b66c1206",
+      "supplied_snapshot_commit": "f8cbe65bb586f74961827f88685b37a7e08a9bcb",
+      "sha256": "afc7bb8f988b1ebacd0181c9f9c0d97c133b5e7ce4ff631d148ace5f4e878ed2",
+      "storage_normalization": "3run完了後のdiff検査で余分な末尾空行のみ削除。渡した内容の意味は同じ。入力時の正確なbytesはsupplied_snapshot_commit内の同pathとsupplied_sha256で保持。"
     }
   ],
   "final_snapshots": [

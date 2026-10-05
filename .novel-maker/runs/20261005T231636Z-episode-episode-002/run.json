@@ -353,8 +353,11 @@
         "planning/episodes/episode-001.design.md"
       ],
       "source_commit": "5dc275801d2d8f459866c99ea76d4c272c65f737",
-      "sha256": "421d2b9e6b01ac6139cf84e90ea27456e75f04ccdaf33ad436e5177b1bf6f9a1",
-      "scope": "今回fresh planでreadyとなった先行Episodeの出口・最終場面の継続情報のみ。途中場面・reviewは含まない。"
+      "sha256": "846abb5e0c551eb6c766d4e0f49cf681d79d64934a83b1b253d34365481427b7",
+      "scope": "今回fresh planでreadyとなった先行Episodeの出口・最終場面の継続情報のみ。途中場面・reviewは含まない。",
+      "supplied_sha256": "421d2b9e6b01ac6139cf84e90ea27456e75f04ccdaf33ad436e5177b1bf6f9a1",
+      "supplied_snapshot_commit": "f8cbe65bb586f74961827f88685b37a7e08a9bcb",
+      "storage_normalization": "3run完了後のdiff検査で余分な末尾空行のみ削除。渡した内容の意味は同じ。入力時の正確なbytesはsupplied_snapshot_commit内の同pathとsupplied_sha256で保持。"
     }
   ],
   "metadata_adjustments": [

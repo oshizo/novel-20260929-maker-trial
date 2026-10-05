@@ -35,4 +35,3 @@ source: planning/episodes/episode-000.design.md、version1、ready/not-required�
   - カイは剣を抜ける状態にし、魔力を温存したまま、足跡の先へ進む。
 - 感情や関係の変化:
   - カイは、慎重さを保ったまま負傷者を見捨てない選択をする。
-
