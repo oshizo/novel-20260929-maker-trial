@@ -151,7 +151,7 @@ Challengerが上位条件と採用意図の未達を扱い、001の熟練者や0
 - maker #155 headの全体テストは155件中28件失敗。同期前revision `2e6aa815635cb9ea8c553ec0e4ad7dbab612038a` は152件中26件失敗。失敗名の集合で26件が共通、追加は `test_agents_use_japanese_artifact_terms` と `test_planning_issue_template_uses_japanese_visible_terms` の2件。全体テストを成功扱いにはしない。
 - 追加2件はEpisode Planner templateとkickoffで「Writer Brief」を可視語として追加した箇所が日本語ラベルの既存契約に抵触していた。既存26件とは分けて [maker #156](https://github.com/oshizo/novel-maker/issues/156) に切り出した。
 
-初稿の宣言と場面の強度の差、000の同型反復、002の採用方向が親Arcの見出しの範囲に留まる点は、maker側の後続Issueで扱う。改善前の初稿や指摘をrunから消さず、story固有の親agentによる手修正で隠さない。
+初稿の宣言と場面の強度の差、000の同型反復、002の採用方向が親Arcの見出しの範囲に留まる点は、[maker #157](https://github.com/oshizo/novel-maker/issues/157) に切り出した。改善前の初稿や指摘をrunから消さず、story固有の親agentによる手修正で隠さない。
 
 ## 旧版の工程別参照
 
