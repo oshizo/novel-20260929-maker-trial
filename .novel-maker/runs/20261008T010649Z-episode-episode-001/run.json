@@ -12,9 +12,9 @@
     "version": "codex-cli 0.159.3",
     "model_observation": "spawn_agent accepts configured models but does not expose actual model telemetry; actual_model remains null."
   },
-  "status": "running",
+  "status": "completed",
   "started_at": "2026-10-08T01:06:49Z",
-  "completed_at": null,
+  "completed_at": "2026-10-08T01:40:50Z",
   "summary": {
     "initial_story_craft_verdict": "REVISE",
     "revised_story_craft_verdict": null,
@@ -204,6 +204,82 @@
       "review": "reviews/09-story-craft-regression-attempt-2.md",
       "started_at": "2026-10-08T01:33:26Z",
       "completed_at": "2026-10-08T01:34:41Z"
+    },
+    {
+      "sequence": 10,
+      "stage": "writer-brief-generator",
+      "attempt": 1,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/10-writer-brief-generator-attempt-1-planning__episodes__episode-001.writer.md"
+      ],
+      "review": "reviews/10-writer-brief-generator-attempt-1.md",
+      "started_at": "2026-10-08T01:34:47Z",
+      "completed_at": "2026-10-08T01:37:02Z"
+    },
+    {
+      "sequence": 11,
+      "stage": "writer-brief-reviewer",
+      "attempt": 1,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "REVISE",
+      "snapshots": [],
+      "review": "reviews/11-writer-brief-reviewer-attempt-1.md",
+      "started_at": "2026-10-08T01:37:02Z",
+      "completed_at": "2026-10-08T01:38:49Z"
+    },
+    {
+      "sequence": 12,
+      "stage": "writer-brief-generator",
+      "attempt": 2,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/12-writer-brief-generator-attempt-2-planning__episodes__episode-001.writer.md"
+      ],
+      "review": "reviews/12-writer-brief-generator-attempt-2.md",
+      "started_at": "2026-10-08T01:38:50Z",
+      "completed_at": "2026-10-08T01:39:49Z"
+    },
+    {
+      "sequence": 13,
+      "stage": "writer-brief-reviewer",
+      "attempt": 2,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/13-writer-brief-reviewer-attempt-2.md",
+      "started_at": "2026-10-08T01:39:49Z",
+      "completed_at": "2026-10-08T01:40:50Z"
     }
   ],
   "input_baseline": {
@@ -235,5 +311,9 @@
       "snapshots/00-input-baseline-style__profile.md",
       "snapshots/00-input-baseline-planning__episodes__episode-000.design.md"
     ]
-  }
+  },
+  "ready_snapshots": [
+    "snapshots/99-ready-planning__episodes__episode-001.design.md",
+    "snapshots/99-ready-planning__episodes__episode-001.writer.md"
+  ]
 }
