@@ -12,9 +12,9 @@
     "version": "codex-cli 0.159.3",
     "model_observation": "spawn_agent accepts the configured model but does not expose actual model telemetry; actual_model remains null."
   },
-  "status": "running",
+  "status": "completed",
   "started_at": "2026-10-08T00:50:53Z",
-  "completed_at": null,
+  "completed_at": "2026-10-08T01:15:45Z",
   "summary": {
     "initial_story_craft_verdict": "REVISE",
     "revised_story_craft_verdict": null,
@@ -148,6 +148,158 @@
       "review": "reviews/06-story-craft-regression-attempt-1.md",
       "started_at": "2026-10-08T01:02:22Z",
       "completed_at": "2026-10-08T01:06:48Z"
+    },
+    {
+      "sequence": 7,
+      "stage": "writer-brief-generator",
+      "attempt": 1,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/07-writer-brief-generator-attempt-1-planning__episodes__episode-000.writer.md"
+      ],
+      "review": "reviews/07-writer-brief-generator-attempt-1.md",
+      "started_at": "2026-10-08T01:06:49Z",
+      "completed_at": "2026-10-08T01:08:32Z"
+    },
+    {
+      "sequence": 8,
+      "stage": "writer-brief-reviewer",
+      "attempt": 1,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "REVISE",
+      "snapshots": [],
+      "review": "reviews/08-writer-brief-reviewer-attempt-1.md",
+      "started_at": "2026-10-08T01:08:33Z",
+      "completed_at": "2026-10-08T01:10:37Z"
+    },
+    {
+      "sequence": 9,
+      "stage": "writer-brief-generator",
+      "attempt": 2,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/09-writer-brief-generator-attempt-2-planning__episodes__episode-000.writer.md"
+      ],
+      "review": "reviews/09-writer-brief-generator-attempt-2.md",
+      "started_at": "2026-10-08T01:10:37Z",
+      "completed_at": "2026-10-08T01:11:28Z"
+    },
+    {
+      "sequence": 10,
+      "stage": "writer-brief-reviewer",
+      "attempt": 2,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "REVISE",
+      "snapshots": [],
+      "review": "reviews/10-writer-brief-reviewer-attempt-2.md",
+      "started_at": "2026-10-08T01:11:28Z",
+      "completed_at": "2026-10-08T01:12:26Z"
+    },
+    {
+      "sequence": 11,
+      "stage": "writer-brief-generator",
+      "attempt": 3,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/11-writer-brief-generator-attempt-3-planning__episodes__episode-000.writer.md"
+      ],
+      "review": "reviews/11-writer-brief-generator-attempt-3.md",
+      "started_at": "2026-10-08T01:12:26Z",
+      "completed_at": "2026-10-08T01:13:09Z"
+    },
+    {
+      "sequence": 12,
+      "stage": "writer-brief-reviewer",
+      "attempt": 3,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "REVISE",
+      "snapshots": [],
+      "review": "reviews/12-writer-brief-reviewer-attempt-3.md",
+      "started_at": "2026-10-08T01:13:09Z",
+      "completed_at": "2026-10-08T01:14:13Z"
+    },
+    {
+      "sequence": 13,
+      "stage": "writer-brief-generator",
+      "attempt": 4,
+      "configured_agent": "writer_brief_generator",
+      "configured_model": "gpt-6-luna",
+      "actual_agent": "writer_brief_generator",
+      "actual_model": null,
+      "reasoning": "medium",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": null,
+      "snapshots": [
+        "snapshots/13-writer-brief-generator-attempt-4-planning__episodes__episode-000.writer.md"
+      ],
+      "review": "reviews/13-writer-brief-generator-attempt-4.md",
+      "started_at": "2026-10-08T01:14:13Z",
+      "completed_at": "2026-10-08T01:14:57Z"
+    },
+    {
+      "sequence": 14,
+      "stage": "writer-brief-reviewer",
+      "attempt": 4,
+      "configured_agent": "writer_brief_reviewer",
+      "configured_model": "gpt-6.1-sol",
+      "actual_agent": "writer_brief_reviewer",
+      "actual_model": null,
+      "reasoning": "high",
+      "result": "completed",
+      "failure_reason": null,
+      "model_fallback": null,
+      "verdict": "PASS",
+      "snapshots": [],
+      "review": "reviews/14-writer-brief-reviewer-attempt-4.md",
+      "started_at": "2026-10-08T01:14:57Z",
+      "completed_at": "2026-10-08T01:15:44Z"
     }
   ],
   "input_baseline": {
@@ -177,5 +329,9 @@
       "snapshots/00-input-baseline-canon__world.md",
       "snapshots/00-input-baseline-style__profile.md"
     ]
-  }
+  },
+  "ready_snapshots": [
+    "snapshots/99-ready-planning__episodes__episode-000.design.md",
+    "snapshots/99-ready-planning__episodes__episode-000.writer.md"
+  ]
 }
