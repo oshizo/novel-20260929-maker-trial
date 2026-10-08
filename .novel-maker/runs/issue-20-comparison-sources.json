@@ -1,0 +1,162 @@
+{
+  "purpose": "生成完了後の診断専用。Planner / Writerの通常入力にはしない。",
+  "comparison_started_after_commit": "8e0e2d5cb52eee484c23775b34fcfef2e6463803",
+  "sources": {
+    "PR17/episode-000": {
+      "sha": "ee1c4abac2684bc85131a744bbc0ce98bde437c9",
+      "run": "20261004T112650Z-episode-episode-000",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-000.design.md",
+        "initial-formal": ".novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/01-planner-initial.md",
+        "revision-design": ".novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-000.design.md",
+        "revision-formal": ".novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/07-finalizer-attempt-2-planning__episodes__episode-000.design.md",
+        "finalizer-formal": ".novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/07-finalizer-attempt-2.md",
+        "challenger": ".novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/02-story-craft-challenger.md",
+        "ready-design": "planning/episodes/episode-000.design.md",
+        "ready-writer": "planning/episodes/episode-000.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-000.design.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/01-planner-initial.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-000.design.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/snapshots/07-finalizer-attempt-2-planning__episodes__episode-000.design.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/07-finalizer-attempt-2.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T112650Z-episode-episode-000/reviews/02-story-craft-challenger.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-000.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-000.writer.md"
+      }
+    },
+    "PR17/episode-001": {
+      "sha": "ee1c4abac2684bc85131a744bbc0ce98bde437c9",
+      "run": "20261004T144510Z-episode-episode-001",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-001.design.md",
+        "initial-formal": ".novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/01-planner-initial.md",
+        "revision-design": ".novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-001.design.md",
+        "revision-formal": ".novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/06-finalizer-attempt-1-planning__episodes__episode-001.design.md",
+        "finalizer-formal": ".novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/06-finalizer.md",
+        "challenger": ".novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/02-story-craft-challenger.md",
+        "ready-design": "planning/episodes/episode-001.design.md",
+        "ready-writer": "planning/episodes/episode-001.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-001.design.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/01-planner-initial.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-001.design.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/snapshots/06-finalizer-attempt-1-planning__episodes__episode-001.design.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/06-finalizer.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T144510Z-episode-episode-001/reviews/02-story-craft-challenger.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-001.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-001.writer.md"
+      }
+    },
+    "PR17/episode-002": {
+      "sha": "ee1c4abac2684bc85131a744bbc0ce98bde437c9",
+      "run": "20261004T153610Z-episode-episode-002",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-002.design.md",
+        "initial-formal": ".novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/01-planner-initial.md",
+        "revision-design": ".novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-002.design.md",
+        "revision-formal": ".novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/06-finalizer-attempt-1-planning__episodes__episode-002.design.md",
+        "finalizer-formal": ".novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/06-finalizer.md",
+        "challenger": ".novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/02-story-craft-challenger.md",
+        "ready-design": "planning/episodes/episode-002.design.md",
+        "ready-writer": "planning/episodes/episode-002.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/01-planner-initial-attempt-1-planning__episodes__episode-002.design.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/01-planner-initial.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/03-planner-revision-attempt-1-planning__episodes__episode-002.design.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/snapshots/06-finalizer-attempt-1-planning__episodes__episode-002.design.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/06-finalizer.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/.novel-maker/runs/20261004T153610Z-episode-episode-002/reviews/02-story-craft-challenger.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-002.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/ee1c4abac2684bc85131a744bbc0ce98bde437c9/planning/episodes/episode-002.writer.md"
+      }
+    },
+    "PR19/episode-000": {
+      "sha": "b32a0104e40035c39181c87fda4d5b17a77ba3b1",
+      "run": "20261005T143908Z-episode-episode-000",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": ".novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": ".novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": ".novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": ".novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/05-finalizer-attempt-1.md",
+        "challenger": ".novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "planning/episodes/episode-000.design.md",
+        "ready-writer": "planning/episodes/episode-000.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/05-finalizer-attempt-1.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T143908Z-episode-episode-000/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-000.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-000.writer.md"
+      }
+    },
+    "PR19/episode-001": {
+      "sha": "b32a0104e40035c39181c87fda4d5b17a77ba3b1",
+      "run": "20261005T152805Z-episode-episode-001",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": ".novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": ".novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": ".novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": ".novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/05-finalizer-attempt-1.md",
+        "challenger": ".novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "planning/episodes/episode-001.design.md",
+        "ready-writer": "planning/episodes/episode-001.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/05-finalizer-attempt-1.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T152805Z-episode-episode-001/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-001.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-001.writer.md"
+      }
+    },
+    "PR19/episode-002": {
+      "sha": "b32a0104e40035c39181c87fda4d5b17a77ba3b1",
+      "run": "20261005T231636Z-episode-episode-002",
+      "paths": {
+        "initial-design": ".novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": ".novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": ".novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": ".novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": ".novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": ".novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/05-finalizer-attempt-1.md",
+        "challenger": ".novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "planning/episodes/episode-002.design.md",
+        "ready-writer": "planning/episodes/episode-002.writer.md"
+      },
+      "links": {
+        "initial-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/01-planner-initial-attempt-1.md",
+        "initial-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/01-planner-initial-attempt-1.md",
+        "revision-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/03-planner-revision-attempt-1.md",
+        "revision-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/03-planner-revision-attempt-1.md",
+        "finalizer-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/snapshots/05-finalizer-attempt-1.md",
+        "finalizer-formal": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/05-finalizer-attempt-1.md",
+        "challenger": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/.novel-maker/runs/20261005T231636Z-episode-episode-002/reviews/02-story-craft-challenger-attempt-1.md",
+        "ready-design": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-002.design.md",
+        "ready-writer": "https://github.com/oshizo/novel-20260929-maker-trial/blob/b32a0104e40035c39181c87fda4d5b17a77ba3b1/planning/episodes/episode-002.writer.md"
+      }
+    }
+  }
+}

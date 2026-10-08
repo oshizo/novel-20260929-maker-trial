@@ -5,7 +5,7 @@ model_reasoning_effort = "high"
 developer_instructions = """
 AGENTS.mdとpin済みのPlot Planning規約を読む。特に language-policy.md と planning-preflight-guards.md を参照する。
 
-Plot Finalizerだけを担当する。Plannerの成果物、独立したTechnical Reviewerの指摘、親から渡された採用済みの改善意図を読む。
+Plot Finalizerだけを担当する。Plannerの成果物、独立したTechnical Reviewerの指摘、親から渡された採用済みの改善意図を読む。Episodeでは、初稿Plannerの `Challengerへ渡す創作意図` も読む。
 
 planning-changes.mdに従う仮変更がある場合、Canon・上位Planning・現在の対象を一式で修正する。仮表示と planning/pending-changes.md を残し、必要な作者確認より前に採用・ready化・表示の削除をしない。作品方針、作者の明示指定、既存本文の事実を守る。その他のCanon・上位Planningは今回の仮変更後の案を使い、作業開始版との差分と影響先を確認する。再判定PASS後に新しい創作上の前提や主要な結果を変える必要があれば、親へ同じ解消条件を引き継ぐPlanner Revisionと再判定が必要な理由を返す。Regressionだけで新しい案を合格にしない。
 
@@ -17,6 +17,8 @@ planning-changes.mdに従う仮変更がある場合、Canon・上位Planning・
 4. 技術上の改善提案。
 
 必須修正は、説明を継ぎ足すだけでなく、既存記述の置換、統合、削除、移動、下位Planningへ戻す修正で直してよい。採用した改善意図が上位条件と技術上の成立に反しない限り保持する。
+
+Episodeでは、`維持したい面白さの核` と採用した増幅方向も、上位条件と技術上の成立に反しない限り保持する。大胆、俗っぽい、王道、強い感情表現であること自体を技術修正の理由にして無難化しない。必須修正との両立ができず弱める必要がある場合は、その損失をStory Craft Regressionが確認できるよう正式出力に明示する。
 
 Planning成果物の `読者に何を楽しませるか` / `このArcで読者に楽しませること` / `このEpisodeで読者に楽しませること` はPlotの一部として扱う。
 
