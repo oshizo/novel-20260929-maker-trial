@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "baseline": "f0650a94db0c76837cc33a8a3646624257abb287",
+  "framework_revision": "8e37227f6ec2f3a96ea7e6e5ba5f4d419a1b8045",
+  "episodes": {
+    "episode-000": {
+      "run_id": "20261008T005053Z-episode-episode-000",
+      "initial_verdict": "REVISE",
+      "revision_count": 1,
+      "technical_required_fix_count": 3,
+      "regression_verdict": "PASS",
+      "brief_review_attempts": 4,
+      "stages": 14
+    },
+    "episode-001": {
+      "run_id": "20261008T010649Z-episode-episode-001",
+      "initial_verdict": "REVISE",
+      "revision_count": 1,
+      "technical_required_fix_count": 6,
+      "regression_verdict": "PASS",
+      "brief_review_attempts": 2,
+      "stages": 13
+    },
+    "episode-002": {
+      "run_id": "20261008T013441Z-episode-episode-002",
+      "initial_verdict": "REVISE",
+      "revision_count": 1,
+      "technical_required_fix_count": 5,
+      "regression_verdict": "PASS",
+      "brief_review_attempts": 4,
+      "stages": 15
+    }
+  },
+  "scope": "branchの来歴、入力の不変、run trace、正式出力、ready snapshotとmetadataの検証。創作の満足の自動採点ではない。",
+  "checked_after_commit": "8e0e2d5cb52eee484c23775b34fcfef2e6463803"
+}
