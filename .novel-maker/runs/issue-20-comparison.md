@@ -146,7 +146,7 @@ Challengerが上位条件と採用意図の未達を扱い、001の熟練者や0
 [run・来歴の検証結果](issue-20-run-validation.json) は、固定SHAからの分岐、6削除のbaseline、PR #19を祖先に含めないこと、固定入力の不変、各入力snapshotの対応commitとの一致、工程数と正式出力、再開記録、ready snapshotと正本の一致、metadataを確認した結果で `PASS`。創作の満足を自動テストで採点した結果ではない。Story Craftと執筆指示の内容は独立roleの正式確認による。
 
 - 同期後の `python3 scripts/novelctl.py check-story /home/oshizo/repo/novel-20260929-maker-trial` は成功。
-- `git diff --check` は成功。
+- 固定baselineからbranch全体への `git diff --check` は、002の保存済みFinalizer正式出力 `reviews/05-finalizer-attempt-1.md` の3行目にあるMarkdown改行用の末尾2スペースを1箇所指摘した。他の差分の指摘はない。正式出力の原文を保存するため、この2スペースは変更していない。
 - maker #155 headの `test_story_craft_recheck_contract.py` は16件すべて成功。
 - maker #155 headの全体テストは155件中28件失敗。同期前revision `2e6aa815635cb9ea8c553ec0e4ad7dbab612038a` は152件中26件失敗。失敗名の集合で26件が共通、追加は `test_agents_use_japanese_artifact_terms` と `test_planning_issue_template_uses_japanese_visible_terms` の2件。全体テストを成功扱いにはしない。
 - 追加2件はEpisode Planner templateとkickoffで「Writer Brief」を可視語として追加した箇所が日本語ラベルの既存契約に抵触していた。既存26件とは分けて [maker #156](https://github.com/oshizo/novel-maker/issues/156) に切り出した。
