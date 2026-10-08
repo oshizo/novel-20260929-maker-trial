@@ -1,7 +1,7 @@
 framework:
   repository: "oshizo/novel-maker"
-  revision: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
-  resolved_commit: "f4491ce08c3c3be8f092ed20f48587e89e80ec87"
+  revision: "8e37227f6ec2f3a96ea7e6e5ba5f4d419a1b8045"
+  resolved_commit: "8e37227f6ec2f3a96ea7e6e5ba5f4d419a1b8045"
   contract_version: 1
 
 planning:
